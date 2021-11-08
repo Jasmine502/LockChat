@@ -13,8 +13,9 @@ namespace WindowsFormsApplication1
         String name, username, foreColor, buddyName, buddyUserName, prompt;
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
-        String[] promptsMade;
+        String promptsMade = "";
         String[] greetings = { "HELLO", "HI", "YO", "HEY" };
+        String[] wellbeings = {"HRU","HOW ARE YOU","HOW R U","HOW ARE U","HYD","HOW U DOIN","HOW YOU DOIN"};
         Random rnd = new Random();
         int buddyNo;
         private void connectButton_Click(object sender, EventArgs e)
@@ -274,21 +275,46 @@ namespace WindowsFormsApplication1
         {
             String response = "";
             bool greeting = false;
-            for (int i = 0; i < greetings.Length; i++)
-            {
-                if (prompt.Contains(greetings[i]))
-                {
-                    greeting = true;
+            bool wellbeing = false;
+            bool hasPromptBeenMade = false;
 
+            if (promptsMade.Contains(prompt))
+            {
+                hasPromptBeenMade = true;
+            }
+            if (!hasPromptBeenMade)
+            {
+                for (int i = 0; i < greetings.Length; i++)
+                {
+                    if (prompt.Contains(greetings[i]))
+                    {
+                        greeting = true;
+                    }
+                }
+                for (int i = 0; i < wellbeings.Length; i++)
+                {
+                    if (prompt.Contains(wellbeings[i]))
+                    {
+                        wellbeing = true;
+                    }
                 }
             }
             response = buddyUserName + ": ";
+
+            // ------------- MAKE IT SO THE CHARACTERS CALL YOU OUT IF YOU ALREADY MADE A PROMPT ------------
 
             //ERROR RESPONSES
             String[] estherError = { "What xD", "D: " + name + ", you okay?", "Um... ?_?", "Hehe :) I don't understand, but understood!" };
             String[] soniaError = { "LOL WHAT???", "HAHAHAHA WTF R U ON ABOUT", ".", "R U BIEN?", "oki doki ami" };
             String[] aimeeError = { "?", "wtf?", "ok.", "moving on." };
             String[] melanieError = { "Start making sense.", "You tire me.", "Amazing.", "What?" };
+
+            //REPEAT RESPONSES
+            // ----- CHANGE THESE --------
+            String[] estherRepeat = {"You said this!"};
+            String[] soniaRepeat = { "Tu as dit ça!" };
+            String[] aimeeRepeat = { "you suffering from memory loss? u just said this" };
+            String[] melanieRepeat = { "I'd rather not waste my time talking to a repeating faulty machine." };
 
             //GREETING RESPONSES
             String[] estherGreetings = { "Hey hey " + name + "!" , "Heyo!", "Excelsior!", "Yoyo!" };
@@ -327,57 +353,103 @@ namespace WindowsFormsApplication1
 
             if (buddyName == "Esther")
             {
-                if (greeting)
+                if (hasPromptBeenMade)
                 {
-                    response += estherGreetings[rnd.Next(estherGreetings.Length)];
+                    response += estherRepeat[rnd.Next(estherRepeat.Length)];
                 }
-                //ERROR
                 else
                 {
-                    response += estherError[rnd.Next(estherError.Length)];
+                    if (greeting) // ---------- FIGURE OUT HOW TO MAKE IT CHOOSE FROM THE MORNING/LATE ARRAYS -------
+                    {
+                        response += estherGreetings[rnd.Next(estherGreetings.Length)];
+                    }
+                    else if (wellbeing)
+                    {
+                        response += estherWellbeing[rnd.Next(estherWellbeing.Length)];
+                    }
+                    //ERROR
+                    else
+                    {
+                        response += estherError[rnd.Next(estherError.Length)];
+                    }
                 }
             }
             else if (buddyName == "Sonia")
             {
-                if (greeting)
+                if (hasPromptBeenMade)
                 {
-                    response += soniaGreetings[rnd.Next(soniaGreetings.Length)];
+                    response += soniaRepeat[rnd.Next(estherRepeat.Length)];
                 }
-                //ERROR
                 else
                 {
-                    response += soniaError[rnd.Next(soniaError.Length)];
+                    if (greeting)
+                    {
+                        response += soniaGreetings[rnd.Next(soniaGreetings.Length)];
+                    }
+                    else if (wellbeing)
+                    {
+                        response += soniaWellbeing[rnd.Next(soniaWellbeing.Length)];
+                    }
+                    //ERROR
+                    else
+                    {
+                        response += soniaError[rnd.Next(soniaError.Length)];
+                    }
                 }
             }
 
             else if (buddyName == "Aimee")
             {
-                if (greeting)
+                if (hasPromptBeenMade)
                 {
-                    response += aimeeGreetings[rnd.Next(aimeeGreetings.Length)];
+                    response += aimeeRepeat[rnd.Next(estherRepeat.Length)];
                 }
-                //ERROR
                 else
                 {
-                    response += aimeeError[rnd.Next(aimeeError.Length)];
+                    if (greeting)
+                    {
+                        response += aimeeGreetings[rnd.Next(aimeeGreetings.Length)];
+                    }
+                    else if (wellbeing)
+                    {
+                        response += aimeeWellbeing[rnd.Next(aimeeWellbeing.Length)];
+                    }
+                    //ERROR
+                    else
+                    {
+                        response += aimeeError[rnd.Next(aimeeError.Length)];
+                    }
                 }
             }
             else if (buddyName == "Melanie")
             {
-                if (greeting)
+                if (hasPromptBeenMade)
                 {
-                    response += melanieGreetings[rnd.Next(melanieGreetings.Length)];
+                    response += melanieRepeat[rnd.Next(estherRepeat.Length)];
                 }
                 else
                 {
-                    response += melanieError[rnd.Next(melanieError.Length)];
+                    if (greeting)
+                    {
+                        response += melanieGreetings[rnd.Next(melanieGreetings.Length)];
+                    }
+                    else if (wellbeing)
+                    {
+                        response += melanieWellbeing[rnd.Next(melanieWellbeing.Length)];
+                    }
+                    else
+                    {
+                        response += melanieError[rnd.Next(melanieError.Length)];
+                    }
                 }
             }
             else
             {
                 MessageBox.Show("You shouldn't be able to see this","How did you see this?");
             }
-                
+
+            promptsMade += prompt;
+            Console.WriteLine(promptsMade);
             return response;
         }
         public void changeForeColor(Color color)
