@@ -113,6 +113,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MeadowBG {
+            get {
+                object obj = ResourceManager.GetObject("MeadowBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Melanie {
             get {
                 object obj = ResourceManager.GetObject("Melanie", resourceCulture);
@@ -176,6 +186,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap SpaceBG {
             get {
                 object obj = ResourceManager.GetObject("SpaceBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UnderwaterBG {
+            get {
+                object obj = ResourceManager.GetObject("UnderwaterBG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

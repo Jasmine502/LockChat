@@ -118,40 +118,46 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Esther PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Esther PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Esther" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Esther.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SpaceBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SpaceBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Esther" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Esther.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Aimee" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Aimee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Melanie PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Melanie PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GasterPFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GasterPFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Sonia" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sonia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Melanie" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Melanie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SkyBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SkyBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sonia PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sonia PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Melanie PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Melanie PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Aimee PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Aimee PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Esther PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Esther PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Melanie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Melanie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sonia PFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sonia PFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SkyBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SkyBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RosesBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RosesBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GasterPFP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GasterPFP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Aimee" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Aimee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MeadowBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MeadowBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnderwaterBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UnderwaterBG.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

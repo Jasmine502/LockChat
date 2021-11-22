@@ -45,6 +45,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rosesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cloudsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.underwaterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meadowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solidColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,9 +55,6 @@
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buddyPFP = new System.Windows.Forms.PictureBox();
             this.userPFP = new System.Windows.Forms.PictureBox();
-            this.rosesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cloudsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buddyPFP)).BeginInit();
@@ -167,6 +167,7 @@
             // listMessage
             // 
             this.listMessage.FormattingEnabled = true;
+            this.listMessage.HorizontalScrollbar = true;
             this.listMessage.Location = new System.Drawing.Point(73, 188);
             this.listMessage.Name = "listMessage";
             this.listMessage.Size = new System.Drawing.Size(348, 212);
@@ -226,39 +227,77 @@
             this.solidColourToolStripMenuItem,
             this.customToolStripMenuItem});
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
+            // 
+            // rosesToolStripMenuItem
+            // 
+            this.rosesToolStripMenuItem.BackColor = System.Drawing.Color.Red;
+            this.rosesToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.RosesBG;
+            this.rosesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.rosesToolStripMenuItem.Name = "rosesToolStripMenuItem";
+            this.rosesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rosesToolStripMenuItem.Text = "Roses";
+            this.rosesToolStripMenuItem.Click += new System.EventHandler(this.rosesToolStripMenuItem_Click);
+            // 
+            // cloudsToolStripMenuItem
+            // 
+            this.cloudsToolStripMenuItem.BackColor = System.Drawing.Color.Aqua;
+            this.cloudsToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SkyBG;
+            this.cloudsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.cloudsToolStripMenuItem.Name = "cloudsToolStripMenuItem";
+            this.cloudsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cloudsToolStripMenuItem.Text = "Sky";
+            this.cloudsToolStripMenuItem.Click += new System.EventHandler(this.cloudsToolStripMenuItem_Click);
+            // 
+            // spaceToolStripMenuItem
+            // 
+            this.spaceToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.spaceToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SpaceBG;
+            this.spaceToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.spaceToolStripMenuItem.Name = "spaceToolStripMenuItem";
+            this.spaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spaceToolStripMenuItem.Text = "Space";
+            this.spaceToolStripMenuItem.Click += new System.EventHandler(this.spaceToolStripMenuItem_Click);
             // 
             // underwaterToolStripMenuItem
             // 
+            this.underwaterToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.UnderwaterBG;
+            this.underwaterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.underwaterToolStripMenuItem.Name = "underwaterToolStripMenuItem";
-            this.underwaterToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.underwaterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.underwaterToolStripMenuItem.Text = "Underwater";
+            this.underwaterToolStripMenuItem.Click += new System.EventHandler(this.underwaterToolStripMenuItem_Click);
             // 
             // meadowToolStripMenuItem
             // 
+            this.meadowToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.meadowToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.MeadowBG;
+            this.meadowToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.meadowToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.meadowToolStripMenuItem.Name = "meadowToolStripMenuItem";
-            this.meadowToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.meadowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.meadowToolStripMenuItem.Text = "Meadow";
+            this.meadowToolStripMenuItem.Click += new System.EventHandler(this.meadowToolStripMenuItem_Click);
             // 
             // solidColourToolStripMenuItem
             // 
             this.solidColourToolStripMenuItem.Name = "solidColourToolStripMenuItem";
-            this.solidColourToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.solidColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.solidColourToolStripMenuItem.Text = "Solid Colour";
             this.solidColourToolStripMenuItem.Click += new System.EventHandler(this.solidColourToolStripMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.customToolStripMenuItem.Text = "Custom...";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // buddyPFP
@@ -278,36 +317,6 @@
             this.userPFP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userPFP.TabIndex = 7;
             this.userPFP.TabStop = false;
-            // 
-            // rosesToolStripMenuItem
-            // 
-            this.rosesToolStripMenuItem.BackColor = System.Drawing.Color.Red;
-            this.rosesToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.RosesBG;
-            this.rosesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.rosesToolStripMenuItem.Name = "rosesToolStripMenuItem";
-            this.rosesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.rosesToolStripMenuItem.Text = "Roses";
-            this.rosesToolStripMenuItem.Click += new System.EventHandler(this.rosesToolStripMenuItem_Click);
-            // 
-            // cloudsToolStripMenuItem
-            // 
-            this.cloudsToolStripMenuItem.BackColor = System.Drawing.Color.Aqua;
-            this.cloudsToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SkyBG;
-            this.cloudsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.cloudsToolStripMenuItem.Name = "cloudsToolStripMenuItem";
-            this.cloudsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.cloudsToolStripMenuItem.Text = "Sky";
-            this.cloudsToolStripMenuItem.Click += new System.EventHandler(this.cloudsToolStripMenuItem_Click);
-            // 
-            // spaceToolStripMenuItem
-            // 
-            this.spaceToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.spaceToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SpaceBG;
-            this.spaceToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.spaceToolStripMenuItem.Name = "spaceToolStripMenuItem";
-            this.spaceToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.spaceToolStripMenuItem.Text = "Space";
-            this.spaceToolStripMenuItem.Click += new System.EventHandler(this.spaceToolStripMenuItem_Click);
             // 
             // Form1
             // 

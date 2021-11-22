@@ -26,7 +26,6 @@ namespace WindowsFormsApplication1
             buddyUserName = buddyUser[buddyNo];
             
 
-
             //CONNECT/DISCONNECT BUTTON
             if (connectButton.Text == "CONNECT")
             {
@@ -56,6 +55,7 @@ namespace WindowsFormsApplication1
                 messageBox.Enabled = true;
                 listMessage.Enabled = true;
                 connectButton.Text = "DISCONNECT";
+                
             //FORMATTING LIST BOX
                 //MANAGING EMPTY LOG-IN
                 if (nameBox.Text == "")
@@ -152,6 +152,7 @@ namespace WindowsFormsApplication1
                 nameBox.Enabled = true;
                 usernameBox.Enabled = true;
                 foreColorBox.Enabled = true;
+                promptsMade = "";
             }
 
         }
@@ -200,6 +201,7 @@ namespace WindowsFormsApplication1
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    BackgroundImage = null;
                     BackColor = dlg.Color;
                 }
             }
@@ -243,6 +245,20 @@ namespace WindowsFormsApplication1
             BackgroundImageLayout = ImageLayout.Stretch;
             BackgroundImage = Properties.Resources.SpaceBG;
             changeForeColor(Color.White);
+        }
+
+        private void underwaterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackgroundImageLayout = ImageLayout.Stretch;
+            BackgroundImage = Properties.Resources.UnderwaterBG;
+            changeForeColor(Color.White);
+        }
+
+        private void meadowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackgroundImageLayout = ImageLayout.Stretch;
+            BackgroundImage = Properties.Resources.MeadowBG;
+            changeForeColor(Color.Black);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -301,7 +317,6 @@ namespace WindowsFormsApplication1
             }
             response = buddyUserName + ": ";
 
-            // ------------- MAKE IT SO THE CHARACTERS CALL YOU OUT IF YOU ALREADY MADE A PROMPT ------------
 
             //ERROR RESPONSES
             String[] estherError = { "What xD", "D: " + name + ", you okay?", "Um... ?_?", "Hehe :) I don't understand, but understood!" };
@@ -311,45 +326,29 @@ namespace WindowsFormsApplication1
 
             //REPEAT RESPONSES
             // ----- CHANGE THESE --------
-            String[] estherRepeat = {"You said this!"};
-            String[] soniaRepeat = { "Tu as dit ça!" };
-            String[] aimeeRepeat = { "you suffering from memory loss? u just said this" };
-            String[] melanieRepeat = { "I'd rather not waste my time talking to a repeating faulty machine." };
+            String[] estherRepeat = {"Oh! Didn’t we talk about this already ?", "I can see that you’re tired, you’ve said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you’ve said that before!", "Uhh… are you confused? This isn’t the first time you said this :P", "Hahaha you’re repeating yourself xD" };
+            String[] soniaRepeat = { "LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA"};
+            String[] aimeeRepeat = { "this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?"};
+            String[] melanieRepeat = { "Perhaps take a break. You seem to be forgetting what we have already discussed.", "Do watch yourself, I don’t like repeating myself unlike you.", "Alright. Lovely conversation. Talk to me again when you have practiced having real conversations.", "Do you need me to call you a paramedic? Repetition is a sign of memory loss, and you seem to be suffering from it.", "You have said this. Did you already forget?" };
 
             //GREETING RESPONSES
             String[] estherGreetings = { "Hey hey " + name + "!" , "Heyo!", "Excelsior!", "Yoyo!" };
-            String[] estherEarlyGreetings = {"Morning" + name + "!", "Rise and shine!"};
-            String[] estherLateGreetings = {};
             
             String[] soniaGreetings = { "hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper()};
-            String[] soniaEarlyGreetings = { };
-            String[] soniaLateGreetings = { };
             
             String[] aimeeGreetings = { "hi " + name.ToLower() + ".", "hm.", "what", "can i help u?"};
-            String[] aimeeEarlyGreetings = { };
-            String[] aimeeLateGreetings = { };
-            
+
             String[] melanieGreetings = {"Greetings, " + name + "." , "Oh. It's you.", "Yes?"};
-            String[] melanieEarlyGreetings = {"Good morning.", "I didn't take you for a morning person."};
-            String[] melanieLateGreetings = {"Good evening.", "Why are you awake at this hour?"};
             
 
             //WELLBEING RESPONSES
-            String[] estherWellbeing = {"I'm great! Thanks for asking " + name + " :)"};
-            String[] estherMorningWellbeing = { };
-            String[] estherLateWellbeing = { };
+            String[] estherWellbeing = {"I’m doing great!! Thank you for asking" + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about school :P You?" };
 
-            String[] soniaWellbeing = { };
-            String[] soniaMorningWellbeing = { };
-            String[] soniaLateWellbeing = { };
+            String[] soniaWellbeing = {"BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll its raininggggggg aaaaaaaa", "doing okiedokie how u are doing too?", "im just doing nothing soooo pretty bored… are u doing lots of things now?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL" };
 
-            String[] aimeeWellbeing = { };
-            String[] aimeeMorningWellbeing = { };
-            String[] aimeeLateWellbeing = { };
+            String[] aimeeWellbeing = {"breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?"};
 
-            String[] melanieWellbeing = { };
-            String[] melanieMorningWellbeing = { };
-            String[] melanieLateWellbeing = { };
+            String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that.Either way, how are you " + name + "?"};
 
             if (buddyName == "Esther")
             {
@@ -359,7 +358,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    if (greeting) // ---------- FIGURE OUT HOW TO MAKE IT CHOOSE FROM THE MORNING/LATE ARRAYS -------
+                    if (greeting)
                     {
                         response += estherGreetings[rnd.Next(estherGreetings.Length)];
                     }
