@@ -14,8 +14,8 @@ namespace WindowsFormsApplication1
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
-        String[] greetings = { "HELLO", "HI", "YO", "HEY" };
-        String[] wellbeings = {"HRU","HOW ARE YOU","HOW R U","HOW ARE U","HYD","HOW U DOIN","HOW YOU DOIN"};
+        String[] greetings = { "HELLO", "HI","HEY" };
+        String[] wellbeings = {"HRU","HOW R U","HOW ARE U","HYD","HOW U DOIN","HOW YOU DOIN", "HOW ARE YOU"};
         Random rnd = new Random();
         int buddyNo;
         private void connectButton_Click(object sender, EventArgs e)
@@ -342,13 +342,13 @@ namespace WindowsFormsApplication1
             
 
             //WELLBEING RESPONSES
-            String[] estherWellbeing = {"I’m doing great!! Thank you for asking" + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about school :P You?" };
+            String[] estherWellbeing = {"I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about school :P You?" };
 
             String[] soniaWellbeing = {"BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll its raininggggggg aaaaaaaa", "doing okiedokie how u are doing too?", "im just doing nothing soooo pretty bored… are u doing lots of things now?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL" };
 
             String[] aimeeWellbeing = {"breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?"};
 
-            String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that.Either way, how are you " + name + "?"};
+            String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that. Either way, how are you " + name + "?"};
 
             if (buddyName == "Esther")
             {
