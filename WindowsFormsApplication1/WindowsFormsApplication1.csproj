@@ -120,6 +120,246 @@
   <ItemGroup>
     <None Include="Resources\UnderwaterBG.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nightmare on Elm Street.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NITROUS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Non-binary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Obamium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pansexual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pikachu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pirate Skull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rainbow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sans.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sheesh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SIUUU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skateboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sponge Mock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sunset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Superman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Survivalist_Jonesy_Rare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tennis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Terminator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Transgender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trollface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UNA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zagreus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spiderman.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cat.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clementine.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DaBaby.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eye.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Finding Nemo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frozen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guitar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imposter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Jurassic Park.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Matt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Naruto.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plumbob.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rick Roll.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sailor Moon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star Wars.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stargazing.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Steve.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The Flash.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The Matrix.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toy Story.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trevor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White Drake.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yuno.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arthur Morgan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Asexual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B. KYU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Basketball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Batman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Beach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bigby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bisexual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chloe Price.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Doge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EUPHORIA 6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Evil Patrick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Football.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Forest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Friday the 13th.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Goku.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Harry Potter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Henry Stickmin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Illuminati.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Jonesy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kaneki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lee Everett.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lesbian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Love Heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Motorcycle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mountains.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mutation Syndrome.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -50,7 +50,6 @@ namespace WindowsFormsApplication1
                 nameBox.Enabled = false;
                 usernameBox.Enabled = false;
                 foreColorBox.Enabled = false;
-                pfpBtn.Enabled = false;
                 sendButton.Enabled = true;
                 messageBox.Enabled = true;
                 listMessage.Enabled = true;
@@ -147,7 +146,6 @@ namespace WindowsFormsApplication1
                 listMessage.Items.Add("Disconnected");
                 connectButton.Text = "CONNECT";
                 sendButton.Enabled = false;
-                pfpBtn.Enabled = true;
                 messageBox.Enabled = false;
                 nameBox.Enabled = true;
                 usernameBox.Enabled = true;
@@ -184,15 +182,6 @@ namespace WindowsFormsApplication1
 
         private void pfpBtn_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Title = "Choose Profile Picture";
-
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    userPFP.Image = new Bitmap(dlg.FileName);
-                }
-            }
         }
 
         private void solidColourToolStripMenuItem_Click(object sender, EventArgs e)
@@ -259,6 +248,24 @@ namespace WindowsFormsApplication1
             BackgroundImageLayout = ImageLayout.Stretch;
             BackgroundImage = Properties.Resources.MeadowBG;
             changeForeColor(Color.Black);
+        }
+
+        private void customToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Title = "Choose Profile Picture";
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    userPFP.Image = new Bitmap(dlg.FileName);
+                }
+            }
+        }
+
+        private void bKYUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.B__KYU;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -456,7 +463,6 @@ namespace WindowsFormsApplication1
             nameLbl.ForeColor = color;
             usernameLbl.ForeColor = color;
             txtColourLbl.ForeColor = color;
-            pfpLbl.ForeColor = color;
             loginBox.ForeColor = color;
         }
     }
