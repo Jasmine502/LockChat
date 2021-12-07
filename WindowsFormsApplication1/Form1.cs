@@ -268,6 +268,387 @@ namespace WindowsFormsApplication1
             userPFP.Image = Properties.Resources.B__KYU;
         }
 
+        private void eUPHORIA6ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.EUPHORIA_6;
+        }
+
+        private void mutationSyndromeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Mutation_Syndrome;
+        }
+
+        private void nITROUSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.NITROUS;
+        }
+
+        private void stargazingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.stargazing;
+        }
+
+        private void uNAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.UNA;
+        }
+
+        private void ashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Ash;
+        }
+
+        private void gokuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Goku;
+        }
+
+        private void kanekiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Kaneki;
+        }
+
+        private void narutoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Naruto;
+        }
+
+        private void nicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Nico;
+        }
+
+        private void pikachuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Pikachu;
+        }
+
+        private void sailorMoonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Sailor_Moon;
+        }
+
+        private void yunoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Yuno;
+        }
+
+        private void catToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Cat;
+        }
+
+        private void clownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Clown;
+        }
+
+        private void dogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Dog;
+        }
+
+        private void eyeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Eye;
+        }
+
+        private void flowerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Flower;
+        }
+
+        private void guitarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Guitar;
+        }
+
+        private void loveHeartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Love_Heart;
+        }
+
+        private void pirateSKullToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Pirate_Skull;
+        }
+
+        private void beachToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Beach;
+        }
+
+        private void forestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Forest;
+        }
+
+        private void mountainsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Mountains;
+        }
+
+        private void sunsetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Sunset;
+        }
+
+        private void daBabyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.DaBaby;
+        }
+
+        private void dogeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Doge;
+        }
+
+        private void evilPatrickToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Evil_Patrick;
+        }
+
+        private void illuminatiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Illuminati;
+        }
+
+        private void mattToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Matt;
+        }
+
+        private void obamiumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Obamium;
+        }
+
+        private void rickRollToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Rick_Roll;
+        }
+
+        private void sIUUUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.SIUUU;
+        }
+
+        private void spongeMockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Sponge_Mock;
+        }
+
+        private void trollfaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Trollface;
+        }
+
+        private void whiteDrakeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.White_Drake;
+        }
+
+        private void findingNemoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Finding_Nemo;
+        }
+
+        private void fridayThe13thToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Friday_the_13th;
+        }
+
+        private void frozenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Frozen;
+        }
+
+        private void harryPotterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Harry_Potter;
+        }
+
+        private void jurassicParkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Jurassic_Park;
+        }
+
+        private void nightmareOnElmStreetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Nightmare_on_Elm_Street;
+        }
+
+        private void starWarsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Star_Wars;
+        }
+
+        private void terminatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Terminator;
+        }
+
+        private void theMatrixToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.The_Matrix;
+        }
+
+        private void toyStoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Toy_Story;
+        }
+
+        private void batmanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Batman;
+        }
+
+        private void asexualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Asexual;
+        }
+
+        private void bisexualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Bisexual;
+        }
+
+        private void lesbianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Lesbian;
+        }
+
+        private void nonbinaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Non_binary;
+        }
+
+        private void pansexualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Pansexual;
+        }
+
+        private void rainbowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Rainbow;
+        }
+
+        private void transgenderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Transgender;
+        }
+
+        private void basketballToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Basketball;
+        }
+
+        private void footballToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Football;
+        }
+
+        private void tennisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Tennis;
+        }
+
+        private void spidermanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Spiderman;
+        }
+
+        private void supermanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Superman;
+        }
+
+        private void theFlashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.The_Flash;
+        }
+
+        private void carToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Car;
+        }
+
+        private void motorcycleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Motorcycle;
+        }
+
+        private void planeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Plane;
+        }
+
+
+        private void arthurMorganToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Arthur_Morgan;
+        }
+
+        private void bigbyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Bigby;
+        }
+
+        private void chloePriceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Chloe_Price;
+        }
+
+        private void clementineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Clementine;
+        }
+
+        private void henryStickminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Henry_Stickmin;
+        }
+
+        private void imposterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Imposter;
+        }
+
+        private void jonesyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Jonesy;
+        }
+
+        private void leeEverettToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Lee_Everett;
+        }
+
+        private void plumbobToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Plumbob;
+        }
+
+        private void sansToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Sans;
+        }
+
+        private void steveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Steve;
+        }
+
+        private void trevorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Trevor;
+        }
+
+        private void zagreusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.Zagreus;
+        }
+
         private void label2_Click(object sender, EventArgs e)
         {
 
