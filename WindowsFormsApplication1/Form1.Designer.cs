@@ -158,7 +158,7 @@
             this.loginBox.Controls.Add(this.foreColorBox);
             this.loginBox.Controls.Add(this.nameBox);
             this.loginBox.Controls.Add(this.nameLbl);
-            this.loginBox.Location = new System.Drawing.Point(17, 35);
+            this.loginBox.Location = new System.Drawing.Point(193, 32);
             this.loginBox.Name = "loginBox";
             this.loginBox.Size = new System.Drawing.Size(460, 114);
             this.loginBox.TabIndex = 0;
@@ -221,7 +221,7 @@
             // connectButton
             // 
             this.connectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectButton.Location = new System.Drawing.Point(17, 155);
+            this.connectButton.Location = new System.Drawing.Point(193, 152);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(460, 27);
             this.connectButton.TabIndex = 5;
@@ -233,9 +233,9 @@
             // 
             this.listMessage.FormattingEnabled = true;
             this.listMessage.HorizontalScrollbar = true;
-            this.listMessage.Location = new System.Drawing.Point(73, 188);
+            this.listMessage.Location = new System.Drawing.Point(123, 188);
             this.listMessage.Name = "listMessage";
-            this.listMessage.Size = new System.Drawing.Size(348, 212);
+            this.listMessage.Size = new System.Drawing.Size(603, 277);
             this.listMessage.TabIndex = 2;
             this.listMessage.TabStop = false;
             this.listMessage.SelectedIndexChanged += new System.EventHandler(this.listMessage_SelectedIndexChanged);
@@ -243,9 +243,9 @@
             // messageBox
             // 
             this.messageBox.Enabled = false;
-            this.messageBox.Location = new System.Drawing.Point(17, 411);
+            this.messageBox.Location = new System.Drawing.Point(123, 478);
             this.messageBox.Name = "messageBox";
-            this.messageBox.Size = new System.Drawing.Size(460, 20);
+            this.messageBox.Size = new System.Drawing.Size(603, 20);
             this.messageBox.TabIndex = 6;
             this.messageBox.TextChanged += new System.EventHandler(this.messageBox_TextChanged);
             this.messageBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageBox_KeyDown);
@@ -254,9 +254,9 @@
             // 
             this.sendButton.Enabled = false;
             this.sendButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendButton.Location = new System.Drawing.Point(17, 437);
+            this.sendButton.Location = new System.Drawing.Point(123, 504);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(460, 31);
+            this.sendButton.Size = new System.Drawing.Size(603, 31);
             this.sendButton.TabIndex = 7;
             this.sendButton.Text = "SEND";
             this.sendButton.UseVisualStyleBackColor = true;
@@ -268,7 +268,7 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(494, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(846, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1087,9 +1087,9 @@
             // 
             // buddyPFP
             // 
-            this.buddyPFP.Location = new System.Drawing.Point(427, 188);
+            this.buddyPFP.Location = new System.Drawing.Point(732, 188);
             this.buddyPFP.Name = "buddyPFP";
-            this.buddyPFP.Size = new System.Drawing.Size(50, 50);
+            this.buddyPFP.Size = new System.Drawing.Size(100, 100);
             this.buddyPFP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.buddyPFP.TabIndex = 9;
             this.buddyPFP.TabStop = false;
@@ -1098,7 +1098,7 @@
             // 
             this.userPFP.Location = new System.Drawing.Point(17, 188);
             this.userPFP.Name = "userPFP";
-            this.userPFP.Size = new System.Drawing.Size(50, 50);
+            this.userPFP.Size = new System.Drawing.Size(100, 100);
             this.userPFP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userPFP.TabIndex = 7;
             this.userPFP.TabStop = false;
@@ -1107,7 +1107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 477);
+            this.ClientSize = new System.Drawing.Size(846, 547);
             this.Controls.Add(this.buddyPFP);
             this.Controls.Add(this.userPFP);
             this.Controls.Add(this.sendButton);
