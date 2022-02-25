@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -76,6 +76,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Aimee_PFP {
             get {
                 object obj = ResourceManager.GetObject("Aimee PFP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AimeeBio_Temp {
+            get {
+                object obj = ResourceManager.GetObject("AimeeBio_Temp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +276,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Esther_PFP {
             get {
                 object obj = ResourceManager.GetObject("Esther PFP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EstherBio_Temp {
+            get {
+                object obj = ResourceManager.GetObject("EstherBio_Temp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -552,6 +572,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MelanieBio_Temp {
+            get {
+                object obj = ResourceManager.GetObject("MelanieBio_Temp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Motorcycle {
             get {
                 object obj = ResourceManager.GetObject("Motorcycle", resourceCulture);
@@ -795,6 +825,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Sonia_PFP {
             get {
                 object obj = ResourceManager.GetObject("Sonia PFP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SoniaBio_Temp {
+            get {
+                object obj = ResourceManager.GetObject("SoniaBio_Temp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

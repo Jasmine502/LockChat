@@ -41,6 +41,9 @@
             this.messageBox = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rosesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -142,17 +145,18 @@
             this.zagreusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buddyPFP = new System.Windows.Forms.PictureBox();
-            this.userPFP = new System.Windows.Forms.PictureBox();
             this.chooseSonia = new System.Windows.Forms.Button();
             this.chooseEsther = new System.Windows.Forms.Button();
             this.chooseAimee = new System.Windows.Forms.Button();
             this.chooseMelanie = new System.Windows.Forms.Button();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bioBox = new System.Windows.Forms.PictureBox();
+            this.buddyPFP = new System.Windows.Forms.PictureBox();
+            this.userPFP = new System.Windows.Forms.PictureBox();
             this.loginBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bioBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buddyPFP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPFP)).BeginInit();
             this.SuspendLayout();
@@ -279,6 +283,27 @@
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveDataToolStripMenuItem,
+            this.loadDataToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveDataToolStripMenuItem
+            // 
+            this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.saveDataToolStripMenuItem.Text = "Save Data";
+            // 
+            // loadDataToolStripMenuItem
+            // 
+            this.loadDataToolStripMenuItem.Name = "loadDataToolStripMenuItem";
+            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.loadDataToolStripMenuItem.Text = "Load Data";
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -300,7 +325,7 @@
             this.solidColourToolStripMenuItem,
             this.customToolStripMenuItem});
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             // 
             // rosesToolStripMenuItem
@@ -383,7 +408,7 @@
             this.videoGamesToolStripMenuItem,
             this.customToolStripMenuItem1});
             this.profilePictureToolStripMenuItem.Name = "profilePictureToolStripMenuItem";
-            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.profilePictureToolStripMenuItem.Text = "Profile Picture";
             // 
             // albumArtToolStripMenuItem
@@ -1097,9 +1122,71 @@
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
+            // chooseSonia
+            // 
+            this.chooseSonia.Location = new System.Drawing.Point(6, 63);
+            this.chooseSonia.Name = "chooseSonia";
+            this.chooseSonia.Size = new System.Drawing.Size(139, 38);
+            this.chooseSonia.TabIndex = 11;
+            this.chooseSonia.Text = "xXx_Sony_xXx";
+            this.chooseSonia.UseVisualStyleBackColor = true;
+            this.chooseSonia.Click += new System.EventHandler(this.chooseSonia_Click);
+            // 
+            // chooseEsther
+            // 
+            this.chooseEsther.Location = new System.Drawing.Point(6, 19);
+            this.chooseEsther.Name = "chooseEsther";
+            this.chooseEsther.Size = new System.Drawing.Size(139, 38);
+            this.chooseEsther.TabIndex = 12;
+            this.chooseEsther.Text = "Angel616";
+            this.chooseEsther.UseVisualStyleBackColor = true;
+            this.chooseEsther.Click += new System.EventHandler(this.chooseEsther_Click);
+            // 
+            // chooseAimee
+            // 
+            this.chooseAimee.Location = new System.Drawing.Point(9, 107);
+            this.chooseAimee.Name = "chooseAimee";
+            this.chooseAimee.Size = new System.Drawing.Size(139, 38);
+            this.chooseAimee.TabIndex = 13;
+            this.chooseAimee.Text = "aimaggot666";
+            this.chooseAimee.UseVisualStyleBackColor = true;
+            this.chooseAimee.Click += new System.EventHandler(this.chooseAimee_Click);
+            // 
+            // chooseMelanie
+            // 
+            this.chooseMelanie.Location = new System.Drawing.Point(6, 151);
+            this.chooseMelanie.Name = "chooseMelanie";
+            this.chooseMelanie.Size = new System.Drawing.Size(139, 38);
+            this.chooseMelanie.TabIndex = 14;
+            this.chooseMelanie.Text = "MelanieS";
+            this.chooseMelanie.UseVisualStyleBackColor = true;
+            this.chooseMelanie.Click += new System.EventHandler(this.chooseMelanie_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bioBox);
+            this.groupBox1.Controls.Add(this.chooseEsther);
+            this.groupBox1.Controls.Add(this.chooseSonia);
+            this.groupBox1.Controls.Add(this.chooseMelanie);
+            this.groupBox1.Controls.Add(this.chooseAimee);
+            this.groupBox1.Location = new System.Drawing.Point(9, 27);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(523, 482);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Users";
+            // 
+            // bioBox
+            // 
+            this.bioBox.Location = new System.Drawing.Point(151, 19);
+            this.bioBox.Name = "bioBox";
+            this.bioBox.Size = new System.Drawing.Size(356, 452);
+            this.bioBox.TabIndex = 15;
+            this.bioBox.TabStop = false;
             // 
             // buddyPFP
             // 
@@ -1119,76 +1206,12 @@
             this.userPFP.TabIndex = 7;
             this.userPFP.TabStop = false;
             // 
-            // chooseSonia
-            // 
-            this.chooseSonia.Location = new System.Drawing.Point(262, 386);
-            this.chooseSonia.Name = "chooseSonia";
-            this.chooseSonia.Size = new System.Drawing.Size(114, 50);
-            this.chooseSonia.TabIndex = 11;
-            this.chooseSonia.Text = "Sonia";
-            this.chooseSonia.UseVisualStyleBackColor = true;
-            this.chooseSonia.Click += new System.EventHandler(this.chooseSonia_Click);
-            // 
-            // chooseEsther
-            // 
-            this.chooseEsther.Location = new System.Drawing.Point(123, 386);
-            this.chooseEsther.Name = "chooseEsther";
-            this.chooseEsther.Size = new System.Drawing.Size(133, 50);
-            this.chooseEsther.TabIndex = 12;
-            this.chooseEsther.Text = "Esther";
-            this.chooseEsther.UseVisualStyleBackColor = true;
-            this.chooseEsther.Click += new System.EventHandler(this.chooseEsther_Click);
-            // 
-            // chooseAimee
-            // 
-            this.chooseAimee.Location = new System.Drawing.Point(439, 386);
-            this.chooseAimee.Name = "chooseAimee";
-            this.chooseAimee.Size = new System.Drawing.Size(79, 50);
-            this.chooseAimee.TabIndex = 13;
-            this.chooseAimee.Text = "Aimee";
-            this.chooseAimee.UseVisualStyleBackColor = true;
-            this.chooseAimee.Click += new System.EventHandler(this.chooseAimee_Click);
-            // 
-            // chooseMelanie
-            // 
-            this.chooseMelanie.Location = new System.Drawing.Point(524, 386);
-            this.chooseMelanie.Name = "chooseMelanie";
-            this.chooseMelanie.Size = new System.Drawing.Size(79, 50);
-            this.chooseMelanie.TabIndex = 14;
-            this.chooseMelanie.Text = "Melanie";
-            this.chooseMelanie.UseVisualStyleBackColor = true;
-            this.chooseMelanie.Click += new System.EventHandler(this.chooseMelanie_Click);
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveDataToolStripMenuItem,
-            this.loadDataToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // saveDataToolStripMenuItem
-            // 
-            this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveDataToolStripMenuItem.Text = "Save Data";
-            // 
-            // loadDataToolStripMenuItem
-            // 
-            this.loadDataToolStripMenuItem.Name = "loadDataToolStripMenuItem";
-            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadDataToolStripMenuItem.Text = "Load Data";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 545);
-            this.Controls.Add(this.chooseMelanie);
-            this.Controls.Add(this.chooseAimee);
-            this.Controls.Add(this.chooseEsther);
-            this.Controls.Add(this.chooseSonia);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buddyPFP);
             this.Controls.Add(this.userPFP);
             this.Controls.Add(this.sendButton);
@@ -1209,6 +1232,8 @@
             this.loginBox.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bioBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buddyPFP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPFP)).EndInit();
             this.ResumeLayout(false);
@@ -1340,6 +1365,8 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadDataToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox bioBox;
     }
 }
 

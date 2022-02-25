@@ -24,6 +24,7 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Size = new Size(862, 584);
             sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
             sound.PlayLooping();
             listMessage.Hide();
@@ -31,6 +32,8 @@ namespace WindowsFormsApplication1
             userPFP.Hide();
             messageBox.Hide();
             sendButton.Hide();
+            groupBox1.Hide();
+            bioBox.Hide();
             chooseEsther.Hide();
             chooseSonia.Hide();
             chooseAimee.Hide();
@@ -38,11 +41,13 @@ namespace WindowsFormsApplication1
         }
         private void connectButton_Click(object sender, EventArgs e)
         {
-
-
+            Size = new Size(548, 584);
+            CenterToScreen();
             //SHOW/HIDE ELEMENTS
             loginBox.Hide();
             loginButton.Hide();
+            groupBox1.Show();
+            bioBox.Show();
             chooseEsther.Show();
             chooseSonia.Show();
             chooseAimee.Show();
@@ -866,6 +871,8 @@ namespace WindowsFormsApplication1
 
         public void mainChatShowHideElements()
         {
+            groupBox1.Hide();
+            bioBox.Hide();
             chooseEsther.Hide();
             chooseSonia.Hide();
             chooseAimee.Hide();
@@ -875,7 +882,8 @@ namespace WindowsFormsApplication1
             buddyPFP.Show();
             messageBox.Show();
             sendButton.Show();
-
+            Size = new Size(862, 584);
+            CenterToScreen();
 
         }
     }
