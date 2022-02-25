@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Media;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -14,144 +16,125 @@ namespace WindowsFormsApplication1
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
-        String[] greetings = { "HELLO", "HI","HEY" };
-        String[] wellbeings = {"HRU","HOW R U","HOW ARE U","HYD","HOW U DOIN","HOW YOU DOIN", "HOW ARE YOU"};
+        String[] greetings = { "HELLO", "HI", "HEY" };
+        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU" };
         Random rnd = new Random();
+        SoundPlayer sound;
         int buddyNo;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
+            sound.PlayLooping();
+            listMessage.Hide();
+            buddyPFP.Hide();
+            userPFP.Hide();
+            messageBox.Hide();
+            sendButton.Hide();
+            chooseEsther.Hide();
+            chooseSonia.Hide();
+            chooseAimee.Hide();
+            chooseMelanie.Hide();
+        }
         private void connectButton_Click(object sender, EventArgs e)
         {
-            //CHOOSING RANDOM BUDDY
-            buddyNo = rnd.Next(buddy.Length);
-            buddyName = buddy[buddyNo];
-            buddyUserName = buddyUser[buddyNo];
-            
 
-            //CONNECT/DISCONNECT BUTTON
-            if (connectButton.Text == "CONNECT")
-            {
-                //SETTING BUDDY PFP
-                if (buddyName == "Esther")
-                {
-                    buddyPFP.Image = Properties.Resources.Esther_PFP;
-                }
-                else if (buddyName == "Sonia")
-                {
-                    buddyPFP.Image = Properties.Resources.Sonia_PFP;
-                }
-                else if (buddyName == "Aimee")
-                {
-                    buddyPFP.Image = Properties.Resources.Aimee_PFP;
-                }
-                else if (buddyName == "Melanie")
-                {
-                    buddyPFP.Image = Properties.Resources.Melanie_PFP;
-                }
 
-                nameBox.Enabled = false;
-                usernameBox.Enabled = false;
-                foreColorBox.Enabled = false;
-                sendButton.Enabled = true;
-                messageBox.Enabled = true;
-                listMessage.Enabled = true;
-                connectButton.Text = "DISCONNECT";
-                
+            //SHOW/HIDE ELEMENTS
+            loginBox.Hide();
+            loginButton.Hide();
+            chooseEsther.Show();
+            chooseSonia.Show();
+            chooseAimee.Show();
+            chooseMelanie.Show();
+
+
             //FORMATTING LIST BOX
-                //MANAGING EMPTY LOG-IN
-                if (nameBox.Text == "")
-                {
-                    name = "Gaster";
-                }
-                else
-                {
-                    name = nameBox.Text;
-                }
-
-                if (usernameBox.Text == "")
-                {
-                    username = "Me";
-                }
-                else
-                {
-                    username = usernameBox.Text;
-                }
-
-                if (userPFP.Image == null)
-                {
-                    userPFP.Image = Properties.Resources.GasterPFP;
-                }
-
-                foreColor = foreColorBox.Text.ToUpper();
-                listMessage.Items.Clear();
-                listMessage.Items.Add("Connected");
-
-                if (foreColor == "RED")
-                {
-                    listMessage.ForeColor = Color.Red;
-                    listMessage.BackColor = Color.White;
-                }
-                else if (foreColor == "ORANGE")
-                {
-                    listMessage.ForeColor = Color.Orange;
-                    listMessage.BackColor = Color.Black;
-                    messageBox.ForeColor = Color.White;
-                    messageBox.BackColor = Color.Black;
-                }
-                else if (foreColor == "YELLOW")
-                {
-                    listMessage.ForeColor = Color.Yellow;
-                    listMessage.BackColor = Color.Black;
-                    messageBox.ForeColor = Color.White;
-                    messageBox.BackColor = Color.Black;
-                }
-                else if (foreColor == "GREEN")
-                {
-                    listMessage.ForeColor = Color.Green;
-                    listMessage.BackColor = Color.White;
-                }
-                else if (foreColor == "BLUE")
-                {
-                    listMessage.ForeColor = Color.Blue;
-                    listMessage.BackColor = Color.White;
-                }
-                else if (foreColor == "PINK" || foreColor == "VIOLET")
-                {
-                    listMessage.ForeColor = Color.Pink;
-                    listMessage.BackColor = Color.Black;
-                    messageBox.ForeColor = Color.White;
-                    messageBox.BackColor = Color.Black;
-                }
-                else if (foreColor == "PURPLE" || foreColor == "INDIGO")
-                {
-                    listMessage.ForeColor = Color.Purple;
-                    listMessage.BackColor = Color.White;
-                }
-                else if (foreColor == "BLACK")
-                {
-                    listMessage.ForeColor = Color.Black;
-                    listMessage.BackColor = Color.White;
-                }
-                else if (foreColor == "WHITE")
-                {
-                    listMessage.ForeColor = Color.White;
-                    listMessage.BackColor = Color.Black;
-                }
-                else
-                {
-                    listMessage.ForeColor = Color.Black;
-                    listMessage.BackColor = Color.White;
-                }
+            //MANAGING EMPTY LOG-IN
+            if (nameBox.Text == "")
+            {
+                name = "Gaster";
             }
             else
             {
-                listMessage.Items.Add("Disconnected");
-                connectButton.Text = "CONNECT";
-                sendButton.Enabled = false;
-                messageBox.Enabled = false;
-                nameBox.Enabled = true;
-                usernameBox.Enabled = true;
-                foreColorBox.Enabled = true;
-                promptsMade = "";
+                name = nameBox.Text;
             }
+
+            if (usernameBox.Text == "")
+            {
+                username = "Me";
+            }
+            else
+            {
+                username = usernameBox.Text;
+            }
+
+            if (userPFP.Image == null)
+            {
+                userPFP.Image = Properties.Resources.GasterPFP;
+            }
+
+            foreColor = foreColorBox.Text.ToUpper();
+            listMessage.Items.Clear();
+            listMessage.Items.Add("Connected");
+
+            if (foreColor == "RED")
+            {
+                listMessage.ForeColor = Color.Red;
+                listMessage.BackColor = Color.White;
+            }
+            else if (foreColor == "ORANGE")
+            {
+                listMessage.ForeColor = Color.Orange;
+                listMessage.BackColor = Color.Black;
+                messageBox.ForeColor = Color.White;
+                messageBox.BackColor = Color.Black;
+            }
+            else if (foreColor == "YELLOW")
+            {
+                listMessage.ForeColor = Color.Yellow;
+                listMessage.BackColor = Color.Black;
+                messageBox.ForeColor = Color.White;
+                messageBox.BackColor = Color.Black;
+            }
+            else if (foreColor == "GREEN")
+            {
+                listMessage.ForeColor = Color.Green;
+                listMessage.BackColor = Color.White;
+            }
+            else if (foreColor == "BLUE")
+            {
+                listMessage.ForeColor = Color.Blue;
+                listMessage.BackColor = Color.White;
+            }
+            else if (foreColor == "PINK" || foreColor == "VIOLET")
+            {
+                listMessage.ForeColor = Color.Pink;
+                listMessage.BackColor = Color.Black;
+                messageBox.ForeColor = Color.White;
+                messageBox.BackColor = Color.Black;
+            }
+            else if (foreColor == "PURPLE" || foreColor == "INDIGO")
+            {
+                listMessage.ForeColor = Color.Purple;
+                listMessage.BackColor = Color.White;
+            }
+            else if (foreColor == "BLACK")
+            {
+                listMessage.ForeColor = Color.Black;
+                listMessage.BackColor = Color.White;
+            }
+            else if (foreColor == "WHITE")
+            {
+                listMessage.ForeColor = Color.White;
+                listMessage.BackColor = Color.Black;
+            }
+            else
+            {
+                listMessage.ForeColor = Color.Black;
+                listMessage.BackColor = Color.White;
+            }
+
 
         }
 
@@ -180,9 +163,6 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void pfpBtn_Click(object sender, EventArgs e)
-        {
-        }
 
         private void solidColourToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -225,9 +205,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
+ 
 
         private void spaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -649,9 +627,55 @@ namespace WindowsFormsApplication1
             userPFP.Image = Properties.Resources.Zagreus;
         }
 
+        private void chooseSonia_Click(object sender, EventArgs e)
+        {
+            buddyNo = 2;
+            mainChatShowHideElements();
+            buddyName = buddy[1];
+            buddyUserName = buddyUser[1];
+            buddyPFP.Image = Properties.Resources.Sonia_PFP;
+        }
+
+        private void chooseEsther_Click(object sender, EventArgs e)
+        {
+            buddyNo = 1;
+            mainChatShowHideElements();
+            buddyName = buddy[0];
+            buddyUserName = buddyUser[0];
+            buddyPFP.Image = Properties.Resources.Esther_PFP;
+        }
+
+        private void chooseAimee_Click(object sender, EventArgs e)
+        {
+            buddyNo = 3;
+            mainChatShowHideElements();
+            buddyName = buddy[2];
+            buddyUserName = buddyUser[2];
+            buddyPFP.Image = Properties.Resources.Aimee_PFP;
+        }
+
+        private void chooseMelanie_Click(object sender, EventArgs e)
+        {
+            buddyNo = 4;
+            mainChatShowHideElements();
+            buddyName = buddy[3];
+            buddyUserName = buddyUser[3];
+            buddyPFP.Image = Properties.Resources.Melanie_PFP;
+        }
+
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void freddyFazbearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userPFP.Image = Properties.Resources.FreddyFazbear;
         }
 
         private void colorBox_TextChanged(object sender, EventArgs e)
@@ -663,14 +687,7 @@ namespace WindowsFormsApplication1
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (connectButton.Text == "DISCONNECT")
-                {
-                    sendButton_Click((object)sender, (EventArgs)e);
-                }
-                else
-                {
-                    connectButton_Click((object)sender, (EventArgs)e);
-                }
+                sendButton_Click((object)sender, (EventArgs)e);
             }
         }
 
@@ -714,29 +731,29 @@ namespace WindowsFormsApplication1
 
             //REPEAT RESPONSES
             // ----- CHANGE THESE --------
-            String[] estherRepeat = {"Oh! Didn’t we talk about this already ?", "I can see that you’re tired, you’ve said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you’ve said that before!", "Uhh… are you confused? This isn’t the first time you said this :P", "Hahaha you’re repeating yourself xD" };
-            String[] soniaRepeat = { "LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA"};
-            String[] aimeeRepeat = { "this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?"};
+            String[] estherRepeat = { "Oh! Didn’t we talk about this already ?", "I can see that you’re tired, you’ve said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you’ve said that before!", "Uhh… are you confused? This isn’t the first time you said this :P", "Hahaha you’re repeating yourself xD" };
+            String[] soniaRepeat = { "LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA" };
+            String[] aimeeRepeat = { "this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?" };
             String[] melanieRepeat = { "Perhaps take a break. You seem to be forgetting what we have already discussed.", "Do watch yourself, I don’t like repeating myself unlike you.", "Alright. Lovely conversation. Talk to me again when you have practiced having real conversations.", "Do you need me to call you a paramedic? Repetition is a sign of memory loss, and you seem to be suffering from it.", "You have said this. Did you already forget?" };
 
             //GREETING RESPONSES
-            String[] estherGreetings = { "Hey hey " + name + "!" , "Heyo!", "Excelsior!", "Yoyo!" };
-            
-            String[] soniaGreetings = { "hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper()};
-            
-            String[] aimeeGreetings = { "hi " + name.ToLower() + ".", "hm.", "what", "can i help u?"};
+            String[] estherGreetings = { "Hey hey " + name + "!", "Heyo!", "Excelsior!", "Yoyo!" };
 
-            String[] melanieGreetings = {"Greetings, " + name + "." , "Oh. It's you.", "Yes?"};
-            
+            String[] soniaGreetings = { "hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper() };
+
+            String[] aimeeGreetings = { "hi " + name.ToLower() + ".", "hm.", "what", "can i help u?" };
+
+            String[] melanieGreetings = { "Greetings, " + name + ".", "Oh. It's you.", "Yes?" };
+
 
             //WELLBEING RESPONSES
-            String[] estherWellbeing = {"I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about school :P You?" };
+            String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about lockdown :P You?" };
 
-            String[] soniaWellbeing = {"BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll its raininggggggg aaaaaaaa", "doing okiedokie how u are doing too?", "im just doing nothing soooo pretty bored… are u doing lots of things now?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL" };
+            String[] soniaWellbeing = { "BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "doing okiedokie how u are doing too?", "im just doing nothing bc theres nothing to do soooo pretty bored… are u doing lots of things now?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
 
-            String[] aimeeWellbeing = {"breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?"};
+            String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
 
-            String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that. Either way, how are you " + name + "?"};
+            String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that. Either way, how are you " + name + "?" };
 
             if (buddyName == "Esther")
             {
@@ -832,7 +849,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                MessageBox.Show("You shouldn't be able to see this","How did you see this?");
+                MessageBox.Show("You shouldn't be able to see this", "How did you see this?");
             }
 
             promptsMade += prompt;
@@ -845,6 +862,21 @@ namespace WindowsFormsApplication1
             usernameLbl.ForeColor = color;
             txtColourLbl.ForeColor = color;
             loginBox.ForeColor = color;
+        }
+
+        public void mainChatShowHideElements()
+        {
+            chooseEsther.Hide();
+            chooseSonia.Hide();
+            chooseAimee.Hide();
+            chooseMelanie.Hide();
+            listMessage.Show();
+            userPFP.Show();
+            buddyPFP.Show();
+            messageBox.Show();
+            sendButton.Show();
+
+
         }
     }
 }

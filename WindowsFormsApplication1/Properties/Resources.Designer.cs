@@ -343,6 +343,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FreddyFazbear {
+            get {
+                object obj = ResourceManager.GetObject("FreddyFazbear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Friday_the_13th {
             get {
                 object obj = ResourceManager.GetObject("Friday_the_13th", resourceCulture);
@@ -477,6 +487,15 @@ namespace WindowsFormsApplication1.Properties {
             get {
                 object obj = ResourceManager.GetObject("Lesbian", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream LockChat_LOOP {
+            get {
+                return ResourceManager.GetStream("LockChat_LOOP", resourceCulture);
             }
         }
         

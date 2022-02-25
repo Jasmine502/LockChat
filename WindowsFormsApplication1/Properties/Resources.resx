@@ -400,4 +400,10 @@
   <data name="Zagreus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zagreus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FreddyFazbear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FreddyFazbear.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LockChat_LOOP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LockChat LOOP.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
