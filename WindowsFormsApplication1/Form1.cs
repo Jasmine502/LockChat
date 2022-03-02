@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Media;
-using System.IO;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -16,10 +15,12 @@ namespace WindowsFormsApplication1
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
-        String[] greetings = { "HELLO", "HI", "HEY" };
+        String[] greetings = { "HELLO", "HI", "HEY", "YO " };
         String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU" };
+        String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
         Random rnd = new Random();
         SoundPlayer sound;
+        bool greeting;
         int buddyNo;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -210,7 +211,7 @@ namespace WindowsFormsApplication1
 
         }
 
- 
+
 
         private void spaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -683,6 +684,26 @@ namespace WindowsFormsApplication1
             userPFP.Image = Properties.Resources.FreddyFazbear;
         }
 
+        private void chooseEsther_MouseHover(object sender, EventArgs e)
+        {
+            bioBox.Image = Properties.Resources.EstherBio_Temp;
+        }
+
+        private void chooseSonia_MouseHover(object sender, EventArgs e)
+        {
+            bioBox.Image = Properties.Resources.SoniaBio_Temp;
+        }
+
+        private void chooseAimee_MouseHover(object sender, EventArgs e)
+        {
+            bioBox.Image = Properties.Resources.AimeeBio_Temp;
+        }
+
+        private void chooseMelanie_MouseHover(object sender, EventArgs e)
+        {
+            bioBox.Image = Properties.Resources.MelanieBio_Temp;
+        }
+
         private void colorBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -700,11 +721,11 @@ namespace WindowsFormsApplication1
         public String promptResponse(String prompt)
         {
             String response = "";
-            bool greeting = false;
             bool wellbeing = false;
+            bool wydCheck = false;
             bool hasPromptBeenMade = false;
-
-            if (promptsMade.Contains(prompt))
+            
+            if (promptsMade.Contains(prompt) || greeting || wellbeing || wydCheck)
             {
                 hasPromptBeenMade = true;
             }
@@ -724,6 +745,13 @@ namespace WindowsFormsApplication1
                         wellbeing = true;
                     }
                 }
+                for (int i = 0; i < wyd.Length; i++)
+                {
+                    if (prompt.Contains(wyd[i]))
+                    {
+                        wydCheck = true;
+                    }
+                }
             }
             response = buddyUserName + ": ";
 
@@ -735,7 +763,6 @@ namespace WindowsFormsApplication1
             String[] melanieError = { "Start making sense.", "You tire me.", "Amazing.", "What?" };
 
             //REPEAT RESPONSES
-            // ----- CHANGE THESE --------
             String[] estherRepeat = { "Oh! Didn’t we talk about this already ?", "I can see that you’re tired, you’ve said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you’ve said that before!", "Uhh… are you confused? This isn’t the first time you said this :P", "Hahaha you’re repeating yourself xD" };
             String[] soniaRepeat = { "LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA" };
             String[] aimeeRepeat = { "this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?" };
@@ -754,11 +781,17 @@ namespace WindowsFormsApplication1
             //WELLBEING RESPONSES
             String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about lockdown :P You?" };
 
-            String[] soniaWellbeing = { "BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "doing okiedokie how u are doing too?", "im just doing nothing bc theres nothing to do soooo pretty bored… are u doing lots of things now?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
+            String[] soniaWellbeing = { "BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "doing okiedokie how u are doing too?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
 
             String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
 
             String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that. Either way, how are you " + name + "?" };
+
+            //WYD RESPONSES
+            String[] estherWYD = { };
+            String[] soniaWYD = {"ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho","DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP"};
+            String[] aimeeWYD = { };
+            String[] melanieWYD = { };
 
             if (buddyName == "Esther")
             {
@@ -798,6 +831,10 @@ namespace WindowsFormsApplication1
                     else if (wellbeing)
                     {
                         response += soniaWellbeing[rnd.Next(soniaWellbeing.Length)];
+                    }
+                    else if (wydCheck)
+                    {
+                        response += soniaWYD[rnd.Next(soniaWYD.Length)];
                     }
                     //ERROR
                     else

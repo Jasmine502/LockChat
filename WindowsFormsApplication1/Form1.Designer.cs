@@ -1135,6 +1135,7 @@
             this.chooseSonia.Text = "xXx_Sony_xXx";
             this.chooseSonia.UseVisualStyleBackColor = true;
             this.chooseSonia.Click += new System.EventHandler(this.chooseSonia_Click);
+            this.chooseSonia.MouseHover += new System.EventHandler(this.chooseSonia_MouseHover);
             // 
             // chooseEsther
             // 
@@ -1145,6 +1146,7 @@
             this.chooseEsther.Text = "Angel616";
             this.chooseEsther.UseVisualStyleBackColor = true;
             this.chooseEsther.Click += new System.EventHandler(this.chooseEsther_Click);
+            this.chooseEsther.MouseHover += new System.EventHandler(this.chooseEsther_MouseHover);
             // 
             // chooseAimee
             // 
@@ -1155,6 +1157,7 @@
             this.chooseAimee.Text = "aimaggot666";
             this.chooseAimee.UseVisualStyleBackColor = true;
             this.chooseAimee.Click += new System.EventHandler(this.chooseAimee_Click);
+            this.chooseAimee.MouseHover += new System.EventHandler(this.chooseAimee_MouseHover);
             // 
             // chooseMelanie
             // 
@@ -1165,6 +1168,7 @@
             this.chooseMelanie.Text = "MelanieS";
             this.chooseMelanie.UseVisualStyleBackColor = true;
             this.chooseMelanie.Click += new System.EventHandler(this.chooseMelanie_Click);
+            this.chooseMelanie.MouseHover += new System.EventHandler(this.chooseMelanie_MouseHover);
             // 
             // groupBox1
             // 
