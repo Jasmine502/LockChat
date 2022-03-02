@@ -721,11 +721,12 @@ namespace WindowsFormsApplication1
         public String promptResponse(String prompt)
         {
             String response = "";
+            bool greeting = false;
             bool wellbeing = false;
             bool wydCheck = false;
             bool hasPromptBeenMade = false;
             
-            if (promptsMade.Contains(prompt) || greeting || wellbeing || wydCheck)
+            if (promptsMade.Contains(prompt))
             {
                 hasPromptBeenMade = true;
             }
