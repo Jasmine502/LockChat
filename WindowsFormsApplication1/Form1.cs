@@ -18,10 +18,16 @@ namespace WindowsFormsApplication1
         String[] greetings = { "HELLO", "HI", "HEY", "YO " };
         String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU" };
         String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
+        String[] goOut = {"GO OUT","BREAK THE RULES","SHOULD LEAVE THE HOUSE","SHOULD LEAVE UR HOUSE" };
+        String[] stayHome = {"STAY HOME","STAY AT HOME","DONT LEAVE","DON'T LEAVE","DO NOT LEAVE","HAVE TO STAY","MUST STAY","RISKY"};
+        String[] compliments = {"UR COOL","YOU'RE COOL","U R COOL","U ARE COOL","UR SWEET","YOU'RE SWEET","U R SWEET","U ARE SWEET","UR FUNNY","YOU'RE FUNNY","U R FUNNY","U ARE FUNNY","LIKE TALKING TO U","LIKE TALKING TO YOU","LOVE TALKING TO U","LOVE TALKING TO YOU","UR GREAT","YOU'RE GREAT","U R GREAT","U ARE GREAT","UR AMAZING","YOU'RE AMAZING","U R AMAZING","U ARE AMAZING"};
+        String[] affection = { };
+        String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
         Random rnd = new Random();
         SoundPlayer sound;
-        bool greeting;
         int buddyNo;
+        int relationshipPts;
+        int covidPts;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,7 +59,8 @@ namespace WindowsFormsApplication1
             chooseSonia.Show();
             chooseAimee.Show();
             chooseMelanie.Show();
-
+            relationshipPts = 0;
+            covidPts = 0;
 
             //FORMATTING LIST BOX
             //MANAGING EMPTY LOG-IN
@@ -724,6 +731,11 @@ namespace WindowsFormsApplication1
             bool greeting = false;
             bool wellbeing = false;
             bool wydCheck = false;
+            bool goOutCheck = false;
+            bool stayHomeCheck = false;
+            bool complimented = false;
+            bool affectionate = false;
+            bool thanked = false;
             bool hasPromptBeenMade = false;
             
             if (promptsMade.Contains(prompt))
@@ -751,6 +763,41 @@ namespace WindowsFormsApplication1
                     if (prompt.Contains(wyd[i]))
                     {
                         wydCheck = true;
+                    }
+                }
+                for (int i = 0; i < goOut.Length; i++)
+                {
+                    if (prompt.Contains(goOut[i]))
+                    {
+                        goOutCheck = true;
+                    }
+                }
+                for (int i = 0; i < stayHome.Length; i++)
+                {
+                    if (prompt.Contains(stayHome[i]))
+                    {
+                        stayHomeCheck = true;
+                    }
+                }
+                for (int i = 0; i < compliments.Length; i++)
+                {
+                    if (prompt.Contains(compliments[i]))
+                    {
+                        complimented = true;
+                    }
+                }
+                for (int i = 0; i < affection.Length; i++)
+                {
+                    if (prompt.Contains(affection[i]))
+                    {
+                        affectionate = true;
+                    }
+                }
+                for(int i = 0; i < thanks.Length; i++)
+                {
+                    if (prompt.Contains(thanks[i]))
+                    {
+                        thanked = true;
                     }
                 }
             }
@@ -782,7 +829,7 @@ namespace WindowsFormsApplication1
             //WELLBEING RESPONSES
             String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about lockdown :P You?" };
 
-            String[] soniaWellbeing = { "BIEN", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "doing okiedokie how u are doing too?", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
+            String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
 
             String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
 
@@ -793,6 +840,24 @@ namespace WindowsFormsApplication1
             String[] soniaWYD = {"ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho","DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP"};
             String[] aimeeWYD = { };
             String[] melanieWYD = { };
+
+            //GO OUT RESPONSES
+            String[] soniaGoOut = {"MAYBE I WILL.","very good idea :) i just need to be sneaky beaky >.>"};
+
+            //STAY HOME RESPONSES
+            String[] soniaStayHome = {"AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE"};
+
+            //COMPLIMENT RESPONSES
+            String[] soniaComp = {"OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!"};
+
+            //AFFECTION ACCEPTED RESPONSES
+            String[] soniaAffection = {"test"};
+
+            //AFFECTION DENIED RESPONSES
+            String[] soniaNoAffection = {"test"};
+
+            //THANKS RESPONES
+            String[] soniaTY = {"no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe"};
 
             if (buddyName == "Esther")
             {
@@ -836,6 +901,36 @@ namespace WindowsFormsApplication1
                     else if (wydCheck)
                     {
                         response += soniaWYD[rnd.Next(soniaWYD.Length)];
+                    }
+                    else if (goOutCheck)
+                    {
+                        covidPts++;
+                        response += soniaGoOut[rnd.Next(soniaGoOut.Length)];
+                    }
+                    else if (stayHomeCheck)
+                    {
+                        covidPts--;
+                        response += soniaStayHome[rnd.Next(soniaStayHome.Length)];
+                    }
+                    else if (complimented)
+                    {
+                        relationshipPts++;
+                        response += soniaComp[rnd.Next(soniaComp.Length)];
+                    }
+                    else if (affectionate)
+                    {
+                        if (relationshipPts > 4)
+                        {
+                            response += soniaAffection[rnd.Next(soniaAffection.Length)];
+                        }
+                        else
+                        {
+                            response += soniaNoAffection[rnd.Next(soniaNoAffection.Length)];
+                        }
+                    }
+                    else if (thanked)
+                    {
+                        response += soniaTY[rnd.Next(soniaTY.Length)];
                     }
                     //ERROR
                     else
