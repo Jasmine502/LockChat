@@ -11,17 +11,17 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
-        String name, username, foreColor, buddyName, buddyUserName, prompt;
+        String name, username, buddyName, buddyUserName, prompt;
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
         String[] greetings = { "HELLO", "HI", "HEY", "YO " };
         String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU" };
         String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
-        String[] goOut = {"GO OUT","BREAK THE RULES","SHOULD LEAVE THE HOUSE","SHOULD LEAVE UR HOUSE" };
-        String[] stayHome = {"STAY HOME","STAY AT HOME","DONT LEAVE","DON'T LEAVE","DO NOT LEAVE","HAVE TO STAY","MUST STAY","RISKY"};
-        String[] compliments = {"UR COOL","YOU'RE COOL","U R COOL","U ARE COOL","UR SWEET","YOU'RE SWEET","U R SWEET","U ARE SWEET","UR FUNNY","YOU'RE FUNNY","U R FUNNY","U ARE FUNNY","LIKE TALKING TO U","LIKE TALKING TO YOU","LOVE TALKING TO U","LOVE TALKING TO YOU","UR GREAT","YOU'RE GREAT","U R GREAT","U ARE GREAT","UR AMAZING","YOU'RE AMAZING","U R AMAZING","U ARE AMAZING"};
-        String[] affection = { };
+        String[] goOut = { "GO OUT", "BREAK THE RULES", "SHOULD LEAVE THE HOUSE", "SHOULD LEAVE UR HOUSE" };
+        String[] stayHome = { "STAY HOME", "STAY AT HOME", "DONT LEAVE", "DON'T LEAVE", "DO NOT LEAVE", "HAVE TO STAY", "MUST STAY", "RISKY" };
+        String[] compliments = { "UR COOL", "YOU'RE COOL", "U R COOL", "U ARE COOL", "UR SWEET", "YOU'RE SWEET", "U R SWEET", "U ARE SWEET", "UR FUNNY", "YOU'RE FUNNY", "U R FUNNY", "U ARE FUNNY", "LIKE TALKING TO U", "LIKE TALKING TO YOU", "LOVE TALKING TO U", "LOVE TALKING TO YOU", "UR GREAT", "YOU'RE GREAT", "U R GREAT", "U ARE GREAT", "UR AMAZING", "YOU'RE AMAZING", "U R AMAZING", "U ARE AMAZING" };
+        String[] affection = { " I LIKE YOU", "I LIKE U", "I LOVE YOU", "I LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
         String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
         Random rnd = new Random();
         SoundPlayer sound;
@@ -87,66 +87,10 @@ namespace WindowsFormsApplication1
                 userPFP.Image = Properties.Resources.GasterPFP;
             }
 
-            foreColor = foreColorBox.Text.ToUpper();
             listMessage.Items.Clear();
             listMessage.Items.Add("Connected");
 
-            if (foreColor == "RED")
-            {
-                listMessage.ForeColor = Color.Red;
-                listMessage.BackColor = Color.White;
-            }
-            else if (foreColor == "ORANGE")
-            {
-                listMessage.ForeColor = Color.Orange;
-                listMessage.BackColor = Color.Black;
-                messageBox.ForeColor = Color.White;
-                messageBox.BackColor = Color.Black;
-            }
-            else if (foreColor == "YELLOW")
-            {
-                listMessage.ForeColor = Color.Yellow;
-                listMessage.BackColor = Color.Black;
-                messageBox.ForeColor = Color.White;
-                messageBox.BackColor = Color.Black;
-            }
-            else if (foreColor == "GREEN")
-            {
-                listMessage.ForeColor = Color.Green;
-                listMessage.BackColor = Color.White;
-            }
-            else if (foreColor == "BLUE")
-            {
-                listMessage.ForeColor = Color.Blue;
-                listMessage.BackColor = Color.White;
-            }
-            else if (foreColor == "PINK" || foreColor == "VIOLET")
-            {
-                listMessage.ForeColor = Color.Pink;
-                listMessage.BackColor = Color.Black;
-                messageBox.ForeColor = Color.White;
-                messageBox.BackColor = Color.Black;
-            }
-            else if (foreColor == "PURPLE" || foreColor == "INDIGO")
-            {
-                listMessage.ForeColor = Color.Purple;
-                listMessage.BackColor = Color.White;
-            }
-            else if (foreColor == "BLACK")
-            {
-                listMessage.ForeColor = Color.Black;
-                listMessage.BackColor = Color.White;
-            }
-            else if (foreColor == "WHITE")
-            {
-                listMessage.ForeColor = Color.White;
-                listMessage.BackColor = Color.Black;
-            }
-            else
-            {
-                listMessage.ForeColor = Color.Black;
-                listMessage.BackColor = Color.White;
-            }
+            
 
 
         }
@@ -161,7 +105,9 @@ namespace WindowsFormsApplication1
             else
             {
                 prompt = messageBox.Text.ToUpper();
-                listMessage.Items.Add(username + ": " + messageBox.Text);
+                listMessage.Items.Add(username + ":");
+                listMessage.Items.Add(messageBox.Text);
+                listMessage.Items.Add(buddyUserName + ":");
                 listMessage.Items.Add(promptResponse(prompt));
                 messageBox.Clear();
             }
@@ -217,8 +163,6 @@ namespace WindowsFormsApplication1
             }
 
         }
-
-
 
         private void spaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -711,6 +655,60 @@ namespace WindowsFormsApplication1
             bioBox.Image = Properties.Resources.MelanieBio_Temp;
         }
 
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Red;
+            listMessage.BackColor = Color.White;
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Orange;
+            listMessage.BackColor = Color.Black;
+            messageBox.ForeColor = Color.White;
+            messageBox.BackColor = Color.Black;
+        }
+
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Yellow;
+            listMessage.BackColor = Color.Black;
+            messageBox.ForeColor = Color.White;
+            messageBox.BackColor = Color.Black;
+        }
+
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Green;
+            listMessage.BackColor = Color.White;
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Blue;
+            listMessage.BackColor = Color.White;
+        }
+
+        private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Pink;
+            listMessage.BackColor = Color.Black;
+            messageBox.ForeColor = Color.White;
+            messageBox.BackColor = Color.Black;
+        }
+
+        private void blackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.Black;
+            listMessage.BackColor = Color.White;
+        }
+
+        private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listMessage.ForeColor = Color.White;
+            listMessage.BackColor = Color.Black;
+        }
+
         private void colorBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -737,7 +735,7 @@ namespace WindowsFormsApplication1
             bool affectionate = false;
             bool thanked = false;
             bool hasPromptBeenMade = false;
-            
+
             if (promptsMade.Contains(prompt))
             {
                 hasPromptBeenMade = true;
@@ -793,7 +791,7 @@ namespace WindowsFormsApplication1
                         affectionate = true;
                     }
                 }
-                for(int i = 0; i < thanks.Length; i++)
+                for (int i = 0; i < thanks.Length; i++)
                 {
                     if (prompt.Contains(thanks[i]))
                     {
@@ -801,7 +799,6 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-            response = buddyUserName + ": ";
 
 
             //ERROR RESPONSES
@@ -837,27 +834,27 @@ namespace WindowsFormsApplication1
 
             //WYD RESPONSES
             String[] estherWYD = { };
-            String[] soniaWYD = {"ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho","DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP"};
+            String[] soniaWYD = { "ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho", "DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP" };
             String[] aimeeWYD = { };
             String[] melanieWYD = { };
 
             //GO OUT RESPONSES
-            String[] soniaGoOut = {"MAYBE I WILL.","very good idea :) i just need to be sneaky beaky >.>"};
+            String[] soniaGoOut = { "MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", ""};
 
             //STAY HOME RESPONSES
-            String[] soniaStayHome = {"AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE"};
+            String[] soniaStayHome = { "AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE","it's worth the risk at this point " + name.ToLower() + "😭"};
 
             //COMPLIMENT RESPONSES
-            String[] soniaComp = {"OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!"};
+            String[] soniaComp = { "OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!" };
 
             //AFFECTION ACCEPTED RESPONSES
-            String[] soniaAffection = {"test"};
+            String[] soniaAffection = { "KAFNOEISHIOFEJFEWSOUGB I THINK I FEEL THE SAME <.<", "omg really what what what i do too wtf this isnt happening", "OMG ME TOO AAAAAAAAA :)))))" };
 
             //AFFECTION DENIED RESPONSES
-            String[] soniaNoAffection = {"test"};
+            String[] soniaNoAffection = { "AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :((("};
 
             //THANKS RESPONES
-            String[] soniaTY = {"no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe"};
+            String[] soniaTY = { "no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe" };
 
             if (buddyName == "Esther")
             {
@@ -998,7 +995,6 @@ namespace WindowsFormsApplication1
         {
             nameLbl.ForeColor = color;
             usernameLbl.ForeColor = color;
-            txtColourLbl.ForeColor = color;
             loginBox.ForeColor = color;
         }
 
