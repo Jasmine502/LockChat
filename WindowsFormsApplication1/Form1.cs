@@ -23,6 +23,7 @@ namespace WindowsFormsApplication1
         String[] compliments = { "UR COOL", "YOU'RE COOL", "U R COOL", "U ARE COOL", "UR SWEET", "YOU'RE SWEET", "U R SWEET", "U ARE SWEET", "UR FUNNY", "YOU'RE FUNNY", "U R FUNNY", "U ARE FUNNY", "LIKE TALKING TO U", "LIKE TALKING TO YOU", "LOVE TALKING TO U", "LOVE TALKING TO YOU", "UR GREAT", "YOU'RE GREAT", "U R GREAT", "U ARE GREAT", "UR AMAZING", "YOU'RE AMAZING", "U R AMAZING", "U ARE AMAZING" };
         String[] affection = { " I LIKE YOU", "I LIKE U", "I LOVE YOU", "I LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
         String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
+        String[] laughing = { };
         Random rnd = new Random();
         SoundPlayer sound;
         int buddyNo;
@@ -734,6 +735,8 @@ namespace WindowsFormsApplication1
             bool complimented = false;
             bool affectionate = false;
             bool thanked = false;
+            bool lol = false;
+
             bool hasPromptBeenMade = false;
 
             if (promptsMade.Contains(prompt))
@@ -797,6 +800,17 @@ namespace WindowsFormsApplication1
                     {
                         thanked = true;
                     }
+                    else if (prompt == "TY")
+                    {
+                        thanked = true;
+                    }
+                }
+                for (int i = 0; i < laughing.Length; i++)
+                {
+                    if(prompt.Contains(laughing[i]))
+                    {
+                        laughing = true;
+                    }
                 }
             }
 
@@ -855,6 +869,10 @@ namespace WindowsFormsApplication1
 
             //THANKS RESPONES
             String[] soniaTY = { "no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe" };
+
+            //LAUGHING RESPONSES
+
+            String[] soniaLOL = {"glad i could make u laugh " + name.ToLower(), ":)", ":D", "HAHAHAHAHA", "LMAO"};
 
             if (buddyName == "Esther")
             {
@@ -928,6 +946,10 @@ namespace WindowsFormsApplication1
                     else if (thanked)
                     {
                         response += soniaTY[rnd.Next(soniaTY.Length)];
+                    }
+                    else if (lol)
+                    {
+                        response += soniaLOL[rnd.Next(soniaLOL.Length)];
                     }
                     //ERROR
                     else
