@@ -108,8 +108,10 @@ namespace WindowsFormsApplication1
                 prompt = messageBox.Text.ToUpper();
                 listMessage.Items.Add(username + ":");
                 listMessage.Items.Add(messageBox.Text);
+                listMessage.Items.Add("");
                 listMessage.Items.Add(buddyUserName + ":");
                 listMessage.Items.Add(promptResponse(prompt));
+                listMessage.Items.Add("");
                 messageBox.Clear();
             }
         }
@@ -809,7 +811,7 @@ namespace WindowsFormsApplication1
                 {
                     if(prompt.Contains(laughing[i]))
                     {
-                        laughing = true;
+                        lol = true;
                     }
                 }
             }
@@ -844,23 +846,29 @@ namespace WindowsFormsApplication1
 
             String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
 
-            String[] melanieWellbeing = { "Currently busy with work. I hope you are doing something useful with your time too?", "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? Are you faring better than I am?", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care.", "Annoyed so please don’t test that. Either way, how are you " + name + "?" };
+            String[] melanieWellbeing = {"Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that."};
 
             //WYD RESPONSES
-            String[] estherWYD = { };
+            String[] estherWYD = { "It is a lovely day, the sun would feel great! Maybe I should take a walk :P", "Just getting ready to get to the comic book store... The new chapter of UNA comics just came out!!!",  };
             String[] soniaWYD = { "ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho", "DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP" };
-            String[] aimeeWYD = { };
-            String[] melanieWYD = { };
+            String[] aimeeWYD = {"rotting.","nothing as always.","staring into the endless void","surprisingly looking outside and kinda wanting to escape this cage."};
+            String[] melanieWYD = { "Currently busy with work.","Responding to e-mails at the moment. Somehow they are more taxing than conversing with you.","Just gave myself a break because I can. Might go for a well-deserved Melanie Promenade." };
 
             //GO OUT RESPONSES
-            String[] soniaGoOut = { "MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", ""};
+            String[] estherGoOut = {"Yay! Glad you agree " + name + ".","Let's go!!!! About time hehe","Heck yeah! I will do just that :)"};
+            String[] soniaGoOut = { "MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", "YESSIRRRRRRR GREAT IDEA"};
+            String[] aimeeGoOut = { "sure, but only when it gets darker...", "you're one to talk, but i guess i should","ill do it but only because i want to.","yea nah nevermind","actually cant be bothered tbf"};
+            String[] melanieGoOut = { "I am far too busy today to 'go out', but I'll keep your unsolicited advice in mind.", "You're right, I've been stuck in the office for too long. I need some air.", "God yes, I need a drink too." };
 
             //STAY HOME RESPONSES
-            String[] soniaStayHome = { "AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE","it's worth the risk at this point " + name.ToLower() + "😭"};
+            String[] estherStayHome = {"Okie... I should be more responsible, you're right!","Awh :("};
+            String[] soniaStayHome = { "AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE","it's worth the risk at this point " + name.ToLower() + "😭", "OKAY FINE ILL STAY PFFT", "YEAH? yeah. ye.... u rite"};
+            String[] aimeeStayHome = {"you don't tell me what to do.","ugh. fine.", "my eyes cannot roll further back into my skull"};
+            String[] melanieStayHome = { "Ah yes. It is clear now that I have way too much work to focus on.", "On second thought, I'd have to confer with my assistant, so I'd rather not leave the house.", "I have a meeting soon, so perhaps I shouldn't waste time." };
 
             //COMPLIMENT RESPONSES
             String[] soniaComp = { "OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!" };
-
+            
             //AFFECTION ACCEPTED RESPONSES
             String[] soniaAffection = { "KAFNOEISHIOFEJFEWSOUGB I THINK I FEEL THE SAME <.<", "omg really what what what i do too wtf this isnt happening", "OMG ME TOO AAAAAAAAA :)))))" };
 
@@ -890,6 +898,44 @@ namespace WindowsFormsApplication1
                     {
                         response += estherWellbeing[rnd.Next(estherWellbeing.Length)];
                     }
+                    else if (wydCheck)
+                    {
+                        response += estherWYD[rnd.Next(estherWYD.Length)];
+                    }
+                    else if (goOutCheck)
+                    {
+                        covidPts++;
+                        response += estherGoOut[rnd.Next(estherGoOut.Length)];
+                    }
+                    else if (stayHomeCheck)
+                    {
+                        covidPts--;
+                        response += estherStayHome[rnd.Next(estherStayHome.Length)];
+                    }
+                    /*else if (complimented)
+                    {
+                        relationshipPts++;
+                        response += estherComp[rnd.Next(estherComp.Length)];
+                    }
+                    else if (affectionate)
+                    {
+                        if (relationshipPts > 4)
+                        {
+                            response += estherAffection[rnd.Next(estherAffection.Length)];
+                        }
+                        else
+                        {
+                            response += estherNoAffection[rnd.Next(estherNoAffection.Length)];
+                        }
+                    }
+                    else if (thanked)
+                    {
+                        response += estherTY[rnd.Next(estherTY.Length)];
+                    }
+                    else if (lol)
+                    {
+                        response += estherLOL[rnd.Next(estherLOL.Length)];
+                    }*/
                     //ERROR
                     else
                     {
@@ -975,6 +1021,20 @@ namespace WindowsFormsApplication1
                     {
                         response += aimeeWellbeing[rnd.Next(aimeeWellbeing.Length)];
                     }
+                    else if (wydCheck)
+                    {
+                        response += aimeeWYD[rnd.Next(aimeeWYD.Length)];
+                    }
+                    else if (goOutCheck)
+                    {
+                        covidPts++;
+                        response += aimeeGoOut[rnd.Next(aimeeGoOut.Length)];
+                    }
+                    else if (stayHomeCheck)
+                    {
+                        covidPts--;
+                        response += aimeeStayHome[rnd.Next(aimeeStayHome.Length)];
+                    }
                     //ERROR
                     else
                     {
@@ -997,6 +1057,20 @@ namespace WindowsFormsApplication1
                     else if (wellbeing)
                     {
                         response += melanieWellbeing[rnd.Next(melanieWellbeing.Length)];
+                    }
+                    else if (wydCheck)
+                    {
+                        response += melanieWYD[rnd.Next(melanieWYD.Length)];
+                    }
+                    else if (goOutCheck)
+                    {
+                        covidPts++;
+                        response += melanieGoOut[rnd.Next(melanieGoOut.Length)];
+                    }
+                    else if (stayHomeCheck)
+                    {
+                        covidPts--;
+                        response += melanieStayHome[rnd.Next(melanieStayHome.Length)];
                     }
                     else
                     {
