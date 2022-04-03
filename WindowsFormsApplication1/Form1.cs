@@ -831,21 +831,15 @@ namespace WindowsFormsApplication1
 
             //GREETING RESPONSES
             String[] estherGreetings = { "Hey hey " + name + "!", "Heyo!", "Excelsior!", "Yoyo!" };
-
             String[] soniaGreetings = { "hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper() };
-
             String[] aimeeGreetings = { "hi " + name.ToLower() + ".", "hm.", "what", "can i help u?" };
-
             String[] melanieGreetings = { "Greetings, " + name + ".", "Oh. It's you.", "Yes?" };
 
 
             //WELLBEING RESPONSES
             String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about lockdown :P You?" };
-
             String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
-
             String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
-
             String[] melanieWellbeing = {"Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that."};
 
             //WYD RESPONSES
@@ -867,6 +861,7 @@ namespace WindowsFormsApplication1
             String[] melanieStayHome = { "Ah yes. It is clear now that I have way too much work to focus on.", "On second thought, I'd have to confer with my assistant, so I'd rather not leave the house.", "I have a meeting soon, so perhaps I shouldn't waste time." };
 
             //COMPLIMENT RESPONSES
+            String[] estherComp = {"Eek! That's so nice, thank you " + name + "!!! :D","Oh my- That means so much thank you!","D'awh... That is so sweet thank you so much :P","Ah! So unexpected but much appreciated, likewise!"};
             String[] soniaComp = { "OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!" };
             
             //AFFECTION ACCEPTED RESPONSES
@@ -876,11 +871,15 @@ namespace WindowsFormsApplication1
             String[] soniaNoAffection = { "AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :((("};
 
             //THANKS RESPONES
+            String[] estherTY = { "Happy to help :)","No worries!","You're very welcome!"};
             String[] soniaTY = { "no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe" };
+            String[] aimeeTY = {"ok.","whatever.","you owe me"};
 
             //LAUGHING RESPONSES
-
-            String[] soniaLOL = {"glad i could make u laugh " + name.ToLower(), ":)", ":D", "HAHAHAHAHA", "LMAO"};
+            String[] estherLOL = { "Hehe D",":P","XD","Glad I could make you laugh xD"};
+            String[] soniaLOL = {"HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO"};
+            String[] aimeeLOL = {"wasnt that funny.","hilarious.","lol.","haha.","shut up."};
+            String[] melanieLOL = { }; //GET ANA TO DO IT LOL
 
             if (buddyName == "Esther")
             {
@@ -912,11 +911,12 @@ namespace WindowsFormsApplication1
                         covidPts--;
                         response += estherStayHome[rnd.Next(estherStayHome.Length)];
                     }
-                    /*else if (complimented)
+                    else if (complimented)
                     {
                         relationshipPts++;
                         response += estherComp[rnd.Next(estherComp.Length)];
                     }
+                    /*
                     else if (affectionate)
                     {
                         if (relationshipPts > 4)
@@ -928,6 +928,7 @@ namespace WindowsFormsApplication1
                             response += estherNoAffection[rnd.Next(estherNoAffection.Length)];
                         }
                     }
+                    */
                     else if (thanked)
                     {
                         response += estherTY[rnd.Next(estherTY.Length)];
@@ -935,7 +936,7 @@ namespace WindowsFormsApplication1
                     else if (lol)
                     {
                         response += estherLOL[rnd.Next(estherLOL.Length)];
-                    }*/
+                    }
                     //ERROR
                     else
                     {
@@ -1034,6 +1035,14 @@ namespace WindowsFormsApplication1
                     {
                         covidPts--;
                         response += aimeeStayHome[rnd.Next(aimeeStayHome.Length)];
+                    }
+                    else if (thanked)
+                    {
+                        response += aimeeTY[rnd.Next(aimeeTY.Length)];
+                    }
+                    else if (lol)
+                    {
+                        response += aimeeLOL[rnd.Next(aimeeLOL.Length)];
                     }
                     //ERROR
                     else
