@@ -838,7 +838,7 @@ namespace WindowsFormsApplication1
 
             //WELLBEING RESPONSES
             String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about lockdown :P You?" };
-            String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "omg ty for asking i was just about to ask u how u were but look at us in synch TOTALLY AMAZING!!!! just did like 3 meters of the white powder!! i dont actually know what that means I was jk dont report me " + name.ToLower(), "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
+            String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
             String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
             String[] melanieWellbeing = {"Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that."};
 
