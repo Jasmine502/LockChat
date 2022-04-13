@@ -643,22 +643,22 @@ namespace WindowsFormsApplication1
 
         private void chooseEsther_MouseHover(object sender, EventArgs e)
         {
-            bioBox.Image = Properties.Resources.EstherBio_Temp;
+            bioBox.Image = Properties.Resources.EstherBio;
         }
 
         private void chooseSonia_MouseHover(object sender, EventArgs e)
         {
-            bioBox.Image = Properties.Resources.SoniaBio_Temp;
+            bioBox.Image = Properties.Resources.SoniaBio;
         }
 
         private void chooseAimee_MouseHover(object sender, EventArgs e)
         {
-            bioBox.Image = Properties.Resources.AimeeBio_Temp;
+            bioBox.Image = Properties.Resources.AimeeBio;
         }
 
         private void chooseMelanie_MouseHover(object sender, EventArgs e)
         {
-            bioBox.Image = Properties.Resources.MelanieBio_Temp;
+            bioBox.Image = Properties.Resources.MelanieBio;
         }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)

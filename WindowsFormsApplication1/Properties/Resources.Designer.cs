@@ -83,6 +83,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AimeeBio {
+            get {
+                object obj = ResourceManager.GetObject("AimeeBio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AimeeBio_Temp {
             get {
                 object obj = ResourceManager.GetObject("AimeeBio_Temp", resourceCulture);
@@ -276,6 +286,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Esther_PFP {
             get {
                 object obj = ResourceManager.GetObject("Esther PFP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EstherBio {
+            get {
+                object obj = ResourceManager.GetObject("EstherBio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -572,6 +592,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MelanieBio {
+            get {
+                object obj = ResourceManager.GetObject("MelanieBio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MelanieBio_Temp {
             get {
                 object obj = ResourceManager.GetObject("MelanieBio_Temp", resourceCulture);
@@ -825,6 +855,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Sonia_PFP {
             get {
                 object obj = ResourceManager.GetObject("Sonia PFP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SoniaBio {
+            get {
+                object obj = ResourceManager.GetObject("SoniaBio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

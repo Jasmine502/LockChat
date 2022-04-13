@@ -418,4 +418,16 @@
   <data name="SoniaBio_Temp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SoniaBio_Temp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AimeeBio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AimeeBio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EstherBio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EstherBio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MelanieBio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MelanieBio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SoniaBio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SoniaBio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
