@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
@@ -16,14 +17,14 @@ namespace WindowsFormsApplication1
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
         String[] greetings = { "HELLO", "HI", "HEY", "YO " };
-        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU" };
+        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU","HOW'S LIFE","HOWS LIFE"};
         String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
         String[] goOut = { "GO OUT", "BREAK THE RULES", "SHOULD LEAVE THE HOUSE", "SHOULD LEAVE UR HOUSE" };
         String[] stayHome = { "STAY HOME", "STAY AT HOME", "DONT LEAVE", "DON'T LEAVE", "DO NOT LEAVE", "HAVE TO STAY", "MUST STAY", "RISKY" };
         String[] compliments = { "UR COOL", "YOU'RE COOL", "U R COOL", "U ARE COOL", "UR SWEET", "YOU'RE SWEET", "U R SWEET", "U ARE SWEET", "UR FUNNY", "YOU'RE FUNNY", "U R FUNNY", "U ARE FUNNY", "LIKE TALKING TO U", "LIKE TALKING TO YOU", "LOVE TALKING TO U", "LOVE TALKING TO YOU", "UR GREAT", "YOU'RE GREAT", "U R GREAT", "U ARE GREAT", "UR AMAZING", "YOU'RE AMAZING", "U R AMAZING", "U ARE AMAZING" };
         String[] affection = { " I LIKE YOU", "I LIKE U", "I LOVE YOU", "I LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
         String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
-        String[] laughing = { };
+        String[] laughing = {"LOL", "LMAO","ROFL","HAHA"};
         Random rnd = new Random();
         SoundPlayer sound;
         int buddyNo;
@@ -96,8 +97,8 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void sendButton_Click(object sender, EventArgs e)
-        {
+        private async void sendButton_Click(object sender, EventArgs e)
+        { 
             //EMPTY MESSAGE BOX ERROR
             if (messageBox.Text == "")
             {
@@ -109,10 +110,12 @@ namespace WindowsFormsApplication1
                 listMessage.Items.Add(username + ":");
                 listMessage.Items.Add(messageBox.Text);
                 listMessage.Items.Add("");
+                messageBox.Clear();
+                await Task.Delay(rnd.Next(1000,4000));
                 listMessage.Items.Add(buddyUserName + ":");
                 listMessage.Items.Add(promptResponse(prompt));
                 listMessage.Items.Add("");
-                messageBox.Clear();
+                
             }
         }
 
@@ -717,11 +720,20 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void loginBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         private void messageBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 sendButton_Click((object)sender, (EventArgs)e);
+            }
+            else
+            {
+                Console.WriteLine("lol");
             }
         }
 
@@ -837,9 +849,9 @@ namespace WindowsFormsApplication1
 
 
             //WELLBEING RESPONSES
-            String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad, how about you?", ":( Feeling a tiny bit sad but it will pass… how about you?", "Just stressing about lockdown :P You?" };
+            String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad I guess...", ":( Feeling a tiny bit sad but it will pass… ", "Just stressing about lockdown :P You?" };
             String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
-            String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever. how about you?", "locking down." };
+            String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever.", "locking down." };
             String[] melanieWellbeing = {"Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that."};
 
             //WYD RESPONSES
