@@ -160,6 +160,7 @@
             this.bioBox = new System.Windows.Forms.PictureBox();
             this.buddyPFP = new System.Windows.Forms.PictureBox();
             this.userPFP = new System.Windows.Forms.PictureBox();
+            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -297,6 +298,7 @@
             this.backgroundToolStripMenuItem,
             this.profilePictureToolStripMenuItem,
             this.textColourToolStripMenuItem,
+            this.muteToolStripMenuItem,
             this.resetToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -313,7 +315,7 @@
             this.solidColourToolStripMenuItem,
             this.customToolStripMenuItem});
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             // 
             // rosesToolStripMenuItem
@@ -396,7 +398,7 @@
             this.videoGamesToolStripMenuItem,
             this.customToolStripMenuItem1});
             this.profilePictureToolStripMenuItem.Name = "profilePictureToolStripMenuItem";
-            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profilePictureToolStripMenuItem.Text = "Profile Picture";
             // 
             // albumArtToolStripMenuItem
@@ -1119,7 +1121,7 @@
             this.blackToolStripMenuItem,
             this.whiteToolStripMenuItem});
             this.textColourToolStripMenuItem.Name = "textColourToolStripMenuItem";
-            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.textColourToolStripMenuItem.Text = "Text Colour";
             // 
             // redToolStripMenuItem
@@ -1180,7 +1182,7 @@
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
@@ -1267,6 +1269,13 @@
             this.userPFP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userPFP.TabIndex = 7;
             this.userPFP.TabStop = false;
+            // 
+            // muteToolStripMenuItem
+            // 
+            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.muteToolStripMenuItem.Text = "Mute";
+            this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1437,6 +1446,7 @@
         private System.Windows.Forms.ToolStripMenuItem pinkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
     }
 }
 

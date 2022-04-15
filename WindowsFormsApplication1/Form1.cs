@@ -727,6 +727,11 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void muteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sound.Stop();
+        }
+
         private void messageBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
