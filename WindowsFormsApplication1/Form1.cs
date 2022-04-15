@@ -16,15 +16,17 @@ namespace WindowsFormsApplication1
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
-        String[] greetings = { "HELLO", "HI", "HEY", "YO " };
-        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU","HOW'S LIFE","HOWS LIFE"};
+        String[] greetings = { "HELLO", "HI ", "HEY ", "YO " };
+        String[] greetingAlone = { "HI", "HEY", "YO" };
+        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU","HOW'S LIFE","HOWS LIFE","HOW WAS UR DAY","HOW WAAS YOUR DAY"};
         String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
         String[] goOut = { "GO OUT", "BREAK THE RULES", "SHOULD LEAVE THE HOUSE", "SHOULD LEAVE UR HOUSE" };
         String[] stayHome = { "STAY HOME", "STAY AT HOME", "DONT LEAVE", "DON'T LEAVE", "DO NOT LEAVE", "HAVE TO STAY", "MUST STAY", "RISKY" };
         String[] compliments = { "UR COOL", "YOU'RE COOL", "U R COOL", "U ARE COOL", "UR SWEET", "YOU'RE SWEET", "U R SWEET", "U ARE SWEET", "UR FUNNY", "YOU'RE FUNNY", "U R FUNNY", "U ARE FUNNY", "LIKE TALKING TO U", "LIKE TALKING TO YOU", "LOVE TALKING TO U", "LOVE TALKING TO YOU", "UR GREAT", "YOU'RE GREAT", "U R GREAT", "U ARE GREAT", "UR AMAZING", "YOU'RE AMAZING", "U R AMAZING", "U ARE AMAZING" };
-        String[] affection = { " I LIKE YOU", "I LIKE U", "I LOVE YOU", "I LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
+        String[] affection = { " I LIKE YOU", "I LIKE U", "LOVE YOU", "LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
         String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
-        String[] laughing = {"LOL", "LMAO","ROFL","HAHA"};
+        String[] laughing = {"LOL", "LMAO","ROFL","HAHA","XD"};
+        String[] goodbye = { "LATERZ", "TTYL", "GBYE", "LATERS", "BAI", "CYA", "GOODBAI", "BYE", "CIAO", "GOODBYE", "CYA LATER", "TALK TO U LATER", "TALK TO YOU LATER", "UNTIL NEXT TIME", "C U", "SEE U", "C YA", "SEE YA", "C YOU" ,"FAREWELL"};
         Random rnd = new Random();
         SoundPlayer sound;
         int buddyNo;
@@ -750,6 +752,7 @@ namespace WindowsFormsApplication1
             bool affectionate = false;
             bool thanked = false;
             bool lol = false;
+            bool farewell = false;
 
             bool hasPromptBeenMade = false;
 
@@ -761,7 +764,11 @@ namespace WindowsFormsApplication1
             {
                 for (int i = 0; i < greetings.Length; i++)
                 {
-                    if (prompt.Contains(greetings[i]))
+                    if (prompt == greetingAlone[i])
+                    {
+                        greeting = true;
+                    }
+                    else if (prompt.Contains(greetings[i]))
                     {
                         greeting = true;
                     }
@@ -826,6 +833,13 @@ namespace WindowsFormsApplication1
                         lol = true;
                     }
                 }
+                for (int i = 0; i < goodbye.Length; i++)
+                {
+                    if (prompt.Contains(laughing[i]))
+                    {
+                        farewell = true;
+                    }
+                }
             }
 
 
@@ -885,13 +899,19 @@ namespace WindowsFormsApplication1
             //THANKS RESPONES
             String[] estherTY = { "Happy to help :)","No worries!","You're very welcome!"};
             String[] soniaTY = { "no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe" };
-            String[] aimeeTY = {"ok.","whatever.","you owe me"};
+            String[] aimeeTY = { "ok. no prob", "whatever.", "you owe me" };
 
             //LAUGHING RESPONSES
             String[] estherLOL = { "Hehe D",":P","XD","Glad I could make you laugh xD"};
             String[] soniaLOL = {"HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO"};
             String[] aimeeLOL = {"wasnt that funny.","hilarious.","lol.","haha.","shut up."};
-            String[] melanieLOL = { }; //GET ANA TO DO IT LOL
+            String[] melanieLOL = {"Glad I could amuse you.","How humourous.","Yeah."}; 
+
+            //FAREWELL RESPONSES
+            String[] estherBye = { "Okie, take care " + name + "!", "See you on the other side!","Smell ya later!","Later gator!" };
+            String[] soniaBye = {"OKOKOKKO BAI","BYEBYEBYEYBEYBYEYBEYBE","kbye lmao","AU REVOIR " + name.ToUpper()};
+            String[] aimeeBye = {"bye ig.","see u in hell.","cya never.","bye.","ok bye."};
+            String[] melanieBye = {"Farewell, " + name + ".","Until next meeting.","Cheers.","Goodbye. Signed, Melanie"};
 
             if (buddyName == "Esther")
             {
@@ -949,6 +969,10 @@ namespace WindowsFormsApplication1
                     {
                         response += estherLOL[rnd.Next(estherLOL.Length)];
                     }
+                    else if (farewell)
+                    {
+                        response += estherBye[rnd.Next(estherBye.Length)];
+                    }
                     //ERROR
                     else
                     {
@@ -960,7 +984,7 @@ namespace WindowsFormsApplication1
             {
                 if (hasPromptBeenMade)
                 {
-                    response += soniaRepeat[rnd.Next(estherRepeat.Length)];
+                    response += soniaRepeat[rnd.Next(soniaRepeat.Length)];
                 }
                 else
                 {
@@ -1010,6 +1034,10 @@ namespace WindowsFormsApplication1
                     {
                         response += soniaLOL[rnd.Next(soniaLOL.Length)];
                     }
+                    else if (farewell)
+                    {
+                        response += soniaBye[rnd.Next(soniaBye.Length)];
+                    }
                     //ERROR
                     else
                     {
@@ -1022,7 +1050,7 @@ namespace WindowsFormsApplication1
             {
                 if (hasPromptBeenMade)
                 {
-                    response += aimeeRepeat[rnd.Next(estherRepeat.Length)];
+                    response += aimeeRepeat[rnd.Next(aimeeRepeat.Length)];
                 }
                 else
                 {
@@ -1056,6 +1084,10 @@ namespace WindowsFormsApplication1
                     {
                         response += aimeeLOL[rnd.Next(aimeeLOL.Length)];
                     }
+                    else if (farewell)
+                    {
+                        response += estherBye[rnd.Next(estherBye.Length)];
+                    }
                     //ERROR
                     else
                     {
@@ -1067,7 +1099,7 @@ namespace WindowsFormsApplication1
             {
                 if (hasPromptBeenMade)
                 {
-                    response += melanieRepeat[rnd.Next(estherRepeat.Length)];
+                    response += melanieRepeat[rnd.Next(melanieRepeat.Length)];
                 }
                 else
                 {
@@ -1092,6 +1124,10 @@ namespace WindowsFormsApplication1
                     {
                         covidPts--;
                         response += melanieStayHome[rnd.Next(melanieStayHome.Length)];
+                    }
+                    else if (farewell)
+                    {
+                        response += melanieBye[rnd.Next(melanieBye.Length)];
                     }
                     else
                     {
