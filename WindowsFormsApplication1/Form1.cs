@@ -16,22 +16,23 @@ namespace WindowsFormsApplication1
         String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
         String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
         String promptsMade = "";
-        String[] greetings = { "HELLO", "HI ", "HEY ", "YO " };
-        String[] greetingAlone = { "HI", "HEY", "YO" };
-        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU","HOW'S LIFE","HOWS LIFE","HOW WAS UR DAY","HOW WAAS YOUR DAY"};
-        String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
+        String[] greetings = { "HELLO", "HI", "HEY ", "YO ", "HEY", };
+        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU", "HOW'S LIFE", "HOWS LIFE", "HOW WAS UR DAY", "HOW WAAS YOUR DAY" };
+        String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO","WHAT U UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
         String[] goOut = { "GO OUT", "BREAK THE RULES", "SHOULD LEAVE THE HOUSE", "SHOULD LEAVE UR HOUSE" };
         String[] stayHome = { "STAY HOME", "STAY AT HOME", "DONT LEAVE", "DON'T LEAVE", "DO NOT LEAVE", "HAVE TO STAY", "MUST STAY", "RISKY" };
         String[] compliments = { "UR COOL", "YOU'RE COOL", "U R COOL", "U ARE COOL", "UR SWEET", "YOU'RE SWEET", "U R SWEET", "U ARE SWEET", "UR FUNNY", "YOU'RE FUNNY", "U R FUNNY", "U ARE FUNNY", "LIKE TALKING TO U", "LIKE TALKING TO YOU", "LOVE TALKING TO U", "LOVE TALKING TO YOU", "UR GREAT", "YOU'RE GREAT", "U R GREAT", "U ARE GREAT", "UR AMAZING", "YOU'RE AMAZING", "U R AMAZING", "U ARE AMAZING" };
         String[] affection = { " I LIKE YOU", "I LIKE U", "LOVE YOU", "LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
         String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
-        String[] laughing = {"LOL", "LMAO","ROFL","HAHA","XD"};
-        String[] goodbye = { "LATERZ", "TTYL", "GBYE", "LATERS", "BAI", "CYA", "GOODBAI", "BYE", "CIAO", "GOODBYE", "CYA LATER", "TALK TO U LATER", "TALK TO YOU LATER", "UNTIL NEXT TIME", "C U", "SEE U", "C YA", "SEE YA", "C YOU" ,"FAREWELL"};
+        String[] laughing = { "LOL", "LMAO", "ROFL", "HAHA", "XD" };
+        String[] goodbye = { "LATERZ", "TTYL", "GBYE", "LATERS", "BAI", "CYA", "GOODBAI", "BYE", "CIAO", "GOODBYE", "CYA LATER", "TALK TO U LATER", "TALK TO YOU LATER", "UNTIL NEXT TIME", "C U", "SEE U", "C YA", "SEE YA", "C YOU", "FAREWELL" };
+
         Random rnd = new Random();
         SoundPlayer sound;
         int buddyNo;
         int relationshipPts;
         int covidPts;
+        bool muted;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -49,6 +50,10 @@ namespace WindowsFormsApplication1
             chooseSonia.Hide();
             chooseAimee.Hide();
             chooseMelanie.Hide();
+            buddyNo = 0;
+            relationshipPts = 0;
+            covidPts = 0;
+            muted = false;
         }
         private void connectButton_Click(object sender, EventArgs e)
         {
@@ -94,13 +99,13 @@ namespace WindowsFormsApplication1
             listMessage.Items.Clear();
             listMessage.Items.Add("Connected");
 
-            
+
 
 
         }
 
         private async void sendButton_Click(object sender, EventArgs e)
-        { 
+        {
             //EMPTY MESSAGE BOX ERROR
             if (messageBox.Text == "")
             {
@@ -113,11 +118,11 @@ namespace WindowsFormsApplication1
                 listMessage.Items.Add(messageBox.Text);
                 listMessage.Items.Add("");
                 messageBox.Clear();
-                await Task.Delay(rnd.Next(1000,4000));
+                await Task.Delay(rnd.Next(1000, 4000));
                 listMessage.Items.Add(buddyUserName + ":");
                 listMessage.Items.Add(promptResponse(prompt));
                 listMessage.Items.Add("");
-                
+
             }
         }
 
@@ -729,7 +734,28 @@ namespace WindowsFormsApplication1
 
         private void muteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sound.Stop();
+            if (!muted)
+            {
+                sound.Stop();
+                muteToolStripMenuItem.Text = "Unmute";
+            }
+            else
+            {
+
+                sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
+                sound.PlayLooping();
+                muteToolStripMenuItem.Text = "Mute";
+            }
+        }
+
+        private void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sorry, this feature isn't available yet!");
+        }
+
+        private void loadDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sorry, this feature isn't available yet!");
         }
 
         private void messageBox_KeyDown(object sender, KeyEventArgs e)
@@ -737,10 +763,6 @@ namespace WindowsFormsApplication1
             if (e.KeyCode == Keys.Enter)
             {
                 sendButton_Click((object)sender, (EventArgs)e);
-            }
-            else
-            {
-                Console.WriteLine("lol");
             }
         }
 
@@ -758,7 +780,6 @@ namespace WindowsFormsApplication1
             bool thanked = false;
             bool lol = false;
             bool farewell = false;
-
             bool hasPromptBeenMade = false;
 
             if (promptsMade.Contains(prompt))
@@ -767,17 +788,7 @@ namespace WindowsFormsApplication1
             }
             if (!hasPromptBeenMade)
             {
-                for (int i = 0; i < greetings.Length; i++)
-                {
-                    if (prompt == greetingAlone[i])
-                    {
-                        greeting = true;
-                    }
-                    else if (prompt.Contains(greetings[i]))
-                    {
-                        greeting = true;
-                    }
-                }
+                
                 for (int i = 0; i < wellbeings.Length; i++)
                 {
                     if (prompt.Contains(wellbeings[i]))
@@ -833,16 +844,23 @@ namespace WindowsFormsApplication1
                 }
                 for (int i = 0; i < laughing.Length; i++)
                 {
-                    if(prompt.Contains(laughing[i]))
+                    if (prompt.Contains(laughing[i]))
                     {
                         lol = true;
                     }
                 }
                 for (int i = 0; i < goodbye.Length; i++)
                 {
-                    if (prompt.Contains(laughing[i]))
+                    if (prompt.Contains(goodbye[i]))
                     {
                         farewell = true;
+                    }
+                }
+                for (int i = 0; i < greetings.Length; i++)
+                {
+                    if (prompt.Contains(greetings[i]))
+                    {
+                        greeting = true;
                     }
                 }
             }
@@ -871,52 +889,52 @@ namespace WindowsFormsApplication1
             String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad I guess...", ":( Feeling a tiny bit sad but it will pass… ", "Just stressing about lockdown :P You?" };
             String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
             String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever.", "locking down." };
-            String[] melanieWellbeing = {"Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that."};
+            String[] melanieWellbeing = { "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that." };
 
             //WYD RESPONSES
-            String[] estherWYD = { "It is a lovely day, the sun would feel great! Maybe I should take a walk :P", "Just getting ready to get to the comic book store... The new chapter of UNA comics just came out!!!",  };
+            String[] estherWYD = { "It is a lovely day, the sun would feel great! Maybe I should take a walk :P", "Just getting ready to get to the comic book store... The new chapter of UNA comics just came out!!!", };
             String[] soniaWYD = { "ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho", "DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP" };
-            String[] aimeeWYD = {"rotting.","nothing as always.","staring into the endless void","surprisingly looking outside and kinda wanting to escape this cage."};
-            String[] melanieWYD = { "Currently busy with work.","Responding to e-mails at the moment. Somehow they are more taxing than conversing with you.","Just gave myself a break because I can. Might go for a well-deserved Melanie Promenade." };
+            String[] aimeeWYD = { "rotting.", "nothing as always.", "staring into the endless void", "surprisingly looking outside and kinda wanting to escape this cage." };
+            String[] melanieWYD = { "Currently busy with work.", "Responding to e-mails at the moment. Somehow they are more taxing than conversing with you.", "Just gave myself a break because I can. Might go for a well-deserved Melanie Promenade." };
 
             //GO OUT RESPONSES
-            String[] estherGoOut = {"Yay! Glad you agree " + name + ".","Let's go!!!! About time hehe","Heck yeah! I will do just that :)"};
-            String[] soniaGoOut = { "MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", "YESSIRRRRRRR GREAT IDEA"};
-            String[] aimeeGoOut = { "sure, but only when it gets darker...", "you're one to talk, but i guess i should","ill do it but only because i want to.","yea nah nevermind","actually cant be bothered tbf"};
+            String[] estherGoOut = { "Yay! Glad you agree " + name + ".", "Let's go!!!! About time hehe", "Heck yeah! I will do just that :)" };
+            String[] soniaGoOut = { "MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", "YESSIRRRRRRR GREAT IDEA" };
+            String[] aimeeGoOut = { "sure, but only when it gets darker...", "you're one to talk, but i guess i should", "ill do it but only because i want to.", "yea nah nevermind", "actually cant be bothered tbf" };
             String[] melanieGoOut = { "I am far too busy today to 'go out', but I'll keep your unsolicited advice in mind.", "You're right, I've been stuck in the office for too long. I need some air.", "God yes, I need a drink too." };
 
             //STAY HOME RESPONSES
-            String[] estherStayHome = {"Okie... I should be more responsible, you're right!","Awh :("};
-            String[] soniaStayHome = { "AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE","it's worth the risk at this point " + name.ToLower() + "😭", "OKAY FINE ILL STAY PFFT", "YEAH? yeah. ye.... u rite"};
-            String[] aimeeStayHome = {"you don't tell me what to do.","ugh. fine.", "my eyes cannot roll further back into my skull"};
+            String[] estherStayHome = { "Okie... I should be more responsible, you're right!", "Awh :(" };
+            String[] soniaStayHome = { "AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE", "it's worth the risk at this point " + name.ToLower() + "😭", "OKAY FINE ILL STAY PFFT", "YEAH? yeah. ye.... u rite" };
+            String[] aimeeStayHome = { "you don't tell me what to do.", "ugh. fine.", "my eyes cannot roll further back into my skull" };
             String[] melanieStayHome = { "Ah yes. It is clear now that I have way too much work to focus on.", "On second thought, I'd have to confer with my assistant, so I'd rather not leave the house.", "I have a meeting soon, so perhaps I shouldn't waste time." };
 
             //COMPLIMENT RESPONSES
-            String[] estherComp = {"Eek! That's so nice, thank you " + name + "!!! :D","Oh my- That means so much thank you!","D'awh... That is so sweet thank you so much :P","Ah! So unexpected but much appreciated, likewise!"};
+            String[] estherComp = { "Eek! That's so nice, thank you " + name + "!!! :D", "Oh my- That means so much thank you!", "D'awh... That is so sweet thank you so much :P", "Ah! So unexpected but much appreciated, likewise!" };
             String[] soniaComp = { "OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!" };
-            
+
             //AFFECTION ACCEPTED RESPONSES
             String[] soniaAffection = { "KAFNOEISHIOFEJFEWSOUGB I THINK I FEEL THE SAME <.<", "omg really what what what i do too wtf this isnt happening", "OMG ME TOO AAAAAAAAA :)))))" };
 
             //AFFECTION DENIED RESPONSES
-            String[] soniaNoAffection = { "AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :((("};
+            String[] soniaNoAffection = { "AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :(((" };
 
             //THANKS RESPONES
-            String[] estherTY = { "Happy to help :)","No worries!","You're very welcome!"};
+            String[] estherTY = { "Happy to help :)", "No worries!", "You're very welcome!" };
             String[] soniaTY = { "no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe" };
             String[] aimeeTY = { "ok. no prob", "whatever.", "you owe me" };
 
             //LAUGHING RESPONSES
-            String[] estherLOL = { "Hehe D",":P","XD","Glad I could make you laugh xD"};
-            String[] soniaLOL = {"HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO"};
-            String[] aimeeLOL = {"wasnt that funny.","hilarious.","lol.","haha.","shut up."};
-            String[] melanieLOL = {"Glad I could amuse you.","How humourous.","Yeah."}; 
+            String[] estherLOL = { "Hehe D", ":P", "XD", "Glad I could make you laugh xD" };
+            String[] soniaLOL = { "HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO" };
+            String[] aimeeLOL = { "wasnt that funny.", "hilarious.", "lol.", "haha.", "shut up." };
+            String[] melanieLOL = { "Glad I could amuse you.", "How humourous.", "Yeah." };
 
             //FAREWELL RESPONSES
-            String[] estherBye = { "Okie, take care " + name + "!", "See you on the other side!","Smell ya later!","Later gator!" };
-            String[] soniaBye = {"OKOKOKKO BAI","BYEBYEBYEYBEYBYEYBEYBE","kbye lmao","AU REVOIR " + name.ToUpper()};
-            String[] aimeeBye = {"bye ig.","see u in hell.","cya never.","bye.","ok bye."};
-            String[] melanieBye = {"Farewell, " + name + ".","Until next meeting.","Cheers.","Goodbye. Signed, Melanie"};
+            String[] estherBye = { "Okie, take care " + name + "!", "See you on the other side!", "Smell ya later!", "Later gator!" };
+            String[] soniaBye = { "OKOKOKKO BAI", "BYEBYEBYEYBEYBYEYBEYBE", "kbye lmao", "AU REVOIR " + name.ToUpper() };
+            String[] aimeeBye = { "bye ig.", "see u in hell.", "cya never.", "bye.", "ok bye." };
+            String[] melanieBye = { "Farewell, " + name + ".", "Until next meeting.", "Cheers.", "Goodbye. Signed, Melanie" };
 
             if (buddyName == "Esther")
             {
@@ -926,11 +944,8 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    if (greeting)
-                    {
-                        response += estherGreetings[rnd.Next(estherGreetings.Length)];
-                    }
-                    else if (wellbeing)
+                    
+                    if (wellbeing)
                     {
                         response += estherWellbeing[rnd.Next(estherWellbeing.Length)];
                     }
@@ -978,6 +993,10 @@ namespace WindowsFormsApplication1
                     {
                         response += estherBye[rnd.Next(estherBye.Length)];
                     }
+                    else if (greeting)
+                    {
+                        response += estherGreetings[rnd.Next(estherGreetings.Length)];
+                    }
                     //ERROR
                     else
                     {
@@ -993,11 +1012,8 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    if (greeting)
-                    {
-                        response += soniaGreetings[rnd.Next(soniaGreetings.Length)];
-                    }
-                    else if (wellbeing)
+                    
+                    if (wellbeing)
                     {
                         response += soniaWellbeing[rnd.Next(soniaWellbeing.Length)];
                     }
@@ -1043,6 +1059,10 @@ namespace WindowsFormsApplication1
                     {
                         response += soniaBye[rnd.Next(soniaBye.Length)];
                     }
+                    else if (greeting)
+                    {
+                        response += soniaGreetings[rnd.Next(soniaGreetings.Length)];
+                    }
                     //ERROR
                     else
                     {
@@ -1059,11 +1079,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    if (greeting)
-                    {
-                        response += aimeeGreetings[rnd.Next(aimeeGreetings.Length)];
-                    }
-                    else if (wellbeing)
+                    if (wellbeing)
                     {
                         response += aimeeWellbeing[rnd.Next(aimeeWellbeing.Length)];
                     }
@@ -1091,7 +1107,11 @@ namespace WindowsFormsApplication1
                     }
                     else if (farewell)
                     {
-                        response += estherBye[rnd.Next(estherBye.Length)];
+                        response += aimeeBye[rnd.Next(aimeeBye.Length)];
+                    }
+                    else if (greeting)
+                    {
+                        response += aimeeGreetings[rnd.Next(aimeeGreetings.Length)];
                     }
                     //ERROR
                     else
@@ -1108,11 +1128,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    if (greeting)
-                    {
-                        response += melanieGreetings[rnd.Next(melanieGreetings.Length)];
-                    }
-                    else if (wellbeing)
+                    if (wellbeing)
                     {
                         response += melanieWellbeing[rnd.Next(melanieWellbeing.Length)];
                     }
@@ -1130,9 +1146,17 @@ namespace WindowsFormsApplication1
                         covidPts--;
                         response += melanieStayHome[rnd.Next(melanieStayHome.Length)];
                     }
+                    else if (lol)
+                    {
+                        response += melanieLOL[rnd.Next(melanieLOL.Length)];
+                    }
                     else if (farewell)
                     {
                         response += melanieBye[rnd.Next(melanieBye.Length)];
+                    }
+                    else if (greeting)
+                    {
+                        response += melanieGreetings[rnd.Next(melanieGreetings.Length)];
                     }
                     else
                     {
