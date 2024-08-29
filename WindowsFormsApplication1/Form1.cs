@@ -3,6 +3,9 @@ using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -33,23 +36,29 @@ namespace WindowsFormsApplication1
         int relationshipPts;
         int covidPts;
         bool muted;
-
         private void Form1_Load(object sender, EventArgs e)
         {
             Size = new Size(862, 584);
             sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
             sound.PlayLooping();
-            listMessage.Hide();
-            buddyPFP.Hide();
-            userPFP.Hide();
-            messageBox.Hide();
-            sendButton.Hide();
-            groupBox1.Hide();
-            bioBox.Hide();
-            chooseEsther.Hide();
-            chooseSonia.Hide();
-            chooseAimee.Hide();
-            chooseMelanie.Hide();
+
+            HideInitialControls();
+            InitializeGameVariables();
+        }
+
+        private void HideInitialControls()
+        {
+            Control[] controlsToHide = { listMessage, buddyPFP, userPFP, messageBox, sendButton, 
+                                         groupBox1, bioBox, chooseEsther, chooseSonia, 
+                                         chooseAimee, chooseMelanie };
+            foreach (var control in controlsToHide)
+            {
+                control.Hide();
+            }
+        }
+
+        private void InitializeGameVariables()
+        {
             buddyNo = 0;
             relationshipPts = 0;
             covidPts = 0;
@@ -59,7 +68,15 @@ namespace WindowsFormsApplication1
         {
             Size = new Size(548, 584);
             CenterToScreen();
-            //SHOW/HIDE ELEMENTS
+
+            ToggleUIElements();
+            SetUserInfo();
+            ResetGamePoints();
+            InitializeChat();
+        }
+
+        private void ToggleUIElements()
+        {
             loginBox.Hide();
             loginButton.Hide();
             groupBox1.Show();
@@ -68,62 +85,53 @@ namespace WindowsFormsApplication1
             chooseSonia.Show();
             chooseAimee.Show();
             chooseMelanie.Show();
-            relationshipPts = 0;
-            covidPts = 0;
+        }
 
-            //FORMATTING LIST BOX
-            //MANAGING EMPTY LOG-IN
-            if (nameBox.Text == "")
-            {
-                name = "Gaster";
-            }
-            else
-            {
-                name = nameBox.Text;
-            }
-
-            if (usernameBox.Text == "")
-            {
-                username = "Me";
-            }
-            else
-            {
-                username = usernameBox.Text;
-            }
+        private void SetUserInfo()
+        {
+            name = string.IsNullOrEmpty(nameBox.Text) ? "Gaster" : nameBox.Text;
+            username = string.IsNullOrEmpty(usernameBox.Text) ? "Me" : usernameBox.Text;
 
             if (userPFP.Image == null)
             {
                 userPFP.Image = Properties.Resources.GasterPFP;
             }
+        }
 
+        private void ResetGamePoints()
+        {
+            relationshipPts = 0;
+            covidPts = 0;
+        }
+
+        private void InitializeChat()
+        {
             listMessage.Items.Clear();
             listMessage.Items.Add("Connected");
-
-
-
-
         }
 
         private async void sendButton_Click(object sender, EventArgs e)
         {
-            //EMPTY MESSAGE BOX ERROR
-            if (messageBox.Text == "")
+            if (string.IsNullOrWhiteSpace(messageBox.Text))
             {
                 MessageBox.Show("Please enter text into the textbox.", "Error");
+                return;
             }
-            else
-            {
-                prompt = messageBox.Text.ToUpper();
-                listMessage.Items.Add(username + ":");
-                listMessage.Items.Add(messageBox.Text);
-                listMessage.Items.Add("");
-                messageBox.Clear();
-                await Task.Delay(rnd.Next(1000, 4000));
-                listMessage.Items.Add(buddyUserName + ":");
-                listMessage.Items.Add(promptResponse(prompt));
-                listMessage.Items.Add("");
 
-            }
+            prompt = messageBox.Text.ToUpper();
+            AddMessageToList(username, messageBox.Text);
+            messageBox.Clear();
+
+            await Task.Delay(rnd.Next(1000, 4000));
+
+            AddMessageToList(buddyUserName, promptResponse(prompt));
+        }
+
+        private void AddMessageToList(string sender, string message)
+        {
+            listMessage.Items.Add($"{sender}:");
+            listMessage.Items.Add(message);
+            listMessage.Items.Add(string.Empty);
         }
 
         private void messageBox_TextChanged(object sender, EventArgs e)
@@ -135,6 +143,18 @@ namespace WindowsFormsApplication1
 
         }
 
+
+        private void SetBackgroundImage(Image image, Color foreColor)
+        {
+            BackgroundImageLayout = ImageLayout.Stretch;
+            BackgroundImage = image;
+            changeForeColor(foreColor);
+        }
+
+        private void SetUserProfilePicture(Image image)
+        {
+            userPFP.Image = image;
+        }
 
         private void solidColourToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -150,52 +170,39 @@ namespace WindowsFormsApplication1
 
         private void rosesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackgroundImageLayout = ImageLayout.Stretch;
-            BackgroundImage = Properties.Resources.RosesBG;
-            changeForeColor(Color.White);
+            SetBackgroundImage(Properties.Resources.RosesBG, Color.White);
         }
 
         private void cloudsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackgroundImageLayout = ImageLayout.Stretch;
-            BackgroundImage = Properties.Resources.SkyBG;
-            changeForeColor(Color.Black);
+            SetBackgroundImage(Properties.Resources.SkyBG, Color.Black);
         }
 
         private void customToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackgroundImageLayout = ImageLayout.Stretch;
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
                 dlg.Title = "Choose Custom Background";
-
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    BackgroundImage = new Bitmap(dlg.FileName);
+                    SetBackgroundImage(new Bitmap(dlg.FileName), BackColor);
                 }
             }
-
         }
 
         private void spaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackgroundImageLayout = ImageLayout.Stretch;
-            BackgroundImage = Properties.Resources.SpaceBG;
-            changeForeColor(Color.White);
+            SetBackgroundImage(Properties.Resources.SpaceBG, Color.White);
         }
 
         private void underwaterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackgroundImageLayout = ImageLayout.Stretch;
-            BackgroundImage = Properties.Resources.UnderwaterBG;
-            changeForeColor(Color.White);
+            SetBackgroundImage(Properties.Resources.UnderwaterBG, Color.White);
         }
 
         private void meadowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackgroundImageLayout = ImageLayout.Stretch;
-            BackgroundImage = Properties.Resources.MeadowBG;
-            changeForeColor(Color.Black);
+            SetBackgroundImage(Properties.Resources.MeadowBG, Color.Black);
         }
 
         private void customToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -203,435 +210,111 @@ namespace WindowsFormsApplication1
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
                 dlg.Title = "Choose Profile Picture";
-
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    userPFP.Image = new Bitmap(dlg.FileName);
+                    SetUserProfilePicture(new Bitmap(dlg.FileName));
                 }
             }
         }
 
-        private void bKYUToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.B__KYU;
-        }
-
-        private void eUPHORIA6ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.EUPHORIA_6;
-        }
-
-        private void mutationSyndromeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Mutation_Syndrome;
-        }
-
-        private void nITROUSToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.NITROUS;
-        }
-
-        private void stargazingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.stargazing;
-        }
-
-        private void uNAToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.UNA;
-        }
-
-        private void ashToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Ash;
-        }
-
-        private void gokuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Goku;
-        }
-
-        private void kanekiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Kaneki;
-        }
-
-        private void narutoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Naruto;
-        }
-
-        private void nicoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Nico;
-        }
-
-        private void pikachuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Pikachu;
-        }
-
-        private void sailorMoonToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Sailor_Moon;
-        }
-
-        private void yunoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Yuno;
-        }
-
-        private void catToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Cat;
-        }
-
-        private void clownToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Clown;
-        }
-
-        private void dogToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Dog;
-        }
-
-        private void eyeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Eye;
-        }
-
-        private void flowerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Flower;
-        }
-
-        private void guitarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Guitar;
-        }
-
-        private void loveHeartToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Love_Heart;
-        }
-
-        private void pirateSKullToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Pirate_Skull;
-        }
-
-        private void beachToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Beach;
-        }
-
-        private void forestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Forest;
-        }
-
-        private void mountainsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Mountains;
-        }
-
-        private void sunsetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Sunset;
-        }
-
-        private void daBabyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.DaBaby;
-        }
-
-        private void dogeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Doge;
-        }
-
-        private void evilPatrickToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Evil_Patrick;
-        }
-
-        private void illuminatiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Illuminati;
-        }
-
-        private void mattToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Matt;
-        }
-
-        private void obamiumToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Obamium;
-        }
-
-        private void rickRollToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Rick_Roll;
-        }
-
-        private void sIUUUToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.SIUUU;
-        }
-
-        private void spongeMockToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Sponge_Mock;
-        }
-
-        private void trollfaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Trollface;
-        }
-
-        private void whiteDrakeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.White_Drake;
-        }
-
-        private void findingNemoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Finding_Nemo;
-        }
-
-        private void fridayThe13thToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Friday_the_13th;
-        }
-
-        private void frozenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Frozen;
-        }
-
-        private void harryPotterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Harry_Potter;
-        }
-
-        private void jurassicParkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Jurassic_Park;
-        }
-
-        private void nightmareOnElmStreetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Nightmare_on_Elm_Street;
-        }
-
-        private void starWarsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Star_Wars;
-        }
-
-        private void terminatorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Terminator;
-        }
-
-        private void theMatrixToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.The_Matrix;
-        }
-
-        private void toyStoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Toy_Story;
-        }
-
-        private void batmanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Batman;
-        }
-
-        private void asexualToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Asexual;
-        }
-
-        private void bisexualToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Bisexual;
-        }
-
-        private void lesbianToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Lesbian;
-        }
-
-        private void nonbinaryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Non_binary;
-        }
-
-        private void pansexualToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Pansexual;
-        }
-
-        private void rainbowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Rainbow;
-        }
-
-        private void transgenderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Transgender;
-        }
-
-        private void basketballToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Basketball;
-        }
-
-        private void footballToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Football;
-        }
-
-        private void tennisToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Tennis;
-        }
-
-        private void spidermanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Spiderman;
-        }
-
-        private void supermanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Superman;
-        }
-
-        private void theFlashToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.The_Flash;
-        }
-
-        private void carToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Car;
-        }
-
-        private void motorcycleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Motorcycle;
-        }
-
-        private void planeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Plane;
-        }
-
-
-        private void arthurMorganToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Arthur_Morgan;
-        }
-
-        private void bigbyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Bigby;
-        }
-
-        private void chloePriceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Chloe_Price;
-        }
-
-        private void clementineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Clementine;
-        }
-
-        private void henryStickminToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Henry_Stickmin;
-        }
-
-        private void imposterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Imposter;
-        }
-
-        private void jonesyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Jonesy;
-        }
-
-        private void leeEverettToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Lee_Everett;
-        }
-
-        private void plumbobToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Plumbob;
-        }
-
-        private void sansToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Sans;
-        }
-
-        private void steveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Steve;
-        }
-
-        private void trevorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Trevor;
-        }
-
-        private void zagreusToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userPFP.Image = Properties.Resources.Zagreus;
-        }
-
-        private void chooseSonia_Click(object sender, EventArgs e)
-        {
-            buddyNo = 2;
+        private void SetProfilePictureFromResource(string resourceName)
+        {
+            SetUserProfilePicture((Image)Properties.Resources.ResourceManager.GetObject(resourceName));
+        }
+
+        private void bKYUToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("B__KYU");
+        private void eUPHORIA6ToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("EUPHORIA_6");
+        private void mutationSyndromeToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Mutation_Syndrome");
+        private void nITROUSToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("NITROUS");
+        private void stargazingToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("stargazing");
+        private void uNAToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("UNA");
+        private void ashToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Ash");
+        private void gokuToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Goku");
+        private void kanekiToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Kaneki");
+        private void narutoToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Naruto");
+        private void nicoToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Nico");
+        private void pikachuToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Pikachu");
+        private void sailorMoonToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Sailor_Moon");
+        private void yunoToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Yuno");
+        private void catToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Cat");
+        private void clownToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Clown");
+        private void dogToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Dog");
+        private void eyeToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Eye");
+        private void flowerToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Flower");
+        private void guitarToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Guitar");
+        private void loveHeartToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Love_Heart");
+        private void pirateSKullToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Pirate_Skull");
+        private void beachToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Beach");
+        private void forestToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Forest");
+        private void mountainsToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Mountains");
+        private void sunsetToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Sunset");
+        private void daBabyToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("DaBaby");
+        private void dogeToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Doge");
+        private void evilPatrickToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Evil_Patrick");
+        private void illuminatiToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Illuminati");
+        private void mattToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Matt");
+        private void obamiumToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Obamium");
+        private void rickRollToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Rick_Roll");
+        private void sIUUUToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("SIUUU");
+        private void spongeMockToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Sponge_Mock");
+        private void trollfaceToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Trollface");
+        private void whiteDrakeToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("White_Drake");
+        private void findingNemoToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Finding_Nemo");
+        private void fridayThe13thToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Friday_the_13th");
+        private void frozenToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Frozen");
+        private void harryPotterToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Harry_Potter");
+        private void jurassicParkToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Jurassic_Park");
+        private void nightmareOnElmStreetToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Nightmare_on_Elm_Street");
+        private void starWarsToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Star_Wars");
+        private void terminatorToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Terminator");
+        private void theMatrixToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("The_Matrix");
+        private void toyStoryToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Toy_Story");
+        private void batmanToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Batman");
+        private void asexualToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Asexual");
+        private void bisexualToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Bisexual");
+        private void lesbianToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Lesbian");
+        private void nonbinaryToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Non_binary");
+        private void pansexualToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Pansexual");
+        private void rainbowToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Rainbow");
+        private void transgenderToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Transgender");
+        private void basketballToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Basketball");
+        private void footballToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Football");
+        private void tennisToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Tennis");
+        private void spidermanToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Spiderman");
+        private void supermanToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Superman");
+        private void theFlashToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("The_Flash");
+        private void carToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Car");
+        private void motorcycleToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Motorcycle");
+        private void planeToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Plane");
+        private void arthurMorganToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Arthur_Morgan");
+        private void bigbyToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Bigby");
+        private void chloePriceToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Chloe_Price");
+        private void clementineToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Clementine");
+        private void henryStickminToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Henry_Stickmin");
+        private void imposterToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Imposter");
+        private void jonesyToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Jonesy");
+        private void leeEverettToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Lee_Everett");
+        private void plumbobToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Plumbob");
+        private void sansToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Sans");
+        private void steveToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Steve");
+        private void trevorToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Trevor");
+        private void zagreusToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Zagreus");
+        private void ChooseBuddy(int index, string pfpResourceName)
+        {
+            buddyNo = index + 1;
             mainChatShowHideElements();
-            buddyName = buddy[1];
-            buddyUserName = buddyUser[1];
-            buddyPFP.Image = Properties.Resources.Sonia_PFP;
+            buddyName = buddy[index];
+            buddyUserName = buddyUser[index];
+            buddyPFP.Image = (Image)Properties.Resources.ResourceManager.GetObject(pfpResourceName);
         }
 
-        private void chooseEsther_Click(object sender, EventArgs e)
-        {
-            buddyNo = 1;
-            mainChatShowHideElements();
-            buddyName = buddy[0];
-            buddyUserName = buddyUser[0];
-            buddyPFP.Image = Properties.Resources.Esther_PFP;
-        }
+        private void chooseSonia_Click(object sender, EventArgs e) => ChooseBuddy(1, "Sonia_PFP");
 
-        private void chooseAimee_Click(object sender, EventArgs e)
-        {
-            buddyNo = 3;
-            mainChatShowHideElements();
-            buddyName = buddy[2];
-            buddyUserName = buddyUser[2];
-            buddyPFP.Image = Properties.Resources.Aimee_PFP;
-        }
+        private void chooseEsther_Click(object sender, EventArgs e) => ChooseBuddy(0, "Esther_PFP");
 
-        private void chooseMelanie_Click(object sender, EventArgs e)
-        {
-            buddyNo = 4;
-            mainChatShowHideElements();
-            buddyName = buddy[3];
-            buddyUserName = buddyUser[3];
-            buddyPFP.Image = Properties.Resources.Melanie_PFP;
-        }
+        private void chooseAimee_Click(object sender, EventArgs e) => ChooseBuddy(2, "Aimee_PFP");
+
+        private void chooseMelanie_Click(object sender, EventArgs e) => ChooseBuddy(3, "Melanie_PFP");
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -643,84 +326,44 @@ namespace WindowsFormsApplication1
             Application.Restart();
         }
 
-        private void freddyFazbearToolStripMenuItem_Click(object sender, EventArgs e)
+        private void freddyFazbearToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("FreddyFazbear");
+
+        private void chooseEsther_MouseHover(object sender, EventArgs e) => SetBioImage("EstherBio");
+
+        private void chooseSonia_MouseHover(object sender, EventArgs e) => SetBioImage("SoniaBio");
+
+        private void chooseAimee_MouseHover(object sender, EventArgs e) => SetBioImage("AimeeBio");
+
+        private void chooseMelanie_MouseHover(object sender, EventArgs e) => SetBioImage("MelanieBio");
+
+        private void SetBioImage(string resourceName) => bioBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(resourceName);
+
+        private void SetChatColors(Color foreColor, Color backColor, bool changeMessageBox = false)
         {
-            userPFP.Image = Properties.Resources.FreddyFazbear;
+            listMessage.ForeColor = foreColor;
+            listMessage.BackColor = backColor;
+            if (changeMessageBox)
+            {
+                messageBox.ForeColor = Color.White;
+                messageBox.BackColor = Color.Black;
+            }
         }
 
-        private void chooseEsther_MouseHover(object sender, EventArgs e)
-        {
-            bioBox.Image = Properties.Resources.EstherBio;
-        }
+        private void redToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Red, Color.White);
 
-        private void chooseSonia_MouseHover(object sender, EventArgs e)
-        {
-            bioBox.Image = Properties.Resources.SoniaBio;
-        }
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Orange, Color.Black, true);
 
-        private void chooseAimee_MouseHover(object sender, EventArgs e)
-        {
-            bioBox.Image = Properties.Resources.AimeeBio;
-        }
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Yellow, Color.Black, true);
 
-        private void chooseMelanie_MouseHover(object sender, EventArgs e)
-        {
-            bioBox.Image = Properties.Resources.MelanieBio;
-        }
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Green, Color.White);
 
-        private void redToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Red;
-            listMessage.BackColor = Color.White;
-        }
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Blue, Color.White);
 
-        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Orange;
-            listMessage.BackColor = Color.Black;
-            messageBox.ForeColor = Color.White;
-            messageBox.BackColor = Color.Black;
-        }
+        private void pinkToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Pink, Color.Black, true);
 
-        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Yellow;
-            listMessage.BackColor = Color.Black;
-            messageBox.ForeColor = Color.White;
-            messageBox.BackColor = Color.Black;
-        }
+        private void blackToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.Black, Color.White);
 
-        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Green;
-            listMessage.BackColor = Color.White;
-        }
-
-        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Blue;
-            listMessage.BackColor = Color.White;
-        }
-
-        private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Pink;
-            listMessage.BackColor = Color.Black;
-            messageBox.ForeColor = Color.White;
-            messageBox.BackColor = Color.Black;
-        }
-
-        private void blackToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.Black;
-            listMessage.BackColor = Color.White;
-        }
-
-        private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listMessage.ForeColor = Color.White;
-            listMessage.BackColor = Color.Black;
-        }
+        private void whiteToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.White, Color.Black);
 
         private void colorBox_TextChanged(object sender, EventArgs e)
         {
@@ -734,28 +377,95 @@ namespace WindowsFormsApplication1
 
         private void muteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!muted)
+            muted = !muted;
+            if (muted)
             {
                 sound.Stop();
-                muteToolStripMenuItem.Text = "Unmute";
             }
             else
             {
-
                 sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
                 sound.PlayLooping();
-                muteToolStripMenuItem.Text = "Mute";
             }
+            muteToolStripMenuItem.Text = muted ? "Unmute" : "Mute";
         }
 
         private void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sorry, this feature isn't available yet!");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
+            saveFileDialog.Title = "Save Game Data";
+            
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
+                {
+                    writer.WriteLine($"Name:{name}");
+                    writer.WriteLine($"Username:{username}");
+                    writer.WriteLine($"BuddyNo:{buddyNo}");
+                    writer.WriteLine($"RelationshipPts:{relationshipPts}");
+                    writer.WriteLine($"CovidPts:{covidPts}");
+                    writer.WriteLine($"Muted:{muted}");
+                    // Add more data as needed
+                }
+                MessageBox.Show("Game data saved successfully!");
+            }
         }
 
         private void loadDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sorry, this feature isn't available yet!");
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+            openFileDialog.Title = "Load Game Data";
+            
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamReader reader = new StreamReader(openFileDialog.FileName))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(':');
+                        if (parts.Length == 2)
+                        {
+                            switch (parts[0])
+                            {
+                                case "Name":
+                                    name = parts[1];
+                                    break;
+                                case "Username":
+                                    username = parts[1];
+                                    break;
+                                case "BuddyNo":
+                                    buddyNo = int.Parse(parts[1]);
+                                    break;
+                                case "RelationshipPts":
+                                    relationshipPts = int.Parse(parts[1]);
+                                    break;
+                                case "CovidPts":
+                                    covidPts = int.Parse(parts[1]);
+                                    break;
+                                case "Muted":
+                                    muted = bool.Parse(parts[1]);
+                                    break;
+                                // Add more cases as needed
+                            }
+                        }
+                    }
+                }
+                MessageBox.Show("Game data loaded successfully!");
+                // Update UI elements with loaded data
+                UpdateUIWithLoadedData();
+            }
+        }
+
+        private void UpdateUIWithLoadedData()
+        {
+            // Update UI elements based on loaded data
+            // For example:
+            nameBox.Text = name;
+            usernameBox.Text = username;
+            // Update other UI elements as needed
         }
 
         private void messageBox_KeyDown(object sender, KeyEventArgs e)
@@ -769,433 +479,138 @@ namespace WindowsFormsApplication1
 
         public String promptResponse(String prompt)
         {
-            String response = "";
-            bool greeting = false;
-            bool wellbeing = false;
-            bool wydCheck = false;
-            bool goOutCheck = false;
-            bool stayHomeCheck = false;
-            bool complimented = false;
-            bool affectionate = false;
-            bool thanked = false;
-            bool lol = false;
-            bool farewell = false;
-            bool hasPromptBeenMade = false;
+            bool[] flags = new bool[10];
+            string[] flagTypes = { "Greetings", "Wellbeing", "WYD", "GoOut", "StayHome", "Comp", "Affection", "TY", "LOL", "Bye" };
+            string[][] checkArrays = { greetings, wellbeings, wyd, goOut, stayHome, compliments, affection, thanks, laughing, goodbye };
 
-            if (promptsMade.Contains(prompt))
-            {
-                hasPromptBeenMade = true;
-            }
+            bool hasPromptBeenMade = promptsMade.Contains(prompt);
+
             if (!hasPromptBeenMade)
             {
-                
-                for (int i = 0; i < wellbeings.Length; i++)
+                for (int i = 0; i < flagTypes.Length; i++)
                 {
-                    if (prompt.Contains(wellbeings[i]))
-                    {
-                        wellbeing = true;
-                    }
+                    flags[i] = checkArrays[i].Any(item => prompt.Contains(item));
                 }
-                for (int i = 0; i < wyd.Length; i++)
+
+                // Special case for "TY"
+                if (prompt == "TY")
                 {
-                    if (prompt.Contains(wyd[i]))
-                    {
-                        wydCheck = true;
-                    }
-                }
-                for (int i = 0; i < goOut.Length; i++)
-                {
-                    if (prompt.Contains(goOut[i]))
-                    {
-                        goOutCheck = true;
-                    }
-                }
-                for (int i = 0; i < stayHome.Length; i++)
-                {
-                    if (prompt.Contains(stayHome[i]))
-                    {
-                        stayHomeCheck = true;
-                    }
-                }
-                for (int i = 0; i < compliments.Length; i++)
-                {
-                    if (prompt.Contains(compliments[i]))
-                    {
-                        complimented = true;
-                    }
-                }
-                for (int i = 0; i < affection.Length; i++)
-                {
-                    if (prompt.Contains(affection[i]))
-                    {
-                        affectionate = true;
-                    }
-                }
-                for (int i = 0; i < thanks.Length; i++)
-                {
-                    if (prompt.Contains(thanks[i]))
-                    {
-                        thanked = true;
-                    }
-                    else if (prompt == "TY")
-                    {
-                        thanked = true;
-                    }
-                }
-                for (int i = 0; i < laughing.Length; i++)
-                {
-                    if (prompt.Contains(laughing[i]))
-                    {
-                        lol = true;
-                    }
-                }
-                for (int i = 0; i < goodbye.Length; i++)
-                {
-                    if (prompt.Contains(goodbye[i]))
-                    {
-                        farewell = true;
-                    }
-                }
-                for (int i = 0; i < greetings.Length; i++)
-                {
-                    if (prompt.Contains(greetings[i]))
-                    {
-                        greeting = true;
-                    }
+                    flags[7] = true; // thanked
                 }
             }
 
-
-            //ERROR RESPONSES
-            String[] estherError = { "What xD", "D: " + name + ", you okay?", "Um... ?_?", "Hehe :) I don't understand, but understood!" };
-            String[] soniaError = { "LOL WHAT???", "HAHAHAHA WTF R U ON ABOUT", ".", "R U BIEN?", "oki doki ami" };
-            String[] aimeeError = { "?", "wtf?", "ok.", "moving on." };
-            String[] melanieError = { "Start making sense.", "You tire me.", "Amazing.", "What?" };
-
-            //REPEAT RESPONSES
-            String[] estherRepeat = { "Oh! Didn’t we talk about this already ?", "I can see that you’re tired, you’ve said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you’ve said that before!", "Uhh… are you confused? This isn’t the first time you said this :P", "Hahaha you’re repeating yourself xD" };
-            String[] soniaRepeat = { "LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA" };
-            String[] aimeeRepeat = { "this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?" };
-            String[] melanieRepeat = { "Perhaps take a break. You seem to be forgetting what we have already discussed.", "Do watch yourself, I don’t like repeating myself unlike you.", "Alright. Lovely conversation. Talk to me again when you have practiced having real conversations.", "Do you need me to call you a paramedic? Repetition is a sign of memory loss, and you seem to be suffering from it.", "You have said this. Did you already forget?" };
-
-            //GREETING RESPONSES
-            String[] estherGreetings = { "Hey hey " + name + "!", "Heyo!", "Excelsior!", "Yoyo!" };
-            String[] soniaGreetings = { "hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper() };
-            String[] aimeeGreetings = { "hi " + name.ToLower() + ".", "hm.", "what", "can i help u?" };
-            String[] melanieGreetings = { "Greetings, " + name + ".", "Oh. It's you.", "Yes?" };
-
-
-            //WELLBEING RESPONSES
-            String[] estherWellbeing = { "I’m doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it’s not so bad I guess...", ":( Feeling a tiny bit sad but it will pass… ", "Just stressing about lockdown :P You?" };
-            String[] soniaWellbeing = { "BIEN... kinda just stuck indoors lol", "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT" };
-            String[] aimeeWellbeing = { "breathing.", "bad.", "i don’t know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it’s whatever.", "locking down." };
-            String[] melanieWellbeing = { "Had a good day, no one pissed me off today. Don’t change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that’s the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don’t test that." };
-
-            //WYD RESPONSES
-            String[] estherWYD = { "It is a lovely day, the sun would feel great! Maybe I should take a walk :P", "Just getting ready to get to the comic book store... The new chapter of UNA comics just came out!!!", };
-            String[] soniaWYD = { "ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho", "DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP" };
-            String[] aimeeWYD = { "rotting.", "nothing as always.", "staring into the endless void", "surprisingly looking outside and kinda wanting to escape this cage." };
-            String[] melanieWYD = { "Currently busy with work.", "Responding to e-mails at the moment. Somehow they are more taxing than conversing with you.", "Just gave myself a break because I can. Might go for a well-deserved Melanie Promenade." };
-
-            //GO OUT RESPONSES
-            String[] estherGoOut = { "Yay! Glad you agree " + name + ".", "Let's go!!!! About time hehe", "Heck yeah! I will do just that :)" };
-            String[] soniaGoOut = { "MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", "YESSIRRRRRRR GREAT IDEA" };
-            String[] aimeeGoOut = { "sure, but only when it gets darker...", "you're one to talk, but i guess i should", "ill do it but only because i want to.", "yea nah nevermind", "actually cant be bothered tbf" };
-            String[] melanieGoOut = { "I am far too busy today to 'go out', but I'll keep your unsolicited advice in mind.", "You're right, I've been stuck in the office for too long. I need some air.", "God yes, I need a drink too." };
-
-            //STAY HOME RESPONSES
-            String[] estherStayHome = { "Okie... I should be more responsible, you're right!", "Awh :(" };
-            String[] soniaStayHome = { "AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE", "it's worth the risk at this point " + name.ToLower() + "😭", "OKAY FINE ILL STAY PFFT", "YEAH? yeah. ye.... u rite" };
-            String[] aimeeStayHome = { "you don't tell me what to do.", "ugh. fine.", "my eyes cannot roll further back into my skull" };
-            String[] melanieStayHome = { "Ah yes. It is clear now that I have way too much work to focus on.", "On second thought, I'd have to confer with my assistant, so I'd rather not leave the house.", "I have a meeting soon, so perhaps I shouldn't waste time." };
-
-            //COMPLIMENT RESPONSES
-            String[] estherComp = { "Eek! That's so nice, thank you " + name + "!!! :D", "Oh my- That means so much thank you!", "D'awh... That is so sweet thank you so much :P", "Ah! So unexpected but much appreciated, likewise!" };
-            String[] soniaComp = { "OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!" };
-
-            //AFFECTION ACCEPTED RESPONSES
-            String[] soniaAffection = { "KAFNOEISHIOFEJFEWSOUGB I THINK I FEEL THE SAME <.<", "omg really what what what i do too wtf this isnt happening", "OMG ME TOO AAAAAAAAA :)))))" };
-
-            //AFFECTION DENIED RESPONSES
-            String[] soniaNoAffection = { "AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :(((" };
-
-            //THANKS RESPONES
-            String[] estherTY = { "Happy to help :)", "No worries!", "You're very welcome!" };
-            String[] soniaTY = { "no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe" };
-            String[] aimeeTY = { "ok. no prob", "whatever.", "you owe me" };
-
-            //LAUGHING RESPONSES
-            String[] estherLOL = { "Hehe D", ":P", "XD", "Glad I could make you laugh xD" };
-            String[] soniaLOL = { "HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO" };
-            String[] aimeeLOL = { "wasnt that funny.", "hilarious.", "lol.", "haha.", "shut up." };
-            String[] melanieLOL = { "Glad I could amuse you.", "How humourous.", "Yeah." };
-
-            //FAREWELL RESPONSES
-            String[] estherBye = { "Okie, take care " + name + "!", "See you on the other side!", "Smell ya later!", "Later gator!" };
-            String[] soniaBye = { "OKOKOKKO BAI", "BYEBYEBYEYBEYBYEYBEYBE", "kbye lmao", "AU REVOIR " + name.ToUpper() };
-            String[] aimeeBye = { "bye ig.", "see u in hell.", "cya never.", "bye.", "ok bye." };
-            String[] melanieBye = { "Farewell, " + name + ".", "Until next meeting.", "Cheers.", "Goodbye. Signed, Melanie" };
-
-            if (buddyName == "Esther")
+            Dictionary<string, string[]> responses = new Dictionary<string, string[]>
             {
-                if (hasPromptBeenMade)
-                {
-                    response += estherRepeat[rnd.Next(estherRepeat.Length)];
-                }
-                else
-                {
-                    
-                    if (wellbeing)
-                    {
-                        response += estherWellbeing[rnd.Next(estherWellbeing.Length)];
-                    }
-                    else if (wydCheck)
-                    {
-                        response += estherWYD[rnd.Next(estherWYD.Length)];
-                    }
-                    else if (goOutCheck)
-                    {
-                        covidPts++;
-                        response += estherGoOut[rnd.Next(estherGoOut.Length)];
-                    }
-                    else if (stayHomeCheck)
-                    {
-                        covidPts--;
-                        response += estherStayHome[rnd.Next(estherStayHome.Length)];
-                    }
-                    else if (complimented)
-                    {
-                        relationshipPts++;
-                        response += estherComp[rnd.Next(estherComp.Length)];
-                    }
-                    /*
-                    else if (affectionate)
-                    {
-                        if (relationshipPts > 4)
-                        {
-                            response += estherAffection[rnd.Next(estherAffection.Length)];
-                        }
-                        else
-                        {
-                            response += estherNoAffection[rnd.Next(estherNoAffection.Length)];
-                        }
-                    }
-                    */
-                    else if (thanked)
-                    {
-                        response += estherTY[rnd.Next(estherTY.Length)];
-                    }
-                    else if (lol)
-                    {
-                        response += estherLOL[rnd.Next(estherLOL.Length)];
-                    }
-                    else if (farewell)
-                    {
-                        response += estherBye[rnd.Next(estherBye.Length)];
-                    }
-                    else if (greeting)
-                    {
-                        response += estherGreetings[rnd.Next(estherGreetings.Length)];
-                    }
-                    //ERROR
-                    else
-                    {
-                        response += estherError[rnd.Next(estherError.Length)];
-                    }
-                }
-            }
-            else if (buddyName == "Sonia")
-            {
-                if (hasPromptBeenMade)
-                {
-                    response += soniaRepeat[rnd.Next(soniaRepeat.Length)];
-                }
-                else
-                {
-                    
-                    if (wellbeing)
-                    {
-                        response += soniaWellbeing[rnd.Next(soniaWellbeing.Length)];
-                    }
-                    else if (wydCheck)
-                    {
-                        response += soniaWYD[rnd.Next(soniaWYD.Length)];
-                    }
-                    else if (goOutCheck)
-                    {
-                        covidPts++;
-                        response += soniaGoOut[rnd.Next(soniaGoOut.Length)];
-                    }
-                    else if (stayHomeCheck)
-                    {
-                        covidPts--;
-                        response += soniaStayHome[rnd.Next(soniaStayHome.Length)];
-                    }
-                    else if (complimented)
-                    {
-                        relationshipPts++;
-                        response += soniaComp[rnd.Next(soniaComp.Length)];
-                    }
-                    else if (affectionate)
-                    {
-                        if (relationshipPts > 4)
-                        {
-                            response += soniaAffection[rnd.Next(soniaAffection.Length)];
-                        }
-                        else
-                        {
-                            response += soniaNoAffection[rnd.Next(soniaNoAffection.Length)];
-                        }
-                    }
-                    else if (thanked)
-                    {
-                        response += soniaTY[rnd.Next(soniaTY.Length)];
-                    }
-                    else if (lol)
-                    {
-                        response += soniaLOL[rnd.Next(soniaLOL.Length)];
-                    }
-                    else if (farewell)
-                    {
-                        response += soniaBye[rnd.Next(soniaBye.Length)];
-                    }
-                    else if (greeting)
-                    {
-                        response += soniaGreetings[rnd.Next(soniaGreetings.Length)];
-                    }
-                    //ERROR
-                    else
-                    {
-                        response += soniaError[rnd.Next(soniaError.Length)];
-                    }
-                }
-            }
+                {"estherError", new[] {"What xD", "D: " + name + ", you okay?", "Um... ?_?", "Hehe :) I don't understand, but understood!"}},
+                {"soniaError", new[] {"LOL WHAT???", "HAHAHAHA WTF R U ON ABOUT", ".", "R U BIEN?", "oki doki ami"}},
+                {"aimeeError", new[] {"?", "wtf?", "ok.", "moving on."}},
+                {"melanieError", new[] {"Start making sense.", "You tire me.", "Amazing.", "What?"}},
+                {"estherRepeat", new[] {"Oh! Didn't we talk about this already ?", "I can see that you're tired, you've said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you've said that before!", "Uhh… are you confused? This isn't the first time you said this :P", "Hahaha you're repeating yourself xD"}},
+                {"soniaRepeat", new[] {"LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA"}},
+                {"aimeeRepeat", new[] {"this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?"}},
+                {"melanieRepeat", new[] {"Perhaps take a break. You seem to be forgetting what we have already discussed.", "Do watch yourself, I don't like repeating myself unlike you.", "Alright. Lovely conversation. Talk to me again when you have practiced having real conversations.", "Do you need me to call you a paramedic? Repetition is a sign of memory loss, and you seem to be suffering from it.", "You have said this. Did you already forget?"}},
+                {"estherGreetings", new[] {"Hey hey " + name + "!", "Heyo!", "Excelsior!", "Yoyo!"}},
+                {"soniaGreetings", new[] {"hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper()}},
+                {"aimeeGreetings", new[] {"hi " + name.ToLower() + ".", "hm.", "what", "can i help u?"}},
+                {"melanieGreetings", new[] {"Greetings, " + name + ".", "Oh. It's you.", "Yes?"}},
+                {"estherWellbeing", new[] {"I'm doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it's not so bad I guess...", ":( Feeling a tiny bit sad but it will pass… ", "Just stressing about lockdown :P You?"}},
+                {"soniaWellbeing", new[] {"BIEN... kinda just stuck indoors lol", "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT"}},
+                {"aimeeWellbeing", new[] {"breathing.", "bad.", "i don't know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it's whatever.", "locking down."}},
+                {"melanieWellbeing", new[] {"Had a good day, no one pissed me off today. Don't change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that's the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don't test that."}},
+                {"estherWYD", new[] {"It is a lovely day, the sun would feel great! Maybe I should take a walk :P", "Just getting ready to get to the comic book store... The new chapter of UNA comics just came out!!!"}},
+                {"soniaWYD", new[] {"ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho", "DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP"}},
+                {"aimeeWYD", new[] {"rotting.", "nothing as always.", "staring into the endless void", "surprisingly looking outside and kinda wanting to escape this cage."}},
+                {"melanieWYD", new[] {"Currently busy with work.", "Responding to e-mails at the moment. Somehow they are more taxing than conversing with you.", "Just gave myself a break because I can. Might go for a well-deserved Melanie Promenade."}},
+                {"estherGoOut", new[] {"Yay! Glad you agree " + name + ".", "Let's go!!!! About time hehe", "Heck yeah! I will do just that :)"}},
+                {"soniaGoOut", new[] {"MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", "YESSIRRRRRRR GREAT IDEA"}},
+                {"aimeeGoOut", new[] {"sure, but only when it gets darker...", "you're one to talk, but i guess i should", "ill do it but only because i want to.", "yea nah nevermind", "actually cant be bothered tbf"}},
+                {"melanieGoOut", new[] {"I am far too busy today to 'go out', but I'll keep your unsolicited advice in mind.", "You're right, I've been stuck in the office for too long. I need some air.", "God yes, I need a drink too."}},
+                {"estherStayHome", new[] {"Okie... I should be more responsible, you're right!", "Awh :("}},
+                {"soniaStayHome", new[] {"AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE", "it's worth the risk at this point " + name.ToLower() + "😭", "OKAY FINE ILL STAY PFFT", "YEAH? yeah. ye.... u rite"}},
+                {"aimeeStayHome", new[] {"you don't tell me what to do.", "ugh. fine.", "my eyes cannot roll further back into my skull"}},
+                {"melanieStayHome", new[] {"Ah yes. It is clear now that I have way too much work to focus on.", "On second thought, I'd have to confer with my assistant, so I'd rather not leave the house.", "I have a meeting soon, so perhaps I shouldn't waste time."}},
+                {"estherComp", new[] {"Eek! That's so nice, thank you " + name + "!!! :D", "Oh my- That means so much thank you!", "D'awh... That is so sweet thank you so much :P", "Ah! So unexpected but much appreciated, likewise!"}},
+                {"soniaComp", new[] {"OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!"}},
+                {"soniaAffection", new[] {"KAFNOEISHIOFEJFEWSOUGB I THINK I FEEL THE SAME <.<", "omg really what what what i do too wtf this isnt happening", "OMG ME TOO AAAAAAAAA :)))))"} },
+                {"soniaNoAffection", new[] {"AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :((("} },
+                {"estherTY", new[] {"Happy to help :)", "No worries!", "You're very welcome!"}},
+                {"soniaTY", new[] {"no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe"}},
+                {"aimeeTY", new[] {"ok. no prob", "whatever.", "you owe me"}},
+                {"estherLOL", new[] {"Hehe D", ":P", "XD", "Glad I could make you laugh xD"}},
+                {"soniaLOL", new[] {"HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO"}},
+                {"aimeeLOL", new[] {"wasnt that funny.", "hilarious.", "lol.", "haha.", "shut up."}},
+                {"melanieLOL", new[] {"Glad I could amuse you.", "How humourous.", "Yeah."}},
+                {"estherBye", new[] {"Okie, take care " + name + "!", "See you on the other side!", "Smell ya later!", "Later gator!"}},
+                {"soniaBye", new[] {"OKOKOKKO BAI", "BYEBYEBYEYBEYBYEYBEYBE", "kbye lmao", "AU REVOIR " + name.ToUpper()}},
+                {"aimeeBye", new[] {"bye ig.", "see u in hell.", "cya never.", "bye.", "ok bye."}},
+                {"melanieBye", new[] {"Farewell, " + name + ".", "Until next meeting.", "Cheers.", "Goodbye. Signed, Melanie"}}
+            };
 
-            else if (buddyName == "Aimee")
+            string response = "";
+            if (hasPromptBeenMade)
             {
-                if (hasPromptBeenMade)
-                {
-                    response += aimeeRepeat[rnd.Next(aimeeRepeat.Length)];
-                }
-                else
-                {
-                    if (wellbeing)
-                    {
-                        response += aimeeWellbeing[rnd.Next(aimeeWellbeing.Length)];
-                    }
-                    else if (wydCheck)
-                    {
-                        response += aimeeWYD[rnd.Next(aimeeWYD.Length)];
-                    }
-                    else if (goOutCheck)
-                    {
-                        covidPts++;
-                        response += aimeeGoOut[rnd.Next(aimeeGoOut.Length)];
-                    }
-                    else if (stayHomeCheck)
-                    {
-                        covidPts--;
-                        response += aimeeStayHome[rnd.Next(aimeeStayHome.Length)];
-                    }
-                    else if (thanked)
-                    {
-                        response += aimeeTY[rnd.Next(aimeeTY.Length)];
-                    }
-                    else if (lol)
-                    {
-                        response += aimeeLOL[rnd.Next(aimeeLOL.Length)];
-                    }
-                    else if (farewell)
-                    {
-                        response += aimeeBye[rnd.Next(aimeeBye.Length)];
-                    }
-                    else if (greeting)
-                    {
-                        response += aimeeGreetings[rnd.Next(aimeeGreetings.Length)];
-                    }
-                    //ERROR
-                    else
-                    {
-                        response += aimeeError[rnd.Next(aimeeError.Length)];
-                    }
-                }
-            }
-            else if (buddyName == "Melanie")
-            {
-                if (hasPromptBeenMade)
-                {
-                    response += melanieRepeat[rnd.Next(melanieRepeat.Length)];
-                }
-                else
-                {
-                    if (wellbeing)
-                    {
-                        response += melanieWellbeing[rnd.Next(melanieWellbeing.Length)];
-                    }
-                    else if (wydCheck)
-                    {
-                        response += melanieWYD[rnd.Next(melanieWYD.Length)];
-                    }
-                    else if (goOutCheck)
-                    {
-                        covidPts++;
-                        response += melanieGoOut[rnd.Next(melanieGoOut.Length)];
-                    }
-                    else if (stayHomeCheck)
-                    {
-                        covidPts--;
-                        response += melanieStayHome[rnd.Next(melanieStayHome.Length)];
-                    }
-                    else if (lol)
-                    {
-                        response += melanieLOL[rnd.Next(melanieLOL.Length)];
-                    }
-                    else if (farewell)
-                    {
-                        response += melanieBye[rnd.Next(melanieBye.Length)];
-                    }
-                    else if (greeting)
-                    {
-                        response += melanieGreetings[rnd.Next(melanieGreetings.Length)];
-                    }
-                    else
-                    {
-                        response += melanieError[rnd.Next(melanieError.Length)];
-                    }
-                }
+                response = responses[buddyName.ToLower() + "Repeat"][rnd.Next(responses[buddyName.ToLower() + "Repeat"].Length)];
             }
             else
             {
-                MessageBox.Show("You shouldn't be able to see this", "How did you see this?");
+                for (int i = 0; i < flagTypes.Length; i++)
+                {
+                    if (flags[i])
+                    {
+                        string responseKey = buddyName.ToLower() + flagTypes[i];
+                        if (responses.ContainsKey(responseKey))
+                        {
+                            response = responses[responseKey][rnd.Next(responses[responseKey].Length)];
+                            break;
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(response))
+                {
+                    response = responses[buddyName.ToLower() + "Error"][rnd.Next(responses[buddyName.ToLower() + "Error"].Length)];
+                }
+
+                if (flags[3] || flags[4]) // goOutCheck or stayHomeCheck
+                {
+                    covidPts += flags[3] ? 1 : -1;
+                }
+                if (flags[5]) // complimented
+                {
+                    relationshipPts++;
+                }
             }
 
-            promptsMade += prompt;
+            promptsMade += prompt + "|";
             Console.WriteLine(promptsMade);
             return response;
         }
         public void changeForeColor(Color color)
         {
-            nameLbl.ForeColor = color;
-            usernameLbl.ForeColor = color;
-            loginBox.ForeColor = color;
+            Control[] controlsToChange = { nameLbl, usernameLbl, loginBox };
+            foreach (var control in controlsToChange)
+            {
+                control.ForeColor = color;
+            }
         }
 
         public void mainChatShowHideElements()
         {
-            groupBox1.Hide();
-            bioBox.Hide();
-            chooseEsther.Hide();
-            chooseSonia.Hide();
-            chooseAimee.Hide();
-            chooseMelanie.Hide();
-            listMessage.Show();
-            userPFP.Show();
-            buddyPFP.Show();
-            messageBox.Show();
-            sendButton.Show();
+            Control[] controlsToHide = { groupBox1, bioBox, chooseEsther, chooseSonia, chooseAimee, chooseMelanie };
+            Control[] controlsToShow = { listMessage, userPFP, buddyPFP, messageBox, sendButton };
+
+            foreach (var control in controlsToHide)
+            {
+                control.Hide();
+            }
+
+            foreach (var control in controlsToShow)
+            {
+                control.Show();
+            }
+
             Size = new Size(862, 584);
             CenterToScreen();
-
         }
     }
 }
