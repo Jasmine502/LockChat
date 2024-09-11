@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.loginBox = new System.Windows.Forms.GroupBox();
-            this.usernameBox = new System.Windows.Forms.TextBox();
-            this.usernameLbl = new System.Windows.Forms.Label();
-            this.nameBox = new System.Windows.Forms.TextBox();
-            this.nameLbl = new System.Windows.Forms.Label();
-            this.loginButton = new System.Windows.Forms.Button();
             this.listMessage = new System.Windows.Forms.ListBox();
             this.messageBox = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
@@ -153,110 +147,46 @@
             this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chooseSonia = new System.Windows.Forms.Button();
-            this.chooseEsther = new System.Windows.Forms.Button();
-            this.chooseAimee = new System.Windows.Forms.Button();
-            this.chooseMelanie = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bioBox = new System.Windows.Forms.PictureBox();
             this.buddyPFP = new System.Windows.Forms.PictureBox();
             this.userPFP = new System.Windows.Forms.PictureBox();
-            this.loginBox.SuspendLayout();
+            this.friendsButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bioBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buddyPFP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPFP)).BeginInit();
             this.SuspendLayout();
             // 
-            // loginBox
-            // 
-            this.loginBox.BackColor = System.Drawing.Color.Transparent;
-            this.loginBox.Controls.Add(this.usernameBox);
-            this.loginBox.Controls.Add(this.usernameLbl);
-            this.loginBox.Controls.Add(this.nameBox);
-            this.loginBox.Controls.Add(this.nameLbl);
-            this.loginBox.Location = new System.Drawing.Point(193, 200);
-            this.loginBox.Name = "loginBox";
-            this.loginBox.Size = new System.Drawing.Size(460, 114);
-            this.loginBox.TabIndex = 0;
-            this.loginBox.TabStop = false;
-            this.loginBox.Text = "Login:";
-            this.loginBox.Enter += new System.EventHandler(this.loginBox_Enter);
-            // 
-            // usernameBox
-            // 
-            this.usernameBox.Location = new System.Drawing.Point(100, 36);
-            this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(264, 20);
-            this.usernameBox.TabIndex = 0;
-            this.usernameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageBox_KeyDown);
-            // 
-            // usernameLbl
-            // 
-            this.usernameLbl.AutoSize = true;
-            this.usernameLbl.Location = new System.Drawing.Point(97, 16);
-            this.usernameLbl.Name = "usernameLbl";
-            this.usernameLbl.Size = new System.Drawing.Size(58, 13);
-            this.usernameLbl.TabIndex = 5;
-            this.usernameLbl.Text = "Username:";
-            // 
-            // nameBox
-            // 
-            this.nameBox.Location = new System.Drawing.Point(100, 82);
-            this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(264, 20);
-            this.nameBox.TabIndex = 1;
-            this.nameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageBox_KeyDown);
-            // 
-            // nameLbl
-            // 
-            this.nameLbl.AutoSize = true;
-            this.nameLbl.Location = new System.Drawing.Point(97, 66);
-            this.nameLbl.Name = "nameLbl";
-            this.nameLbl.Size = new System.Drawing.Size(38, 13);
-            this.nameLbl.TabIndex = 0;
-            this.nameLbl.Text = "Name:";
-            // 
-            // loginButton
-            // 
-            this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(193, 320);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(460, 27);
-            this.loginButton.TabIndex = 3;
-            this.loginButton.Text = "LOG IN";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.connectButton_Click);
-            // 
             // listMessage
             // 
+            this.listMessage.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listMessage.FormattingEnabled = true;
             this.listMessage.HorizontalScrollbar = true;
+            this.listMessage.ItemHeight = 19;
             this.listMessage.Location = new System.Drawing.Point(123, 32);
             this.listMessage.Name = "listMessage";
-            this.listMessage.Size = new System.Drawing.Size(603, 433);
+            this.listMessage.Size = new System.Drawing.Size(603, 422);
             this.listMessage.TabIndex = 2;
             this.listMessage.TabStop = false;
             this.listMessage.SelectedIndexChanged += new System.EventHandler(this.listMessage_SelectedIndexChanged);
             // 
             // messageBox
             // 
+            this.messageBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messageBox.Location = new System.Drawing.Point(123, 478);
+            this.messageBox.Multiline = true;
             this.messageBox.Name = "messageBox";
-            this.messageBox.Size = new System.Drawing.Size(603, 20);
+            this.messageBox.Size = new System.Drawing.Size(539, 55);
             this.messageBox.TabIndex = 4;
             this.messageBox.TextChanged += new System.EventHandler(this.messageBox_TextChanged);
             this.messageBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageBox_KeyDown);
             // 
             // sendButton
             // 
-            this.sendButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendButton.Location = new System.Drawing.Point(123, 504);
+            this.sendButton.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendButton.Location = new System.Drawing.Point(668, 478);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(603, 31);
+            this.sendButton.Size = new System.Drawing.Size(58, 55);
             this.sendButton.TabIndex = 5;
-            this.sendButton.Text = "SEND";
+            this.sendButton.Text = "⏎";
             this.sendButton.UseVisualStyleBackColor = true;
             this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
             // 
@@ -283,14 +213,14 @@
             // saveDataToolStripMenuItem
             // 
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.saveDataToolStripMenuItem.Text = "Save Data";
             this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
             // 
             // loadDataToolStripMenuItem
             // 
             this.loadDataToolStripMenuItem.Name = "loadDataToolStripMenuItem";
-            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.loadDataToolStripMenuItem.Text = "Load Data";
             this.loadDataToolStripMenuItem.Click += new System.EventHandler(this.loadDataToolStripMenuItem_Click);
             // 
@@ -317,7 +247,7 @@
             this.solidColourToolStripMenuItem,
             this.customToolStripMenuItem});
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             // 
             // rosesToolStripMenuItem
@@ -400,7 +330,7 @@
             this.videoGamesToolStripMenuItem,
             this.customToolStripMenuItem1});
             this.profilePictureToolStripMenuItem.Name = "profilePictureToolStripMenuItem";
-            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.profilePictureToolStripMenuItem.Text = "Profile Picture";
             // 
             // albumArtToolStripMenuItem
@@ -838,49 +768,49 @@
             // asexualToolStripMenuItem
             // 
             this.asexualToolStripMenuItem.Name = "asexualToolStripMenuItem";
-            this.asexualToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.asexualToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.asexualToolStripMenuItem.Text = "Asexual";
             this.asexualToolStripMenuItem.Click += new System.EventHandler(this.asexualToolStripMenuItem_Click);
             // 
             // bisexualToolStripMenuItem
             // 
             this.bisexualToolStripMenuItem.Name = "bisexualToolStripMenuItem";
-            this.bisexualToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.bisexualToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.bisexualToolStripMenuItem.Text = "Bisexual";
             this.bisexualToolStripMenuItem.Click += new System.EventHandler(this.bisexualToolStripMenuItem_Click);
             // 
             // lesbianToolStripMenuItem
             // 
             this.lesbianToolStripMenuItem.Name = "lesbianToolStripMenuItem";
-            this.lesbianToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.lesbianToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.lesbianToolStripMenuItem.Text = "Lesbian";
             this.lesbianToolStripMenuItem.Click += new System.EventHandler(this.lesbianToolStripMenuItem_Click);
             // 
             // nonbinaryToolStripMenuItem
             // 
             this.nonbinaryToolStripMenuItem.Name = "nonbinaryToolStripMenuItem";
-            this.nonbinaryToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.nonbinaryToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.nonbinaryToolStripMenuItem.Text = "Non-binary";
             this.nonbinaryToolStripMenuItem.Click += new System.EventHandler(this.nonbinaryToolStripMenuItem_Click);
             // 
             // pansexualToolStripMenuItem
             // 
             this.pansexualToolStripMenuItem.Name = "pansexualToolStripMenuItem";
-            this.pansexualToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.pansexualToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.pansexualToolStripMenuItem.Text = "Pansexual";
             this.pansexualToolStripMenuItem.Click += new System.EventHandler(this.pansexualToolStripMenuItem_Click);
             // 
             // rainbowToolStripMenuItem
             // 
             this.rainbowToolStripMenuItem.Name = "rainbowToolStripMenuItem";
-            this.rainbowToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.rainbowToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.rainbowToolStripMenuItem.Text = "Rainbow";
             this.rainbowToolStripMenuItem.Click += new System.EventHandler(this.rainbowToolStripMenuItem_Click);
             // 
             // transgenderToolStripMenuItem
             // 
             this.transgenderToolStripMenuItem.Name = "transgenderToolStripMenuItem";
-            this.transgenderToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.transgenderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.transgenderToolStripMenuItem.Text = "Transgender";
             this.transgenderToolStripMenuItem.Click += new System.EventHandler(this.transgenderToolStripMenuItem_Click);
             // 
@@ -1123,7 +1053,7 @@
             this.blackToolStripMenuItem,
             this.whiteToolStripMenuItem});
             this.textColourToolStripMenuItem.Name = "textColourToolStripMenuItem";
-            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.textColourToolStripMenuItem.Text = "Text Colour";
             // 
             // redToolStripMenuItem
@@ -1184,82 +1114,16 @@
             // muteToolStripMenuItem
             // 
             this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
-            this.muteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.muteToolStripMenuItem.Text = "Mute";
             this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
-            // 
-            // chooseSonia
-            // 
-            this.chooseSonia.Location = new System.Drawing.Point(6, 63);
-            this.chooseSonia.Name = "chooseSonia";
-            this.chooseSonia.Size = new System.Drawing.Size(139, 38);
-            this.chooseSonia.TabIndex = 11;
-            this.chooseSonia.Text = "xXx_Sony_xXx";
-            this.chooseSonia.UseVisualStyleBackColor = true;
-            this.chooseSonia.Click += new System.EventHandler(this.chooseSonia_Click);
-            this.chooseSonia.MouseHover += new System.EventHandler(this.chooseSonia_MouseHover);
-            // 
-            // chooseEsther
-            // 
-            this.chooseEsther.Location = new System.Drawing.Point(6, 19);
-            this.chooseEsther.Name = "chooseEsther";
-            this.chooseEsther.Size = new System.Drawing.Size(139, 38);
-            this.chooseEsther.TabIndex = 12;
-            this.chooseEsther.Text = "Angel616";
-            this.chooseEsther.UseVisualStyleBackColor = true;
-            this.chooseEsther.Click += new System.EventHandler(this.chooseEsther_Click);
-            this.chooseEsther.MouseHover += new System.EventHandler(this.chooseEsther_MouseHover);
-            // 
-            // chooseAimee
-            // 
-            this.chooseAimee.Location = new System.Drawing.Point(9, 107);
-            this.chooseAimee.Name = "chooseAimee";
-            this.chooseAimee.Size = new System.Drawing.Size(139, 38);
-            this.chooseAimee.TabIndex = 13;
-            this.chooseAimee.Text = "aimaggot666";
-            this.chooseAimee.UseVisualStyleBackColor = true;
-            this.chooseAimee.Click += new System.EventHandler(this.chooseAimee_Click);
-            this.chooseAimee.MouseHover += new System.EventHandler(this.chooseAimee_MouseHover);
-            // 
-            // chooseMelanie
-            // 
-            this.chooseMelanie.Location = new System.Drawing.Point(6, 151);
-            this.chooseMelanie.Name = "chooseMelanie";
-            this.chooseMelanie.Size = new System.Drawing.Size(139, 38);
-            this.chooseMelanie.TabIndex = 14;
-            this.chooseMelanie.Text = "MelanieS";
-            this.chooseMelanie.UseVisualStyleBackColor = true;
-            this.chooseMelanie.Click += new System.EventHandler(this.chooseMelanie_Click);
-            this.chooseMelanie.MouseHover += new System.EventHandler(this.chooseMelanie_MouseHover);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.bioBox);
-            this.groupBox1.Controls.Add(this.chooseEsther);
-            this.groupBox1.Controls.Add(this.chooseSonia);
-            this.groupBox1.Controls.Add(this.chooseMelanie);
-            this.groupBox1.Controls.Add(this.chooseAimee);
-            this.groupBox1.Location = new System.Drawing.Point(9, 27);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(523, 482);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Users";
-            // 
-            // bioBox
-            // 
-            this.bioBox.Location = new System.Drawing.Point(151, 19);
-            this.bioBox.Name = "bioBox";
-            this.bioBox.Size = new System.Drawing.Size(356, 452);
-            this.bioBox.TabIndex = 15;
-            this.bioBox.TabStop = false;
             // 
             // buddyPFP
             // 
@@ -1279,18 +1143,27 @@
             this.userPFP.TabIndex = 7;
             this.userPFP.TabStop = false;
             // 
+            // friendsButton
+            // 
+            this.friendsButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.friendsButton.Location = new System.Drawing.Point(732, 149);
+            this.friendsButton.Name = "friendsButton";
+            this.friendsButton.Size = new System.Drawing.Size(108, 23);
+            this.friendsButton.TabIndex = 17;
+            this.friendsButton.Text = "Friends";
+            this.friendsButton.UseVisualStyleBackColor = true;
+            this.friendsButton.Click += new System.EventHandler(this.friendsButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 545);
-            this.Controls.Add(this.loginBox);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.friendsButton);
             this.Controls.Add(this.buddyPFP);
             this.Controls.Add(this.userPFP);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.messageBox);
-            this.Controls.Add(this.loginButton);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.listMessage);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1302,12 +1175,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LockChat";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.loginBox.ResumeLayout(false);
-            this.loginBox.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bioBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buddyPFP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPFP)).EndInit();
             this.ResumeLayout(false);
@@ -1316,16 +1185,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox loginBox;
-        private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.Label nameLbl;
-        private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.ListBox listMessage;
         private System.Windows.Forms.TextBox messageBox;
         private System.Windows.Forms.Button sendButton;
-        private System.Windows.Forms.TextBox usernameBox;
-        private System.Windows.Forms.Label usernameLbl;
         private System.Windows.Forms.PictureBox userPFP;
         private System.Windows.Forms.PictureBox buddyPFP;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -1429,16 +1291,10 @@
         private System.Windows.Forms.ToolStripMenuItem steveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trevorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zagreusToolStripMenuItem;
-        private System.Windows.Forms.Button chooseSonia;
-        private System.Windows.Forms.Button chooseEsther;
-        private System.Windows.Forms.Button chooseAimee;
-        private System.Windows.Forms.Button chooseMelanie;
         private System.Windows.Forms.ToolStripMenuItem freddyFazbearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadDataToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox bioBox;
         private System.Windows.Forms.ToolStripMenuItem textColourToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
@@ -1449,6 +1305,7 @@
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
+        private System.Windows.Forms.Button friendsButton;
     }
 }
 

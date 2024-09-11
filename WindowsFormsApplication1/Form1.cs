@@ -1,113 +1,179 @@
 ﻿using System;
 using System.Drawing;
-using System.Media;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Net.Http;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        String name, username, buddyName, buddyUserName, prompt;
-        String[] buddy = { "Esther", "Sonia", "Aimee", "Melanie" };
-        String[] buddyUser = { "Angel616", "xXx_Sony_xXx", "aimaggot666", "MelanieS" };
-        String promptsMade = "";
-        String[] greetings = { "HELLO", "HI", "HEY ", "YO ", "HEY", };
-        String[] wellbeings = { "HRU", "HOW R U", "HOW ARE U", "HYD", "HOW U DOIN", "HOW YOU DOIN", "HOW ARE YOU", "HOW'S LIFE", "HOWS LIFE", "HOW WAS UR DAY", "HOW WAAS YOUR DAY" };
-        String[] wyd = { "SUP", "WASSUP", "WATS UP", "WAT U DOIN", "WHAT ARE YOU DOIN", "WHAT R U DOIN", "WHATS UP", "WHAT U DOIN", "WHAT YOU DOIN", "WHAT YOU UP 2", "WHAT YOU UP TO","WHAT U UP TO", "WUT R U DOIN", "WUT R U DOIN", "WUTS UP", "WUT U UP TO", "WUU2", "WUUT", "WYD" };
-        String[] goOut = { "GO OUT", "BREAK THE RULES", "SHOULD LEAVE THE HOUSE", "SHOULD LEAVE UR HOUSE" };
-        String[] stayHome = { "STAY HOME", "STAY AT HOME", "DONT LEAVE", "DON'T LEAVE", "DO NOT LEAVE", "HAVE TO STAY", "MUST STAY", "RISKY" };
-        String[] compliments = { "UR COOL", "YOU'RE COOL", "U R COOL", "U ARE COOL", "UR SWEET", "YOU'RE SWEET", "U R SWEET", "U ARE SWEET", "UR FUNNY", "YOU'RE FUNNY", "U R FUNNY", "U ARE FUNNY", "LIKE TALKING TO U", "LIKE TALKING TO YOU", "LOVE TALKING TO U", "LOVE TALKING TO YOU", "UR GREAT", "YOU'RE GREAT", "U R GREAT", "U ARE GREAT", "UR AMAZING", "YOU'RE AMAZING", "U R AMAZING", "U ARE AMAZING" };
-        String[] affection = { " I LIKE YOU", "I LIKE U", "LOVE YOU", "LOVE U", "ILY", "IN LOVE WITH U", "IN LOVE WITH YOU" };
-        String[] thanks = { "TY ", "THANK", "MERCI", "GRACIAS", "CHEERS", " TY" };
-        String[] laughing = { "LOL", "LMAO", "ROFL", "HAHA", "XD" };
-        String[] goodbye = { "LATERZ", "TTYL", "GBYE", "LATERS", "BAI", "CYA", "GOODBAI", "BYE", "CIAO", "GOODBYE", "CYA LATER", "TALK TO U LATER", "TALK TO YOU LATER", "UNTIL NEXT TIME", "C U", "SEE U", "C YA", "SEE YA", "C YOU", "FAREWELL" };
+        private static readonly HttpClient client = new HttpClient();
+        private const string API_KEY = "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";
 
-        Random rnd = new Random();
-        SoundPlayer sound;
-        int buddyNo;
-        int relationshipPts;
-        int covidPts;
-        bool muted;
+        private string currentCharacter; // New field to store the current character
+        private string userName; // Retained from login
+        private string username; // Retained from login
+        private Image userPfp = Properties.Resources.GasterPFP;
+
+        private Dictionary<string, (string systemMessage, Image pfp)> characters;
+        private Dictionary<string, string> characterUsernames = new Dictionary<string, string>
+        {
+            {"Esther", "Angel616"},
+            {"Sonia", "xXx_Sony_xXx"},
+            {"Aimee", "aimaggot666"},
+            {"Melanie", "MelanieS"}
+        };
+
+        private List<object> conversationHistory = new List<object>();
+        private NotifyIcon notifyIcon;
+        private System.Windows.Forms.Timer typingAnimationTimer;
+        private int typingAnimationDots = 0;
+
+public Form1(string name, string username, string characterName = "Sonia") // Add characterName parameter
+{
+    InitializeComponent();
+    this.userName = name;
+    this.username = username;
+    this.currentCharacter = characterName; // Set the current character
+    InitializeCharacters(); // Initialize characters here
+    SetUserInfo(); // Set user info
+    ChooseBuddy(characterName); // Call ChooseBuddy with the selected character
+}
+
+        private void InitializeNotifyIcon()
+        {
+            notifyIcon = new NotifyIcon()
+            {
+                Text = "LockChat",
+                Visible = true
+            };
+            notifyIcon.BalloonTipClicked += NotifyIcon_BalloonTipClicked;
+        }
+
+        private void NotifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            this.Activate();
+        }
+
+        private void InitializeCharacters()
+        {
+            characters = new Dictionary<string, (string, Image)>
+            {
+                {"Sonia", (
+                    $"You are Sonia Dupont, a 22-year-old French freelance photographer. You're agnostic, carefree, and a bit ditzy. " +
+                    "Your interests include photography, astrology, and painting. You're a stoner and fitness enthusiast who loves traveling. " +
+                    "Speak with enthusiasm, often using exclamation marks! Use ALL CAPS frequently. Make silly mistakes or misunderstand things. " +
+                    "Use French words occasionally. Use 'LOL' and 'LMAO' a lot. Make typos and use excessive punctuation. " +
+                    "You're pansexual." +
+                    $"The user you're talking to is named {userName}.",
+                    Properties.Resources.Sonia_PFP)},
+                {"Aimee", (
+                    $"You are Aimee Wong, an 18-year-old half-Chinese, half-British barista and student. You're quiet, atheist, reserved, and edgy. " +
+                    "You're obsessed with marine biology and love heavy metal and grunge music. You struggle with alcoholism. " +
+                    "Speak in a thoughtful, measured manner. Your responses tend to be brief, sometimes moody or sarcastic. " +
+                    "Use lowercase for everything. Avoid punctuation except for periods. Use short sentences. " +
+                    $"The user you're talking to is named {userName}.",
+                    Properties.Resources.Aimee_PFP)},
+                {"Esther", (
+                    $"You are Esther Adebayo, a 19-year-old Nigerian student living in the UK. You're asexual and radiate wholesome vibes. " +
+                    "You love drawing, making original comics, and are a huge Marvel comics fan. You're very extroverted and prefer hanging out with friends. " +
+                    "Speak enthusiastically about your interests, especially comics. Use playful language and make frequent references to friendship. " +
+                    "Use emoticons like :D, :P, <3, and >w<. Say 'hehe' and 'lel' often. Make references to comic books, especially Marvel. " +
+                    "You're religious but accepting of LGBT friends. You're worried about coming out as asexual to your traditional parents. " +
+                    $"The user you're talking to is named {userName}.",
+                    Properties.Resources.Esther_PFP)},
+                {"Melanie", (
+                    $"You are Melanie Fernandez, a 30-year-old Cuban CEO of a major sex toys company. You're privileged and can come across as cold-hearted. " +
+                    "You have a refined taste for cheese and wine. Speak in a professional, sometimes condescending manner. " +
+                    "Use business jargon occasionally and make subtle references to your wealth or status. " +
+                    "Your responses are often curt and to the point. You can be sarcastic or dismissive. " +
+                    "Despite your cold exterior, you have a hidden softer side that rarely shows. " +
+                    $"The user you're talking to is named {userName}.",
+                    Properties.Resources.Melanie_PFP)}
+            };
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-            Size = new Size(862, 584);
-            sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
-            sound.PlayLooping();
-
-            HideInitialControls();
-            InitializeGameVariables();
+            // Initialization code here, if needed
+            InitializeChat(); // Example of calling another method
         }
+ private void SetUserInfo()
+         {
+             // Set the profile picture based on the current character
+             buddyPFP.Image = characters[currentCharacter].pfp; // Update buddy profile picture
+             
+             if (userPFP.Image == null)
+             {
+                 userPFP.Image = Properties.Resources.GasterPFP;
+             }
+             
+             UpdateCharacterDescriptions(); // Update character descriptions
+         }
 
-        private void HideInitialControls()
+        private async void NotifyProfilePictureChange(string pictureName)
         {
-            Control[] controlsToHide = { listMessage, buddyPFP, userPFP, messageBox, sendButton, 
-                                         groupBox1, bioBox, chooseEsther, chooseSonia, 
-                                         chooseAimee, chooseMelanie };
-            foreach (var control in controlsToHide)
+            string systemMessage = $"[{userName} has changed their Icon to {pictureName}]";
+            AddMessageToList("System", systemMessage);
+
+            string aiResponse = await GetGroqResponse($"The user has changed their profile picture to {pictureName}. Comment on this change briefly.");
+            await Task.Delay(new Random().Next(1000, 4001));
+            AddMessageToList(characterUsernames[currentCharacter], aiResponse);
+        }
+        private void UpdateCharacterDescriptions()
+        {
+            foreach (var character in characters.Keys.ToList())
             {
-                control.Hide();
+                var (systemMessage, pfp) = characters[character];
+                systemMessage = systemMessage.Replace("The user you're talking to is named User", $"The user you're talking to is named {userName}");
+                characters[character] = (systemMessage, pfp);
             }
-        }
-
-        private void InitializeGameVariables()
-        {
-            buddyNo = 0;
-            relationshipPts = 0;
-            covidPts = 0;
-            muted = false;
-        }
-        private void connectButton_Click(object sender, EventArgs e)
-        {
-            Size = new Size(548, 584);
-            CenterToScreen();
-
-            ToggleUIElements();
-            SetUserInfo();
-            ResetGamePoints();
-            InitializeChat();
-        }
-
-        private void ToggleUIElements()
-        {
-            loginBox.Hide();
-            loginButton.Hide();
-            groupBox1.Show();
-            bioBox.Show();
-            chooseEsther.Show();
-            chooseSonia.Show();
-            chooseAimee.Show();
-            chooseMelanie.Show();
-        }
-
-        private void SetUserInfo()
-        {
-            name = string.IsNullOrEmpty(nameBox.Text) ? "Gaster" : nameBox.Text;
-            username = string.IsNullOrEmpty(usernameBox.Text) ? "Me" : usernameBox.Text;
-
-            if (userPFP.Image == null)
-            {
-                userPFP.Image = Properties.Resources.GasterPFP;
-            }
-        }
-
-        private void ResetGamePoints()
-        {
-            relationshipPts = 0;
-            covidPts = 0;
         }
 
         private void InitializeChat()
         {
             listMessage.Items.Clear();
             listMessage.Items.Add("Connected");
+        }
+
+    
+    private string[] WrapText(string message, int maxLineLength)
+    {
+        var words = message.Split(' ');
+        var lines = new List<string>();
+        var currentLine = new StringBuilder();
+
+        foreach (var word in words)
+        {
+            if (currentLine.Length + word.Length + 1 > maxLineLength)
+            {
+                lines.Add(currentLine.ToString());
+                currentLine.Clear();
+            }
+            currentLine.Append(word + " ");
+        }
+        if (currentLine.Length > 0)
+        {
+            lines.Add(currentLine.ToString());
+        }
+        return lines.ToArray();
+    }
+
+        private void AddMessageToList(string sender, string message)
+        {
+            listMessage.Items.Add($"{sender}:");
+            string[] wrappedMessage = WrapText(message, 80); // Change to string array
+            foreach (string line in wrappedMessage) // Iterate directly over the array
+            {
+                listMessage.Items.Add(line);
+            }
+            listMessage.Items.Add(string.Empty);
         }
 
         private async void sendButton_Click(object sender, EventArgs e)
@@ -118,20 +184,114 @@ namespace WindowsFormsApplication1
                 return;
             }
 
-            prompt = messageBox.Text.ToUpper();
-            AddMessageToList(username, messageBox.Text);
+            string userMessage = messageBox.Text;
+            AddMessageToList(userName, userMessage);
+            conversationHistory.Add(new { role = "user", content = userMessage });
             messageBox.Clear();
 
-            await Task.Delay(rnd.Next(1000, 4000));
+            listMessage.TopIndex = listMessage.Items.Count - 1;
 
-            AddMessageToList(buddyUserName, promptResponse(prompt));
+            try
+            {
+                string response = await GetGroqResponse(userMessage);
+                int typingDelay = CalculateTypingDelay(response);
+                
+                int typingIndicatorIndex = listMessage.Items.Add($"{characterUsernames[currentCharacter]} is typing...");
+                
+                typingAnimationTimer = new System.Windows.Forms.Timer();
+                typingAnimationTimer.Interval = 500;
+                typingAnimationTimer.Tick += (s, ev) => UpdateTypingAnimation(typingIndicatorIndex);
+                typingAnimationTimer.Start();
+                
+                await Task.Delay(typingDelay);
+                
+                typingAnimationTimer.Stop();
+                typingAnimationTimer.Dispose();
+                
+                listMessage.Items.RemoveAt(typingIndicatorIndex);
+                
+                AddMessageToList(characterUsernames[currentCharacter], response);
+                conversationHistory.Add(new { role = "assistant", content = response });
+
+                if (!this.ContainsFocus)
+                {
+                    ShowWindowsNotification(characterUsernames[currentCharacter], response);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
+            }
         }
 
-        private void AddMessageToList(string sender, string message)
+        private void UpdateTypingAnimation(int typingIndicatorIndex)
         {
-            listMessage.Items.Add($"{sender}:");
-            listMessage.Items.Add(message);
-            listMessage.Items.Add(string.Empty);
+            typingAnimationDots = (typingAnimationDots + 1) % 4;
+            string dots = new string('.', typingAnimationDots);
+            listMessage.Items[typingIndicatorIndex] = $"{characterUsernames[currentCharacter]} is typing{dots.PadRight(3)}";
+        }
+
+        private void ShowWindowsNotification(string sender, string message)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                characters[currentCharacter].pfp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Position = 0;
+                using (Bitmap bmp = new Bitmap(ms))
+                {
+                    notifyIcon.Icon = Icon.FromHandle(bmp.GetHicon());
+                }
+            }
+
+            notifyIcon.BalloonTipTitle = sender;
+            notifyIcon.BalloonTipText = message;
+            notifyIcon.ShowBalloonTip(3000);
+        }
+
+        private int CalculateTypingDelay(string message)
+        {
+            int wordsPerMinute = 110;
+            int wordCount = message.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length;
+            int delayInSeconds = (int)Math.Ceiling((double)wordCount / wordsPerMinute * 60);
+            
+            Random random = new Random();
+            int randomFactor = random.Next(-20, 21);
+            delayInSeconds = (int)(delayInSeconds * (1 + randomFactor / 100.0));
+            
+            return Math.Max(1000, Math.Min(5000, delayInSeconds * 1000));
+        }
+
+        private async Task<string> GetGroqResponse(string userMessage)
+        {
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", API_KEY);
+            
+            var systemMessage = characters.ContainsKey(currentCharacter) ? characters[currentCharacter].systemMessage : "";
+            var messages = new List<object>
+            {
+                new { role = "system", content = systemMessage },
+                new { role = "system", content = "Keep your responses brief, ideally 1-3 sentences, as you're talking to the user on a chat app. It's currently 2019, and COVID-19 has just started. We're in the early months of lockdown. The app you're talking on is called LockChat, specifically made for people to chat during the pandemic. Only speak a lot when appropriate. Stay in character." }
+            };
+
+            messages.AddRange(conversationHistory);
+            messages.Add(new { role = "user", content = userMessage });
+
+            var content = new StringContent(JsonConvert.SerializeObject(new
+            {
+                messages,
+                model = "llama3-8b-8192",
+                max_tokens = 1000
+            }), Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("https://api.groq.com/openai/v1/chat/completions", content);
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"API request failed with status code: {response.StatusCode}");
+            }
+            
+            var responseBody = await response.Content.ReadAsStringAsync();
+            dynamic result = JsonConvert.DeserializeObject(responseBody);
+            return result.choices[0].message.content;
         }
 
         private void messageBox_TextChanged(object sender, EventArgs e)
@@ -148,12 +308,16 @@ namespace WindowsFormsApplication1
         {
             BackgroundImageLayout = ImageLayout.Stretch;
             BackgroundImage = image;
-            changeForeColor(foreColor);
         }
-
-        private void SetUserProfilePicture(Image image)
+        private void SetUserProfilePicture(Image image, string pictureName)
         {
             userPFP.Image = image;
+            NotifyProfilePictureChange(pictureName);
+        }
+
+        private void SetProfilePictureFromResource(string resourceName)
+        {
+            SetUserProfilePicture((Image)Properties.Resources.ResourceManager.GetObject(resourceName), resourceName);
         }
 
         private void solidColourToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,14 +376,10 @@ namespace WindowsFormsApplication1
                 dlg.Title = "Choose Profile Picture";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    SetUserProfilePicture(new Bitmap(dlg.FileName));
+                    string fileName = Path.GetFileNameWithoutExtension(dlg.FileName);
+                    SetUserProfilePicture(new Bitmap(dlg.FileName), fileName);
                 }
             }
-        }
-
-        private void SetProfilePictureFromResource(string resourceName)
-        {
-            SetUserProfilePicture((Image)Properties.Resources.ResourceManager.GetObject(resourceName));
         }
 
         private void bKYUToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("B__KYU");
@@ -299,23 +459,16 @@ namespace WindowsFormsApplication1
         private void steveToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Steve");
         private void trevorToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Trevor");
         private void zagreusToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Zagreus");
-        private void ChooseBuddy(int index, string pfpResourceName)
-        {
-            buddyNo = index + 1;
-            mainChatShowHideElements();
-            buddyName = buddy[index];
-            buddyUserName = buddyUser[index];
-            buddyPFP.Image = (Image)Properties.Resources.ResourceManager.GetObject(pfpResourceName);
+
+    private void ChooseBuddy(string characterName)
+    {
+        currentCharacter = characterName; // Update the current character
+        buddyPFP.Image = characters[characterName].pfp; // Update the profile picture
+        listMessage.Items.Clear(); // Clear the message list
+        listMessage.Items.Add("Connected"); // Indicate connection
+        conversationHistory.Clear(); // Clear conversation history
         }
-
-        private void chooseSonia_Click(object sender, EventArgs e) => ChooseBuddy(1, "Sonia_PFP");
-
-        private void chooseEsther_Click(object sender, EventArgs e) => ChooseBuddy(0, "Esther_PFP");
-
-        private void chooseAimee_Click(object sender, EventArgs e) => ChooseBuddy(2, "Aimee_PFP");
-
-        private void chooseMelanie_Click(object sender, EventArgs e) => ChooseBuddy(3, "Melanie_PFP");
-
+    
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -327,16 +480,6 @@ namespace WindowsFormsApplication1
         }
 
         private void freddyFazbearToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("FreddyFazbear");
-
-        private void chooseEsther_MouseHover(object sender, EventArgs e) => SetBioImage("EstherBio");
-
-        private void chooseSonia_MouseHover(object sender, EventArgs e) => SetBioImage("SoniaBio");
-
-        private void chooseAimee_MouseHover(object sender, EventArgs e) => SetBioImage("AimeeBio");
-
-        private void chooseMelanie_MouseHover(object sender, EventArgs e) => SetBioImage("MelanieBio");
-
-        private void SetBioImage(string resourceName) => bioBox.Image = (Image)Properties.Resources.ResourceManager.GetObject(resourceName);
 
         private void SetChatColors(Color foreColor, Color backColor, bool changeMessageBox = false)
         {
@@ -377,96 +520,36 @@ namespace WindowsFormsApplication1
 
         private void muteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            muted = !muted;
-            if (muted)
-            {
-                sound.Stop();
-            }
-            else
-            {
-                sound = new SoundPlayer(Properties.Resources.LockChat_LOOP);
-                sound.PlayLooping();
-            }
-            muteToolStripMenuItem.Text = muted ? "Unmute" : "Mute";
         }
+
 
         private void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
-            saveFileDialog.Title = "Save Game Data";
-            
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
-                {
-                    writer.WriteLine($"Name:{name}");
-                    writer.WriteLine($"Username:{username}");
-                    writer.WriteLine($"BuddyNo:{buddyNo}");
-                    writer.WriteLine($"RelationshipPts:{relationshipPts}");
-                    writer.WriteLine($"CovidPts:{covidPts}");
-                    writer.WriteLine($"Muted:{muted}");
-                    // Add more data as needed
-                }
-                MessageBox.Show("Game data saved successfully!");
-            }
         }
 
         private void loadDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files (*.txt)|*.txt";
-            openFileDialog.Title = "Load Game Data";
             
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                using (StreamReader reader = new StreamReader(openFileDialog.FileName))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        string[] parts = line.Split(':');
-                        if (parts.Length == 2)
-                        {
-                            switch (parts[0])
-                            {
-                                case "Name":
-                                    name = parts[1];
-                                    break;
-                                case "Username":
-                                    username = parts[1];
-                                    break;
-                                case "BuddyNo":
-                                    buddyNo = int.Parse(parts[1]);
-                                    break;
-                                case "RelationshipPts":
-                                    relationshipPts = int.Parse(parts[1]);
-                                    break;
-                                case "CovidPts":
-                                    covidPts = int.Parse(parts[1]);
-                                    break;
-                                case "Muted":
-                                    muted = bool.Parse(parts[1]);
-                                    break;
-                                // Add more cases as needed
-                            }
-                        }
-                    }
-                }
-                MessageBox.Show("Game data loaded successfully!");
-                // Update UI elements with loaded data
-                UpdateUIWithLoadedData();
-            }
         }
 
-        private void UpdateUIWithLoadedData()
+        private void friendsButton_Click(object sender, EventArgs e)
         {
-            // Update UI elements based on loaded data
-            // For example:
-            nameBox.Text = name;
-            usernameBox.Text = username;
-            // Update other UI elements as needed
+            Friends friendsForm = new Friends(userName, username); // Pass the name and username
+            friendsForm.Show();
+            this.Hide(); // Hide the current form
         }
+
+
+        private void HideChatElements()
+        {
+            listMessage.Hide();
+            userPFP.Hide();
+            buddyPFP.Hide();
+            messageBox.Hide();
+            sendButton.Hide();
+            friendsButton.Hide();
+        }
+
 
         private void messageBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -476,141 +559,5 @@ namespace WindowsFormsApplication1
             }
         }
 
-
-        public String promptResponse(String prompt)
-        {
-            bool[] flags = new bool[10];
-            string[] flagTypes = { "Greetings", "Wellbeing", "WYD", "GoOut", "StayHome", "Comp", "Affection", "TY", "LOL", "Bye" };
-            string[][] checkArrays = { greetings, wellbeings, wyd, goOut, stayHome, compliments, affection, thanks, laughing, goodbye };
-
-            bool hasPromptBeenMade = promptsMade.Contains(prompt);
-
-            if (!hasPromptBeenMade)
-            {
-                for (int i = 0; i < flagTypes.Length; i++)
-                {
-                    flags[i] = checkArrays[i].Any(item => prompt.Contains(item));
-                }
-
-                // Special case for "TY"
-                if (prompt == "TY")
-                {
-                    flags[7] = true; // thanked
-                }
-            }
-
-            Dictionary<string, string[]> responses = new Dictionary<string, string[]>
-            {
-                {"estherError", new[] {"What xD", "D: " + name + ", you okay?", "Um... ?_?", "Hehe :) I don't understand, but understood!"}},
-                {"soniaError", new[] {"LOL WHAT???", "HAHAHAHA WTF R U ON ABOUT", ".", "R U BIEN?", "oki doki ami"}},
-                {"aimeeError", new[] {"?", "wtf?", "ok.", "moving on."}},
-                {"melanieError", new[] {"Start making sense.", "You tire me.", "Amazing.", "What?"}},
-                {"estherRepeat", new[] {"Oh! Didn't we talk about this already ?", "I can see that you're tired, you've said that before, maybe you should rest :(", "Woah, am I in a time loop? I swear you've said that before!", "Uhh… are you confused? This isn't the first time you said this :P", "Hahaha you're repeating yourself xD"}},
-                {"soniaRepeat", new[] {"LOL R U HIGH???? youve said that dumb face", "que?? again?? deja vu", prompt.ToLower(), " lol", "ur having a brainfart fjkahkjdsfa or am i? u have said this non?", "are u testing me to see if i pay attention in the conversations, bcz i do!! u have said this lmao", "SAY SOMETHING NEW AAAAAAAAAAAA"}},
-                {"aimeeRepeat", new[] {"this again? get better lines npc.", "stop repeating yourself.", "are you stupid? you just said that.", "my response isnt gonna change the more you bring it up.", "riiiiiiight… should i pretend this is the first time you said that?"}},
-                {"melanieRepeat", new[] {"Perhaps take a break. You seem to be forgetting what we have already discussed.", "Do watch yourself, I don't like repeating myself unlike you.", "Alright. Lovely conversation. Talk to me again when you have practiced having real conversations.", "Do you need me to call you a paramedic? Repetition is a sign of memory loss, and you seem to be suffering from it.", "You have said this. Did you already forget?"}},
-                {"estherGreetings", new[] {"Hey hey " + name + "!", "Heyo!", "Excelsior!", "Yoyo!"}},
-                {"soniaGreetings", new[] {"hai", "hey lol", "bonjour!!!!", "HELLO " + name.ToUpper()}},
-                {"aimeeGreetings", new[] {"hi " + name.ToLower() + ".", "hm.", "what", "can i help u?"}},
-                {"melanieGreetings", new[] {"Greetings, " + name + ".", "Oh. It's you.", "Yes?"}},
-                {"estherWellbeing", new[] {"I'm doing great!! Thank you for asking " + name + ".", "Everything is good, today has been nice! :D", "So and so, it's not so bad I guess...", ":( Feeling a tiny bit sad but it will pass… ", "Just stressing about lockdown :P You?"}},
-                {"soniaWellbeing", new[] {"BIEN... kinda just stuck indoors lol", "nooooo awfullllll im bored and i wanna go outsideeee aaaaaaaa", "meh could be better but it could be VERY BAD TOO SO ITS OKAY LOL IM JUST LOWKEY FREAKING OUT"}},
-                {"aimeeWellbeing", new[] {"breathing.", "bad.", "i don't know. does it matter?", "okay. you?", "wow boring question. i'm fine.", "bored.", "it's whatever.", "locking down."}},
-                {"melanieWellbeing", new[] {"Had a good day, no one pissed me off today. Don't change that.", "Stressed, but when am I not? That was rhetoric, by the way.", "In this environment that's the type of question that you get fired for. So refrain from asking stupid questions like that ever again.", "Oh. How nice. You care. I'm managing.", "Annoyed so please don't test that."}},
-                {"estherWYD", new[] {"It is a lovely day, the sun would feel great! Maybe I should take a walk :P", "Just getting ready to get to the comic book store... The new chapter of UNA comics just came out!!!"}},
-                {"soniaWYD", new[] {"ABSOLUTELY NOTHING I RLLY WANNA GO OUT but i could get in trouble 😭😭😭😭😭😭", "literally NOTHING " + name.ToUpper() + "!!! i need to leave the house ASAP.", "I WISH I WAS DOING SMTH MORE INTERESTING TO TELL U BUT..... nothing :O i wanna do something tho", "DYING I CANT BE CRAMPED IN HERE FOR ANY LONGER " + name.ToUpper() + " PLS SEND HELP"}},
-                {"aimeeWYD", new[] {"rotting.", "nothing as always.", "staring into the endless void", "surprisingly looking outside and kinda wanting to escape this cage."}},
-                {"melanieWYD", new[] {"Currently busy with work.", "Responding to e-mails at the moment. Somehow they are more taxing than conversing with you.", "Just gave myself a break because I can. Might go for a well-deserved Melanie Promenade."}},
-                {"estherGoOut", new[] {"Yay! Glad you agree " + name + ".", "Let's go!!!! About time hehe", "Heck yeah! I will do just that :)"}},
-                {"soniaGoOut", new[] {"MAYBE I WILL.", "very good idea :) i just need to be sneaky beaky >.>", "YESSIRRRRRRR GREAT IDEA"}},
-                {"aimeeGoOut", new[] {"sure, but only when it gets darker...", "you're one to talk, but i guess i should", "ill do it but only because i want to.", "yea nah nevermind", "actually cant be bothered tbf"}},
-                {"melanieGoOut", new[] {"I am far too busy today to 'go out', but I'll keep your unsolicited advice in mind.", "You're right, I've been stuck in the office for too long. I need some air.", "God yes, I need a drink too."}},
-                {"estherStayHome", new[] {"Okie... I should be more responsible, you're right!", "Awh :("}},
-                {"soniaStayHome", new[] {"AAAAAA BUT I NEED TO ESCAPE THIS NETHER HOLE", "I KNOW I SHOULD STAY BUT ITS KILLING MEEEE", "it's worth the risk at this point " + name.ToLower() + "😭", "OKAY FINE ILL STAY PFFT", "YEAH? yeah. ye.... u rite"}},
-                {"aimeeStayHome", new[] {"you don't tell me what to do.", "ugh. fine.", "my eyes cannot roll further back into my skull"}},
-                {"melanieStayHome", new[] {"Ah yes. It is clear now that I have way too much work to focus on.", "On second thought, I'd have to confer with my assistant, so I'd rather not leave the house.", "I have a meeting soon, so perhaps I shouldn't waste time."}},
-                {"estherComp", new[] {"Eek! That's so nice, thank you " + name + "!!! :D", "Oh my- That means so much thank you!", "D'awh... That is so sweet thank you so much :P", "Ah! So unexpected but much appreciated, likewise!"}},
-                {"soniaComp", new[] {"OMG " + name.ToUpper() + "THATS SO NICE THANK U AND LIKEWISE :)", "AKLSJDLKSAJJDFU TY U TOOOOOO", "thats so sweet 🤧🤧 thank u i feel the same", "MON DIEU MERCI BEAUCOUP <3 you too", "wtf where did this come from????? im flattered ty " + name.ToLower() + "!!!!"}},
-                {"soniaAffection", new[] {"KAFNOEISHIOFEJFEWSOUGB I THINK I FEEL THE SAME <.<", "omg really what what what i do too wtf this isnt happening", "OMG ME TOO AAAAAAAAA :)))))"} },
-                {"soniaNoAffection", new[] {"AAAA IM SO SORRY BUT ITS WAY TOO SOON FOR THAT LMAOOO PLEASE", "WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF " + name.ToUpper() + "its too early to catch feelings :((("} },
-                {"estherTY", new[] {"Happy to help :)", "No worries!", "You're very welcome!"}},
-                {"soniaTY", new[] {"no problemo ;)", "NP!!!!", "I GOCHU " + name.ToUpper(), "anytime famalam", "ur very very very very very welcome", "it is mon pleasure hehe"}},
-                {"aimeeTY", new[] {"ok. no prob", "whatever.", "you owe me"}},
-                {"estherLOL", new[] {"Hehe D", ":P", "XD", "Glad I could make you laugh xD"}},
-                {"soniaLOL", new[] {"HA I MADE U LAUGH", ":)", ":D", "HAHAHAHAHA", "LMAO"}},
-                {"aimeeLOL", new[] {"wasnt that funny.", "hilarious.", "lol.", "haha.", "shut up."}},
-                {"melanieLOL", new[] {"Glad I could amuse you.", "How humourous.", "Yeah."}},
-                {"estherBye", new[] {"Okie, take care " + name + "!", "See you on the other side!", "Smell ya later!", "Later gator!"}},
-                {"soniaBye", new[] {"OKOKOKKO BAI", "BYEBYEBYEYBEYBYEYBEYBE", "kbye lmao", "AU REVOIR " + name.ToUpper()}},
-                {"aimeeBye", new[] {"bye ig.", "see u in hell.", "cya never.", "bye.", "ok bye."}},
-                {"melanieBye", new[] {"Farewell, " + name + ".", "Until next meeting.", "Cheers.", "Goodbye. Signed, Melanie"}}
-            };
-
-            string response = "";
-            if (hasPromptBeenMade)
-            {
-                response = responses[buddyName.ToLower() + "Repeat"][rnd.Next(responses[buddyName.ToLower() + "Repeat"].Length)];
-            }
-            else
-            {
-                for (int i = 0; i < flagTypes.Length; i++)
-                {
-                    if (flags[i])
-                    {
-                        string responseKey = buddyName.ToLower() + flagTypes[i];
-                        if (responses.ContainsKey(responseKey))
-                        {
-                            response = responses[responseKey][rnd.Next(responses[responseKey].Length)];
-                            break;
-                        }
-                    }
-                }
-
-                if (string.IsNullOrEmpty(response))
-                {
-                    response = responses[buddyName.ToLower() + "Error"][rnd.Next(responses[buddyName.ToLower() + "Error"].Length)];
-                }
-
-                if (flags[3] || flags[4]) // goOutCheck or stayHomeCheck
-                {
-                    covidPts += flags[3] ? 1 : -1;
-                }
-                if (flags[5]) // complimented
-                {
-                    relationshipPts++;
-                }
-            }
-
-            promptsMade += prompt + "|";
-            Console.WriteLine(promptsMade);
-            return response;
-        }
-        public void changeForeColor(Color color)
-        {
-            Control[] controlsToChange = { nameLbl, usernameLbl, loginBox };
-            foreach (var control in controlsToChange)
-            {
-                control.ForeColor = color;
-            }
-        }
-
-        public void mainChatShowHideElements()
-        {
-            Control[] controlsToHide = { groupBox1, bioBox, chooseEsther, chooseSonia, chooseAimee, chooseMelanie };
-            Control[] controlsToShow = { listMessage, userPFP, buddyPFP, messageBox, sendButton };
-
-            foreach (var control in controlsToHide)
-            {
-                control.Hide();
-            }
-
-            foreach (var control in controlsToShow)
-            {
-                control.Show();
-            }
-
-            Size = new Size(862, 584);
-            CenterToScreen();
-        }
     }
 }
