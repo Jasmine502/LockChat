@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class Form1
+    partial class Chat
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chat));
             this.listMessage = new System.Windows.Forms.ListBox();
             this.messageBox = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rosesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,7 +142,6 @@
             this.pinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buddyPFP = new System.Windows.Forms.PictureBox();
             this.userPFP = new System.Windows.Forms.PictureBox();
@@ -193,7 +189,6 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -201,36 +196,12 @@
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveDataToolStripMenuItem,
-            this.loadDataToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // saveDataToolStripMenuItem
-            // 
-            this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.saveDataToolStripMenuItem.Text = "Save Data";
-            this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
-            // 
-            // loadDataToolStripMenuItem
-            // 
-            this.loadDataToolStripMenuItem.Name = "loadDataToolStripMenuItem";
-            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.loadDataToolStripMenuItem.Text = "Load Data";
-            this.loadDataToolStripMenuItem.Click += new System.EventHandler(this.loadDataToolStripMenuItem_Click);
-            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backgroundToolStripMenuItem,
             this.profilePictureToolStripMenuItem,
             this.textColourToolStripMenuItem,
-            this.muteToolStripMenuItem,
             this.resetToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -247,7 +218,7 @@
             this.solidColourToolStripMenuItem,
             this.customToolStripMenuItem});
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             // 
             // rosesToolStripMenuItem
@@ -256,7 +227,7 @@
             this.rosesToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.RosesBG;
             this.rosesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.rosesToolStripMenuItem.Name = "rosesToolStripMenuItem";
-            this.rosesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.rosesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rosesToolStripMenuItem.Text = "Roses";
             this.rosesToolStripMenuItem.Click += new System.EventHandler(this.rosesToolStripMenuItem_Click);
             // 
@@ -266,7 +237,7 @@
             this.cloudsToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SkyBG;
             this.cloudsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.cloudsToolStripMenuItem.Name = "cloudsToolStripMenuItem";
-            this.cloudsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.cloudsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cloudsToolStripMenuItem.Text = "Sky";
             this.cloudsToolStripMenuItem.Click += new System.EventHandler(this.cloudsToolStripMenuItem_Click);
             // 
@@ -276,7 +247,7 @@
             this.spaceToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SpaceBG;
             this.spaceToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.spaceToolStripMenuItem.Name = "spaceToolStripMenuItem";
-            this.spaceToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.spaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.spaceToolStripMenuItem.Text = "Space";
             this.spaceToolStripMenuItem.Click += new System.EventHandler(this.spaceToolStripMenuItem_Click);
             // 
@@ -285,7 +256,7 @@
             this.underwaterToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.UnderwaterBG;
             this.underwaterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.underwaterToolStripMenuItem.Name = "underwaterToolStripMenuItem";
-            this.underwaterToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.underwaterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.underwaterToolStripMenuItem.Text = "Underwater";
             this.underwaterToolStripMenuItem.Click += new System.EventHandler(this.underwaterToolStripMenuItem_Click);
             // 
@@ -296,21 +267,21 @@
             this.meadowToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.meadowToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.meadowToolStripMenuItem.Name = "meadowToolStripMenuItem";
-            this.meadowToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.meadowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.meadowToolStripMenuItem.Text = "Meadow";
             this.meadowToolStripMenuItem.Click += new System.EventHandler(this.meadowToolStripMenuItem_Click);
             // 
             // solidColourToolStripMenuItem
             // 
             this.solidColourToolStripMenuItem.Name = "solidColourToolStripMenuItem";
-            this.solidColourToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.solidColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.solidColourToolStripMenuItem.Text = "Solid Colour";
             this.solidColourToolStripMenuItem.Click += new System.EventHandler(this.solidColourToolStripMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.customToolStripMenuItem.Text = "Custom...";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
             // 
@@ -330,7 +301,7 @@
             this.videoGamesToolStripMenuItem,
             this.customToolStripMenuItem1});
             this.profilePictureToolStripMenuItem.Name = "profilePictureToolStripMenuItem";
-            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profilePictureToolStripMenuItem.Text = "Profile Picture";
             // 
             // albumArtToolStripMenuItem
@@ -343,7 +314,7 @@
             this.stargazingToolStripMenuItem,
             this.uNAToolStripMenuItem});
             this.albumArtToolStripMenuItem.Name = "albumArtToolStripMenuItem";
-            this.albumArtToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.albumArtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.albumArtToolStripMenuItem.Text = "Album Art";
             // 
             // bKYUToolStripMenuItem
@@ -400,7 +371,7 @@
             this.sailorMoonToolStripMenuItem,
             this.yunoToolStripMenuItem});
             this.animeToolStripMenuItem.Name = "animeToolStripMenuItem";
-            this.animeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.animeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.animeToolStripMenuItem.Text = "Anime";
             // 
             // ashToolStripMenuItem
@@ -471,7 +442,7 @@
             this.loveHeartToolStripMenuItem,
             this.pirateSKullToolStripMenuItem});
             this.iconsToolStripMenuItem.Name = "iconsToolStripMenuItem";
-            this.iconsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.iconsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.iconsToolStripMenuItem.Text = "Icons";
             // 
             // catToolStripMenuItem
@@ -538,7 +509,7 @@
             this.mountainsToolStripMenuItem,
             this.sunsetToolStripMenuItem});
             this.landscapeToolStripMenuItem.Name = "landscapeToolStripMenuItem";
-            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.landscapeToolStripMenuItem.Text = "Landscape";
             // 
             // beachToolStripMenuItem
@@ -584,7 +555,7 @@
             this.trollfaceToolStripMenuItem,
             this.whiteDrakeToolStripMenuItem});
             this.memesToolStripMenuItem.Name = "memesToolStripMenuItem";
-            this.memesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.memesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.memesToolStripMenuItem.Text = "Memes";
             // 
             // daBabyToolStripMenuItem
@@ -641,7 +612,7 @@
             this.sIUUUToolStripMenuItem.Name = "sIUUUToolStripMenuItem";
             this.sIUUUToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.sIUUUToolStripMenuItem.Text = "SIUUU";
-            this.sIUUUToolStripMenuItem.Click += new System.EventHandler(this.sIUUUToolStripMenuItem_Click);
+            this.sIUUUToolStripMenuItem.Click += new System.EventHandler(this.sIUUUUToolStripMenuItem_Click);
             // 
             // spongeMockToolStripMenuItem
             // 
@@ -678,7 +649,7 @@
             this.theMatrixToolStripMenuItem,
             this.toyStoryToolStripMenuItem});
             this.moviesToolStripMenuItem.Name = "moviesToolStripMenuItem";
-            this.moviesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.moviesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.moviesToolStripMenuItem.Text = "Movies";
             // 
             // findingNemoToolStripMenuItem
@@ -762,7 +733,7 @@
             this.rainbowToolStripMenuItem,
             this.transgenderToolStripMenuItem});
             this.prideToolStripMenuItem.Name = "prideToolStripMenuItem";
-            this.prideToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.prideToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prideToolStripMenuItem.Text = "Pride";
             // 
             // asexualToolStripMenuItem
@@ -821,7 +792,7 @@
             this.footballToolStripMenuItem,
             this.tennisToolStripMenuItem});
             this.sportsToolStripMenuItem.Name = "sportsToolStripMenuItem";
-            this.sportsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.sportsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sportsToolStripMenuItem.Text = "Sports";
             // 
             // basketballToolStripMenuItem
@@ -853,7 +824,7 @@
             this.supermanToolStripMenuItem,
             this.theFlashToolStripMenuItem});
             this.superheroesToolStripMenuItem.Name = "superheroesToolStripMenuItem";
-            this.superheroesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.superheroesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.superheroesToolStripMenuItem.Text = "Superheroes";
             // 
             // batmanToolStripMenuItem
@@ -891,7 +862,7 @@
             this.motorcycleToolStripMenuItem,
             this.planeToolStripMenuItem});
             this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
-            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vehiclesToolStripMenuItem.Text = "Vehicles";
             // 
             // carToolStripMenuItem
@@ -933,7 +904,7 @@
             this.trevorToolStripMenuItem,
             this.zagreusToolStripMenuItem});
             this.videoGamesToolStripMenuItem.Name = "videoGamesToolStripMenuItem";
-            this.videoGamesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.videoGamesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.videoGamesToolStripMenuItem.Text = "Video Games";
             // 
             // arthurMorganToolStripMenuItem
@@ -1037,7 +1008,7 @@
             // customToolStripMenuItem1
             // 
             this.customToolStripMenuItem1.Name = "customToolStripMenuItem1";
-            this.customToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.customToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.customToolStripMenuItem1.Text = "Custom...";
             this.customToolStripMenuItem1.Click += new System.EventHandler(this.customToolStripMenuItem1_Click);
             // 
@@ -1053,7 +1024,7 @@
             this.blackToolStripMenuItem,
             this.whiteToolStripMenuItem});
             this.textColourToolStripMenuItem.Name = "textColourToolStripMenuItem";
-            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.textColourToolStripMenuItem.Text = "Text Colour";
             // 
             // redToolStripMenuItem
@@ -1103,6 +1074,7 @@
             this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
             this.blackToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.blackToolStripMenuItem.Text = "Black";
+            this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
             // 
             // whiteToolStripMenuItem
             // 
@@ -1111,17 +1083,10 @@
             this.whiteToolStripMenuItem.Text = "White";
             this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
             // 
-            // muteToolStripMenuItem
-            // 
-            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
-            this.muteToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.muteToolStripMenuItem.Text = "Mute";
-            this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
-            // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
@@ -1154,7 +1119,7 @@
             this.friendsButton.UseVisualStyleBackColor = true;
             this.friendsButton.Click += new System.EventHandler(this.friendsButton_Click);
             // 
-            // Form1
+            // Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1171,7 +1136,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(862, 584);
             this.MinimumSize = new System.Drawing.Size(510, 516);
-            this.Name = "Form1";
+            this.Name = "Chat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LockChat";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1292,9 +1257,6 @@
         private System.Windows.Forms.ToolStripMenuItem trevorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zagreusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem freddyFazbearToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem textColourToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
@@ -1304,7 +1266,6 @@
         private System.Windows.Forms.ToolStripMenuItem pinkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
         private System.Windows.Forms.Button friendsButton;
     }
 }

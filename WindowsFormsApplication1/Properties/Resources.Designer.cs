@@ -183,6 +183,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BirdBio {
+            get {
+                object obj = ResourceManager.GetObject("BirdBio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Bisexual {
             get {
                 object obj = ResourceManager.GetObject("Bisexual", resourceCulture);
@@ -243,6 +253,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ColtonBio {
+            get {
+                object obj = ResourceManager.GetObject("ColtonBio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DaBaby {
             get {
                 object obj = ResourceManager.GetObject("DaBaby", resourceCulture);
@@ -266,6 +286,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Doge {
             get {
                 object obj = ResourceManager.GetObject("Doge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EastonBio {
+            get {
+                object obj = ResourceManager.GetObject("EastonBio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -533,6 +563,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LilyBio {
+            get {
+                object obj = ResourceManager.GetObject("LilyBio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lockchat {
             get {
                 object obj = ResourceManager.GetObject("lockchat", resourceCulture);
@@ -775,6 +815,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap Rick_Roll {
             get {
                 object obj = ResourceManager.GetObject("Rick_Roll", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RobinBio {
+            get {
+                object obj = ResourceManager.GetObject("RobinBio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

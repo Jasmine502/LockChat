@@ -10,7 +10,8 @@
     <RootNamespace>WindowsFormsApplication1</RootNamespace>
     <AssemblyName>WindowsFormsApplication1</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <LangVersion>8.0</LangVersion> <!-- Added this line to specify C# language version -->
+    <LangVersion>8.0</LangVersion>
+    <!-- Added this line to specify C# language version -->
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -51,11 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="CharacterDescriptions.cs" />
+    <Compile Include="Chat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Chat.Designer.cs">
+      <DependentUpon>Chat.cs</DependentUpon>
     </Compile>
     <Compile Include="Friends.cs">
       <SubType>Form</SubType>
@@ -71,8 +73,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Chat.resx">
+      <DependentUpon>Chat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Friends.resx">
       <DependentUpon>Friends.cs</DependentUpon>
@@ -418,6 +420,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lockchat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BirdBio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColtonBio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EastonBio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LilyBio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RobinBio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

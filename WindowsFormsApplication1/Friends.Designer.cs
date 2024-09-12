@@ -33,6 +33,12 @@
             this.chooseMelanie = new System.Windows.Forms.Button();
             this.chooseAimee = new System.Windows.Forms.Button();
             this.buddyListGroupBox = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.bioBox = new System.Windows.Forms.PictureBox();
             this.buddyListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bioBox)).BeginInit();
@@ -77,7 +83,7 @@
             // chooseAimee
             // 
             this.chooseAimee.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chooseAimee.Location = new System.Drawing.Point(9, 107);
+            this.chooseAimee.Location = new System.Drawing.Point(6, 107);
             this.chooseAimee.Name = "chooseAimee";
             this.chooseAimee.Size = new System.Drawing.Size(139, 38);
             this.chooseAimee.TabIndex = 13;
@@ -88,6 +94,12 @@
             // 
             // buddyListGroupBox
             // 
+            this.buddyListGroupBox.Controls.Add(this.button6);
+            this.buddyListGroupBox.Controls.Add(this.button5);
+            this.buddyListGroupBox.Controls.Add(this.button4);
+            this.buddyListGroupBox.Controls.Add(this.button3);
+            this.buddyListGroupBox.Controls.Add(this.button2);
+            this.buddyListGroupBox.Controls.Add(this.button1);
             this.buddyListGroupBox.Controls.Add(this.bioBox);
             this.buddyListGroupBox.Controls.Add(this.chooseEsther);
             this.buddyListGroupBox.Controls.Add(this.chooseSonia);
@@ -100,6 +112,72 @@
             this.buddyListGroupBox.TabIndex = 17;
             this.buddyListGroupBox.TabStop = false;
             this.buddyListGroupBox.Text = "@name\'s Buddy List";
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(6, 442);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 29);
+            this.button6.TabIndex = 21;
+            this.button6.Text = "Lock Out";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(6, 371);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(139, 38);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "butterflygoflap❤";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.MouseHover += new System.EventHandler(this.lilyBtn_MouseHover);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(6, 327);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(139, 38);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "M O O N C H I L D";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.MouseHover += new System.EventHandler(this.robinBtn_MouseHover);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(6, 283);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(139, 38);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "bird";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.MouseHover += new System.EventHandler(this.birdBtn_MouseHover);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(6, 239);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(139, 38);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "gamer4life89";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.MouseHover += new System.EventHandler(this.coltonBtn_MouseHover);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 195);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 38);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "sk8rboy";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.MouseHover += new System.EventHandler(this.eastonBtn_MouseHover);
             // 
             // bioBox
             // 
@@ -115,6 +193,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 506);
             this.Controls.Add(this.buddyListGroupBox);
+            this.MaximumSize = new System.Drawing.Size(569, 545);
+            this.MinimumSize = new System.Drawing.Size(569, 545);
             this.Name = "Friends";
             this.Text = "Friends";
             this.buddyListGroupBox.ResumeLayout(false);
@@ -131,5 +211,11 @@
         private System.Windows.Forms.Button chooseMelanie;
         private System.Windows.Forms.Button chooseAimee;
         private System.Windows.Forms.GroupBox buddyListGroupBox;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }

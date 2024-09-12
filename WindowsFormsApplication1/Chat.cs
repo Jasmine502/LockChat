@@ -9,17 +9,19 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
+using WindowsFormsApplication1;
+
 
 namespace WindowsFormsApplication1
 {
-    public partial class Form1 : Form
+    public partial class Chat : Form
     {
         private static readonly HttpClient client = new HttpClient();
         private const string API_KEY = "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";
 
-        private string currentCharacter; // New field to store the current character
-        private string userName; // Retained from login
-        private string username; // Retained from login
+        private string currentCharacter;
+        private string userName;
+        private string username;
         private Image userPfp = Properties.Resources.GasterPFP;
 
         private Dictionary<string, (string systemMessage, Image pfp)> characters;
@@ -36,16 +38,17 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Timer typingAnimationTimer;
         private int typingAnimationDots = 0;
 
-public Form1(string name, string username, string characterName = "Sonia") // Add characterName parameter
-{
-    InitializeComponent();
-    this.userName = name;
-    this.username = username;
-    this.currentCharacter = characterName; // Set the current character
-    InitializeCharacters(); // Initialize characters here
-    SetUserInfo(); // Set user info
-    ChooseBuddy(characterName); // Call ChooseBuddy with the selected character
-}
+        public Chat(string name, string username, string characterName = "Sonia")
+        {
+            InitializeComponent();
+            this.userName = name;
+            this.username = username;
+            this.currentCharacter = characterName;
+            InitializeCharacters();
+            SetUserInfo();
+            ChooseBuddy(characterName);
+            InitializeNotifyIcon();
+        }
 
         private void InitializeNotifyIcon()
         {
@@ -63,59 +66,32 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
         }
 
         private void InitializeCharacters()
+{
+        characters = new Dictionary<string, (string, Image)>
         {
-            characters = new Dictionary<string, (string, Image)>
-            {
-                {"Sonia", (
-                    $"You are Sonia Dupont, a 22-year-old French freelance photographer. You're agnostic, carefree, and a bit ditzy. " +
-                    "Your interests include photography, astrology, and painting. You're a stoner and fitness enthusiast who loves traveling. " +
-                    "Speak with enthusiasm, often using exclamation marks! Use ALL CAPS frequently. Make silly mistakes or misunderstand things. " +
-                    "Use French words occasionally. Use 'LOL' and 'LMAO' a lot. Make typos and use excessive punctuation. " +
-                    "You're pansexual." +
-                    $"The user you're talking to is named {userName}.",
-                    Properties.Resources.Sonia_PFP)},
-                {"Aimee", (
-                    $"You are Aimee Wong, an 18-year-old half-Chinese, half-British barista and student. You're quiet, atheist, reserved, and edgy. " +
-                    "You're obsessed with marine biology and love heavy metal and grunge music. You struggle with alcoholism. " +
-                    "Speak in a thoughtful, measured manner. Your responses tend to be brief, sometimes moody or sarcastic. " +
-                    "Use lowercase for everything. Avoid punctuation except for periods. Use short sentences. " +
-                    $"The user you're talking to is named {userName}.",
-                    Properties.Resources.Aimee_PFP)},
-                {"Esther", (
-                    $"You are Esther Adebayo, a 19-year-old Nigerian student living in the UK. You're asexual and radiate wholesome vibes. " +
-                    "You love drawing, making original comics, and are a huge Marvel comics fan. You're very extroverted and prefer hanging out with friends. " +
-                    "Speak enthusiastically about your interests, especially comics. Use playful language and make frequent references to friendship. " +
-                    "Use emoticons like :D, :P, <3, and >w<. Say 'hehe' and 'lel' often. Make references to comic books, especially Marvel. " +
-                    "You're religious but accepting of LGBT friends. You're worried about coming out as asexual to your traditional parents. " +
-                    $"The user you're talking to is named {userName}.",
-                    Properties.Resources.Esther_PFP)},
-                {"Melanie", (
-                    $"You are Melanie Fernandez, a 30-year-old Cuban CEO of a major sex toys company. You're privileged and can come across as cold-hearted. " +
-                    "You have a refined taste for cheese and wine. Speak in a professional, sometimes condescending manner. " +
-                    "Use business jargon occasionally and make subtle references to your wealth or status. " +
-                    "Your responses are often curt and to the point. You can be sarcastic or dismissive. " +
-                    "Despite your cold exterior, you have a hidden softer side that rarely shows. " +
-                    $"The user you're talking to is named {userName}.",
-                    Properties.Resources.Melanie_PFP)}
-            };
-        }
+            {"Sonia", (CharacterDescriptions.GetCharacterDescription("Sonia", userName), Properties.Resources.Sonia_PFP)},
+            {"Aimee", (CharacterDescriptions.GetCharacterDescription("Aimee", userName), Properties.Resources.Aimee_PFP)},
+            {"Esther", (CharacterDescriptions.GetCharacterDescription("Esther", userName), Properties.Resources.Esther_PFP)},
+            {"Melanie", (CharacterDescriptions.GetCharacterDescription("Melanie", userName), Properties.Resources.Melanie_PFP)}
+        };
+}
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Initialization code here, if needed
-            InitializeChat(); // Example of calling another method
+            InitializeChat();
         }
- private void SetUserInfo()
-         {
-             // Set the profile picture based on the current character
-             buddyPFP.Image = characters[currentCharacter].pfp; // Update buddy profile picture
-             
-             if (userPFP.Image == null)
-             {
-                 userPFP.Image = Properties.Resources.GasterPFP;
-             }
-             
-             UpdateCharacterDescriptions(); // Update character descriptions
-         }
+
+        private void SetUserInfo()
+        {
+            buddyPFP.Image = characters[currentCharacter].pfp;
+            
+            if (userPFP.Image == null)
+            {
+                userPFP.Image = Properties.Resources.GasterPFP;
+            }
+            
+            UpdateCharacterDescriptions();
+        }
 
         private async void NotifyProfilePictureChange(string pictureName)
         {
@@ -124,8 +100,24 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
 
             string aiResponse = await GetGroqResponse($"The user has changed their profile picture to {pictureName}. Comment on this change briefly.");
             await Task.Delay(new Random().Next(1000, 4001));
+            
+            int typingDelay = CalculateTypingDelay(aiResponse);
+            int typingIndicatorIndex = listMessage.Items.Add($"{characterUsernames[currentCharacter]} is typing...");
+
+            typingAnimationTimer = new System.Windows.Forms.Timer();
+            typingAnimationTimer.Interval = 500;
+            typingAnimationTimer.Tick += (s, ev) => UpdateTypingAnimation(typingIndicatorIndex);
+            typingAnimationTimer.Start();
+
+            await Task.Delay(typingDelay);
+
+            typingAnimationTimer.Stop();
+            typingAnimationTimer.Dispose();
+
+            listMessage.Items.RemoveAt(typingIndicatorIndex);
             AddMessageToList(characterUsernames[currentCharacter], aiResponse);
         }
+
         private void UpdateCharacterDescriptions()
         {
             foreach (var character in characters.Keys.ToList())
@@ -142,38 +134,39 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
             listMessage.Items.Add("Connected");
         }
 
-    
-    private string[] WrapText(string message, int maxLineLength)
-    {
-        var words = message.Split(' ');
-        var lines = new List<string>();
-        var currentLine = new StringBuilder();
-
-        foreach (var word in words)
+        private string[] WrapText(string message, int maxLineLength)
         {
-            if (currentLine.Length + word.Length + 1 > maxLineLength)
+            var words = message.Split(' ');
+            var lines = new List<string>();
+            var currentLine = new StringBuilder();
+
+            foreach (var word in words)
+            {
+                if (currentLine.Length + word.Length + 1 > maxLineLength)
+                {
+                    lines.Add(currentLine.ToString());
+                    currentLine.Clear();
+                }
+                currentLine.Append(word + " ");
+            }
+            if (currentLine.Length > 0)
             {
                 lines.Add(currentLine.ToString());
-                currentLine.Clear();
             }
-            currentLine.Append(word + " ");
+            return lines.ToArray();
         }
-        if (currentLine.Length > 0)
-        {
-            lines.Add(currentLine.ToString());
-        }
-        return lines.ToArray();
-    }
 
         private void AddMessageToList(string sender, string message)
         {
             listMessage.Items.Add($"{sender}:");
-            string[] wrappedMessage = WrapText(message, 80); // Change to string array
-            foreach (string line in wrappedMessage) // Iterate directly over the array
+            string[] wrappedMessage = WrapText(message, 70);
+            foreach (string line in wrappedMessage)
             {
                 listMessage.Items.Add(line);
             }
             listMessage.Items.Add(string.Empty);
+
+            listMessage.TopIndex = listMessage.Items.Count - 1;
         }
 
         private async void sendButton_Click(object sender, EventArgs e)
@@ -185,7 +178,7 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
             }
 
             string userMessage = messageBox.Text;
-            AddMessageToList(userName, userMessage);
+            AddMessageToList(username, userMessage);
             conversationHistory.Add(new { role = "user", content = userMessage });
             messageBox.Clear();
 
@@ -303,12 +296,12 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
 
         }
 
-
         private void SetBackgroundImage(Image image, Color foreColor)
         {
             BackgroundImageLayout = ImageLayout.Stretch;
             BackgroundImage = image;
         }
+
         private void SetUserProfilePicture(Image image, string pictureName)
         {
             userPFP.Image = image;
@@ -415,7 +408,7 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
         private void mattToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Matt");
         private void obamiumToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Obamium");
         private void rickRollToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Rick_Roll");
-        private void sIUUUToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("SIUUU");
+        private void sIUUUUToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("SIUUU");
         private void spongeMockToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Sponge_Mock");
         private void trollfaceToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Trollface");
         private void whiteDrakeToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("White_Drake");
@@ -460,15 +453,15 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
         private void trevorToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Trevor");
         private void zagreusToolStripMenuItem_Click(object sender, EventArgs e) => SetProfilePictureFromResource("Zagreus");
 
-    private void ChooseBuddy(string characterName)
-    {
-        currentCharacter = characterName; // Update the current character
-        buddyPFP.Image = characters[characterName].pfp; // Update the profile picture
-        listMessage.Items.Clear(); // Clear the message list
-        listMessage.Items.Add("Connected"); // Indicate connection
-        conversationHistory.Clear(); // Clear conversation history
+        private void ChooseBuddy(string characterName)
+        {
+            currentCharacter = characterName;
+            buddyPFP.Image = characters[characterName].pfp;
+            listMessage.Items.Clear();
+            listMessage.Items.Add("Connected");
+            conversationHistory.Clear();
         }
-    
+
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -508,37 +501,20 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
 
         private void whiteToolStripMenuItem_Click(object sender, EventArgs e) => SetChatColors(Color.White, Color.Black);
 
-        private void colorBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void loginBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void muteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-
         private void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
 
         private void loadDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void friendsButton_Click(object sender, EventArgs e)
         {
-            Friends friendsForm = new Friends(userName, username); // Pass the name and username
+            Friends friendsForm = new Friends(userName, username);
             friendsForm.Show();
-            this.Hide(); // Hide the current form
+            this.Hide();
         }
-
 
         private void HideChatElements()
         {
@@ -550,13 +526,19 @@ public Form1(string name, string username, string characterName = "Sonia") // Ad
             friendsButton.Hide();
         }
 
-
         private void messageBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 sendButton_Click((object)sender, (EventArgs)e);
             }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            notifyIcon.Dispose(); // Dispose of the notifyIcon
+            base.OnFormClosing(e);
+            Application.Exit();
         }
 
     }

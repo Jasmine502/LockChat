@@ -115,6 +115,8 @@
             this.ClientSize = new System.Drawing.Size(184, 314);
             this.Controls.Add(this.lockChatBox);
             this.Controls.Add(this.loginBox);
+            this.MaximumSize = new System.Drawing.Size(200, 353);
+            this.MinimumSize = new System.Drawing.Size(200, 353);
             this.Name = "Login";
             this.Text = "Login";
             this.loginBox.ResumeLayout(false);
