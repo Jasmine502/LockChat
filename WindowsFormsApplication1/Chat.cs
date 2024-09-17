@@ -159,7 +159,7 @@ namespace WindowsFormsApplication1
         private void AddMessageToList(string sender, string message)
         {
             listMessage.Items.Add($"{sender}:");
-            string[] wrappedMessage = WrapText(message, 70);
+            string[] wrappedMessage = WrapText(message, 60);
             foreach (string line in wrappedMessage)
             {
                 listMessage.Items.Add(line);
@@ -222,6 +222,8 @@ namespace WindowsFormsApplication1
             typingAnimationDots = (typingAnimationDots + 1) % 4;
             string dots = new string('.', typingAnimationDots);
             listMessage.Items[typingIndicatorIndex] = $"{characterUsernames[currentCharacter]} is typing{dots.PadRight(3)}";
+
+            listMessage.TopIndex = listMessage.Items.Count - 1;
         }
 
         private void ShowWindowsNotification(string sender, string message)
