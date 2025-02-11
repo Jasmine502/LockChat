@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockChat", "WindowsFormsApplication1\LockChat.csproj", "{9062B2D9-5268-4B08-ADCF-6A119486B4FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockChat Program", "WindowsFormsApplication1\LockChat Program.csproj", "{9062B2D9-5268-4B08-ADCF-6A119486B4FA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LockChat", "LockChat\LockChat.vdproj", "{F7A8AB29-4610-44CA-9E5E-D9F6CE352DA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{9062B2D9-5268-4B08-ADCF-6A119486B4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9062B2D9-5268-4B08-ADCF-6A119486B4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9062B2D9-5268-4B08-ADCF-6A119486B4FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A8AB29-4610-44CA-9E5E-D9F6CE352DA8}.Debug|Any CPU.ActiveCfg = Debug
+		{F7A8AB29-4610-44CA-9E5E-D9F6CE352DA8}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

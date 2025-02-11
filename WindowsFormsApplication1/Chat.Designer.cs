@@ -33,7 +33,7 @@
             this.messageBox = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rosesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cloudsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,13 +43,6 @@
             this.solidColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profilePictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.albumArtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bKYUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eUPHORIA6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mutationSyndromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nITROUSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stargazingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uNAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.animeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gokuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -142,7 +135,9 @@
             this.pinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aPIKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buddyPFP = new System.Windows.Forms.PictureBox();
             this.userPFP = new System.Windows.Forms.PictureBox();
             this.friendsButton = new System.Windows.Forms.Button();
@@ -189,6 +184,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.customiseToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -196,16 +192,15 @@
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // settingsToolStripMenuItem
+            // customiseToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.customiseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backgroundToolStripMenuItem,
             this.profilePictureToolStripMenuItem,
-            this.textColourToolStripMenuItem,
-            this.resetToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.textColourToolStripMenuItem});
+            this.customiseToolStripMenuItem.Name = "customiseToolStripMenuItem";
+            this.customiseToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.customiseToolStripMenuItem.Text = "Personalise";
             // 
             // backgroundToolStripMenuItem
             // 
@@ -218,7 +213,7 @@
             this.solidColourToolStripMenuItem,
             this.customToolStripMenuItem});
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             // 
             // rosesToolStripMenuItem
@@ -227,7 +222,7 @@
             this.rosesToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.RosesBG;
             this.rosesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.rosesToolStripMenuItem.Name = "rosesToolStripMenuItem";
-            this.rosesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.rosesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rosesToolStripMenuItem.Text = "Roses";
             this.rosesToolStripMenuItem.Click += new System.EventHandler(this.rosesToolStripMenuItem_Click);
             // 
@@ -237,7 +232,7 @@
             this.cloudsToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SkyBG;
             this.cloudsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.cloudsToolStripMenuItem.Name = "cloudsToolStripMenuItem";
-            this.cloudsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.cloudsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cloudsToolStripMenuItem.Text = "Sky";
             this.cloudsToolStripMenuItem.Click += new System.EventHandler(this.cloudsToolStripMenuItem_Click);
             // 
@@ -247,7 +242,7 @@
             this.spaceToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.SpaceBG;
             this.spaceToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.spaceToolStripMenuItem.Name = "spaceToolStripMenuItem";
-            this.spaceToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.spaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.spaceToolStripMenuItem.Text = "Space";
             this.spaceToolStripMenuItem.Click += new System.EventHandler(this.spaceToolStripMenuItem_Click);
             // 
@@ -256,7 +251,7 @@
             this.underwaterToolStripMenuItem.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.UnderwaterBG;
             this.underwaterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.underwaterToolStripMenuItem.Name = "underwaterToolStripMenuItem";
-            this.underwaterToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.underwaterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.underwaterToolStripMenuItem.Text = "Underwater";
             this.underwaterToolStripMenuItem.Click += new System.EventHandler(this.underwaterToolStripMenuItem_Click);
             // 
@@ -267,28 +262,27 @@
             this.meadowToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.meadowToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.meadowToolStripMenuItem.Name = "meadowToolStripMenuItem";
-            this.meadowToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.meadowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.meadowToolStripMenuItem.Text = "Meadow";
             this.meadowToolStripMenuItem.Click += new System.EventHandler(this.meadowToolStripMenuItem_Click);
             // 
             // solidColourToolStripMenuItem
             // 
             this.solidColourToolStripMenuItem.Name = "solidColourToolStripMenuItem";
-            this.solidColourToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.solidColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.solidColourToolStripMenuItem.Text = "Solid Colour";
             this.solidColourToolStripMenuItem.Click += new System.EventHandler(this.solidColourToolStripMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.customToolStripMenuItem.Text = "Custom...";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
             // 
             // profilePictureToolStripMenuItem
             // 
             this.profilePictureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.albumArtToolStripMenuItem,
             this.animeToolStripMenuItem,
             this.iconsToolStripMenuItem,
             this.landscapeToolStripMenuItem,
@@ -301,63 +295,8 @@
             this.videoGamesToolStripMenuItem,
             this.customToolStripMenuItem1});
             this.profilePictureToolStripMenuItem.Name = "profilePictureToolStripMenuItem";
-            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.profilePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profilePictureToolStripMenuItem.Text = "Profile Picture";
-            // 
-            // albumArtToolStripMenuItem
-            // 
-            this.albumArtToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bKYUToolStripMenuItem,
-            this.eUPHORIA6ToolStripMenuItem,
-            this.mutationSyndromeToolStripMenuItem,
-            this.nITROUSToolStripMenuItem,
-            this.stargazingToolStripMenuItem,
-            this.uNAToolStripMenuItem});
-            this.albumArtToolStripMenuItem.Name = "albumArtToolStripMenuItem";
-            this.albumArtToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.albumArtToolStripMenuItem.Text = "Album Art";
-            // 
-            // bKYUToolStripMenuItem
-            // 
-            this.bKYUToolStripMenuItem.Name = "bKYUToolStripMenuItem";
-            this.bKYUToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.bKYUToolStripMenuItem.Text = "B. KYU";
-            this.bKYUToolStripMenuItem.Click += new System.EventHandler(this.bKYUToolStripMenuItem_Click);
-            // 
-            // eUPHORIA6ToolStripMenuItem
-            // 
-            this.eUPHORIA6ToolStripMenuItem.Name = "eUPHORIA6ToolStripMenuItem";
-            this.eUPHORIA6ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eUPHORIA6ToolStripMenuItem.Text = "EUPHORIA 6";
-            this.eUPHORIA6ToolStripMenuItem.Click += new System.EventHandler(this.eUPHORIA6ToolStripMenuItem_Click);
-            // 
-            // mutationSyndromeToolStripMenuItem
-            // 
-            this.mutationSyndromeToolStripMenuItem.Name = "mutationSyndromeToolStripMenuItem";
-            this.mutationSyndromeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mutationSyndromeToolStripMenuItem.Text = "Mutation Syndrome";
-            this.mutationSyndromeToolStripMenuItem.Click += new System.EventHandler(this.mutationSyndromeToolStripMenuItem_Click);
-            // 
-            // nITROUSToolStripMenuItem
-            // 
-            this.nITROUSToolStripMenuItem.Name = "nITROUSToolStripMenuItem";
-            this.nITROUSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.nITROUSToolStripMenuItem.Text = "NITROUS";
-            this.nITROUSToolStripMenuItem.Click += new System.EventHandler(this.nITROUSToolStripMenuItem_Click);
-            // 
-            // stargazingToolStripMenuItem
-            // 
-            this.stargazingToolStripMenuItem.Name = "stargazingToolStripMenuItem";
-            this.stargazingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.stargazingToolStripMenuItem.Text = "stargazing";
-            this.stargazingToolStripMenuItem.Click += new System.EventHandler(this.stargazingToolStripMenuItem_Click);
-            // 
-            // uNAToolStripMenuItem
-            // 
-            this.uNAToolStripMenuItem.Name = "uNAToolStripMenuItem";
-            this.uNAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.uNAToolStripMenuItem.Text = "UNA";
-            this.uNAToolStripMenuItem.Click += new System.EventHandler(this.uNAToolStripMenuItem_Click);
             // 
             // animeToolStripMenuItem
             // 
@@ -371,62 +310,62 @@
             this.sailorMoonToolStripMenuItem,
             this.yunoToolStripMenuItem});
             this.animeToolStripMenuItem.Name = "animeToolStripMenuItem";
-            this.animeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.animeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.animeToolStripMenuItem.Text = "Anime";
             // 
             // ashToolStripMenuItem
             // 
             this.ashToolStripMenuItem.Name = "ashToolStripMenuItem";
-            this.ashToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.ashToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ashToolStripMenuItem.Text = "Ash";
             this.ashToolStripMenuItem.Click += new System.EventHandler(this.ashToolStripMenuItem_Click);
             // 
             // gokuToolStripMenuItem
             // 
             this.gokuToolStripMenuItem.Name = "gokuToolStripMenuItem";
-            this.gokuToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.gokuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gokuToolStripMenuItem.Text = "Goku";
             this.gokuToolStripMenuItem.Click += new System.EventHandler(this.gokuToolStripMenuItem_Click);
             // 
             // kanekiToolStripMenuItem
             // 
             this.kanekiToolStripMenuItem.Name = "kanekiToolStripMenuItem";
-            this.kanekiToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.kanekiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.kanekiToolStripMenuItem.Text = "Kaneki";
             this.kanekiToolStripMenuItem.Click += new System.EventHandler(this.kanekiToolStripMenuItem_Click);
             // 
             // narutoToolStripMenuItem
             // 
             this.narutoToolStripMenuItem.Name = "narutoToolStripMenuItem";
-            this.narutoToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.narutoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.narutoToolStripMenuItem.Text = "Naruto";
             this.narutoToolStripMenuItem.Click += new System.EventHandler(this.narutoToolStripMenuItem_Click);
             // 
             // nicoToolStripMenuItem
             // 
             this.nicoToolStripMenuItem.Name = "nicoToolStripMenuItem";
-            this.nicoToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.nicoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nicoToolStripMenuItem.Text = "Nico";
             this.nicoToolStripMenuItem.Click += new System.EventHandler(this.nicoToolStripMenuItem_Click);
             // 
             // pikachuToolStripMenuItem
             // 
             this.pikachuToolStripMenuItem.Name = "pikachuToolStripMenuItem";
-            this.pikachuToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.pikachuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pikachuToolStripMenuItem.Text = "Pikachu";
             this.pikachuToolStripMenuItem.Click += new System.EventHandler(this.pikachuToolStripMenuItem_Click);
             // 
             // sailorMoonToolStripMenuItem
             // 
             this.sailorMoonToolStripMenuItem.Name = "sailorMoonToolStripMenuItem";
-            this.sailorMoonToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.sailorMoonToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sailorMoonToolStripMenuItem.Text = "Sailor Moon";
             this.sailorMoonToolStripMenuItem.Click += new System.EventHandler(this.sailorMoonToolStripMenuItem_Click);
             // 
             // yunoToolStripMenuItem
             // 
             this.yunoToolStripMenuItem.Name = "yunoToolStripMenuItem";
-            this.yunoToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.yunoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.yunoToolStripMenuItem.Text = "Yuno";
             this.yunoToolStripMenuItem.Click += new System.EventHandler(this.yunoToolStripMenuItem_Click);
             // 
@@ -442,7 +381,7 @@
             this.loveHeartToolStripMenuItem,
             this.pirateSKullToolStripMenuItem});
             this.iconsToolStripMenuItem.Name = "iconsToolStripMenuItem";
-            this.iconsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.iconsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.iconsToolStripMenuItem.Text = "Icons";
             // 
             // catToolStripMenuItem
@@ -509,7 +448,7 @@
             this.mountainsToolStripMenuItem,
             this.sunsetToolStripMenuItem});
             this.landscapeToolStripMenuItem.Name = "landscapeToolStripMenuItem";
-            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.landscapeToolStripMenuItem.Text = "Landscape";
             // 
             // beachToolStripMenuItem
@@ -555,7 +494,7 @@
             this.trollfaceToolStripMenuItem,
             this.whiteDrakeToolStripMenuItem});
             this.memesToolStripMenuItem.Name = "memesToolStripMenuItem";
-            this.memesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.memesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.memesToolStripMenuItem.Text = "Memes";
             // 
             // daBabyToolStripMenuItem
@@ -649,7 +588,7 @@
             this.theMatrixToolStripMenuItem,
             this.toyStoryToolStripMenuItem});
             this.moviesToolStripMenuItem.Name = "moviesToolStripMenuItem";
-            this.moviesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.moviesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.moviesToolStripMenuItem.Text = "Movies";
             // 
             // findingNemoToolStripMenuItem
@@ -733,7 +672,7 @@
             this.rainbowToolStripMenuItem,
             this.transgenderToolStripMenuItem});
             this.prideToolStripMenuItem.Name = "prideToolStripMenuItem";
-            this.prideToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.prideToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prideToolStripMenuItem.Text = "Pride";
             // 
             // asexualToolStripMenuItem
@@ -792,7 +731,7 @@
             this.footballToolStripMenuItem,
             this.tennisToolStripMenuItem});
             this.sportsToolStripMenuItem.Name = "sportsToolStripMenuItem";
-            this.sportsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.sportsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sportsToolStripMenuItem.Text = "Sports";
             // 
             // basketballToolStripMenuItem
@@ -824,7 +763,7 @@
             this.supermanToolStripMenuItem,
             this.theFlashToolStripMenuItem});
             this.superheroesToolStripMenuItem.Name = "superheroesToolStripMenuItem";
-            this.superheroesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.superheroesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.superheroesToolStripMenuItem.Text = "Superheroes";
             // 
             // batmanToolStripMenuItem
@@ -862,7 +801,7 @@
             this.motorcycleToolStripMenuItem,
             this.planeToolStripMenuItem});
             this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
-            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vehiclesToolStripMenuItem.Text = "Vehicles";
             // 
             // carToolStripMenuItem
@@ -904,7 +843,7 @@
             this.trevorToolStripMenuItem,
             this.zagreusToolStripMenuItem});
             this.videoGamesToolStripMenuItem.Name = "videoGamesToolStripMenuItem";
-            this.videoGamesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.videoGamesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.videoGamesToolStripMenuItem.Text = "Video Games";
             // 
             // arthurMorganToolStripMenuItem
@@ -1008,7 +947,7 @@
             // customToolStripMenuItem1
             // 
             this.customToolStripMenuItem1.Name = "customToolStripMenuItem1";
-            this.customToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.customToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.customToolStripMenuItem1.Text = "Custom...";
             this.customToolStripMenuItem1.Click += new System.EventHandler(this.customToolStripMenuItem1_Click);
             // 
@@ -1024,7 +963,7 @@
             this.blackToolStripMenuItem,
             this.whiteToolStripMenuItem});
             this.textColourToolStripMenuItem.Name = "textColourToolStripMenuItem";
-            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.textColourToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.textColourToolStripMenuItem.Text = "Text Colour";
             // 
             // redToolStripMenuItem
@@ -1083,12 +1022,28 @@
             this.whiteToolStripMenuItem.Text = "White";
             this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
             // 
-            // resetToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aPIKeyToolStripMenuItem,
+            this.resetDataToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // aPIKeyToolStripMenuItem
+            // 
+            this.aPIKeyToolStripMenuItem.Name = "aPIKeyToolStripMenuItem";
+            this.aPIKeyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aPIKeyToolStripMenuItem.Text = "API Key";
+            this.aPIKeyToolStripMenuItem.Click += new System.EventHandler(this.aPIKeyToolStripMenuItem_Click);
+            // 
+            // resetDataToolStripMenuItem
+            // 
+            this.resetDataToolStripMenuItem.Name = "resetDataToolStripMenuItem";
+            this.resetDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetDataToolStripMenuItem.Text = "Reset Data";
+            this.resetDataToolStripMenuItem.Click += new System.EventHandler(this.resetDataToolStripMenuItem_Click);
             // 
             // buddyPFP
             // 
@@ -1156,7 +1111,7 @@
         private System.Windows.Forms.PictureBox userPFP;
         private System.Windows.Forms.PictureBox buddyPFP;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customiseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rosesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cloudsToolStripMenuItem;
@@ -1165,26 +1120,18 @@
         private System.Windows.Forms.ToolStripMenuItem meadowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem solidColourToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profilePictureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem iconsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem landscapeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem animeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem albumArtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moviesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem superheroesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem memesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoGamesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prideToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bKYUToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eUPHORIA6ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mutationSyndromeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nITROUSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stargazingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uNAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ashToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gokuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kanekiToolStripMenuItem;
@@ -1267,6 +1214,9 @@
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
         private System.Windows.Forms.Button friendsButton;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aPIKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetDataToolStripMenuItem;
     }
 }
 

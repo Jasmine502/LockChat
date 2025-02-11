@@ -65,5 +65,12 @@ namespace WindowsFormsApplication1
         private void lilyBtn_MouseHover(object sender, EventArgs e) => SetBioImage("LilyBio");
         private void birdBtn_MouseHover(object sender, EventArgs e) => SetBioImage("BirdBio");
         private void robinBtn_MouseHover(object sender, EventArgs e) => SetBioImage("RobinBio"); // Added hover for Robin
+
+        private void lockOutButton_Click(object sender, EventArgs e) // Added lockOutButton_Click method
+        {
+            this.Hide(); // Hide the current Friends form
+            Login loginForm = new Login(); // Create a new instance of the Login form
+            loginForm.Show(); // Show the Login form
+        }
     }
 }

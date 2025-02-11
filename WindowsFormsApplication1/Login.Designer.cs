@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.loginBox = new System.Windows.Forms.GroupBox();
             this.lockInBtn = new System.Windows.Forms.Button();
             this.usernameBox = new System.Windows.Forms.TextBox();
@@ -115,6 +116,7 @@
             this.ClientSize = new System.Drawing.Size(184, 314);
             this.Controls.Add(this.lockChatBox);
             this.Controls.Add(this.loginBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(200, 353);
             this.MinimumSize = new System.Drawing.Size(200, 353);
             this.Name = "Login";

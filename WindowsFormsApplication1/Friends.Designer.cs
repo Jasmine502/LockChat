@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Friends));
             this.chooseEsther = new System.Windows.Forms.Button();
             this.chooseSonia = new System.Windows.Forms.Button();
             this.chooseMelanie = new System.Windows.Forms.Button();
             this.chooseAimee = new System.Windows.Forms.Button();
             this.buddyListGroupBox = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.lockOutButton = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -94,7 +95,7 @@
             // 
             // buddyListGroupBox
             // 
-            this.buddyListGroupBox.Controls.Add(this.button6);
+            this.buddyListGroupBox.Controls.Add(this.lockOutButton);
             this.buddyListGroupBox.Controls.Add(this.button5);
             this.buddyListGroupBox.Controls.Add(this.button4);
             this.buddyListGroupBox.Controls.Add(this.button3);
@@ -113,16 +114,16 @@
             this.buddyListGroupBox.TabStop = false;
             this.buddyListGroupBox.Text = "@name\'s Buddy List";
             // 
-            // button6
+            // lockOutButton
             // 
-            this.button6.Enabled = false;
-            this.button6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(6, 442);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(139, 29);
-            this.button6.TabIndex = 21;
-            this.button6.Text = "Lock Out";
-            this.button6.UseVisualStyleBackColor = true;
+            this.lockOutButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lockOutButton.Location = new System.Drawing.Point(6, 442);
+            this.lockOutButton.Name = "lockOutButton";
+            this.lockOutButton.Size = new System.Drawing.Size(139, 29);
+            this.lockOutButton.TabIndex = 21;
+            this.lockOutButton.Text = "Lock Out";
+            this.lockOutButton.UseVisualStyleBackColor = true;
+            this.lockOutButton.Click += new System.EventHandler(this.lockOutButton_Click);
             // 
             // button5
             // 
@@ -193,6 +194,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 506);
             this.Controls.Add(this.buddyListGroupBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(569, 545);
             this.MinimumSize = new System.Drawing.Size(569, 545);
             this.Name = "Friends";
@@ -211,7 +213,7 @@
         private System.Windows.Forms.Button chooseMelanie;
         private System.Windows.Forms.Button chooseAimee;
         private System.Windows.Forms.GroupBox buddyListGroupBox;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button lockOutButton;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;

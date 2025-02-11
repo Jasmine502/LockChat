@@ -10,14 +10,14 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 using WindowsFormsApplication1;
-
+using Microsoft.VisualBasic;
 
 namespace WindowsFormsApplication1
 {
     public partial class Chat : Form
     {
         private static readonly HttpClient client = new HttpClient();
-        private const string API_KEY = "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";
+        private static string API_KEY;
 
         private string currentCharacter;
         private string userName;
@@ -40,6 +40,12 @@ namespace WindowsFormsApplication1
 
         public Chat(string name, string username, string characterName = "Sonia")
         {
+            // Get API key before showing the form
+            while (string.IsNullOrEmpty(API_KEY))
+            {
+                API_KEY = GetApiKey();
+            }
+
             InitializeComponent();
             this.userName = name;
             this.username = username;
@@ -48,6 +54,66 @@ namespace WindowsFormsApplication1
             SetUserInfo();
             ChooseBuddy(characterName);
             InitializeNotifyIcon();
+        }
+
+        private static string GetApiKey()
+        {
+            // Try to read saved API key from settings
+            string savedKey = Properties.Settings.Default.ApiKey;
+            if (!string.IsNullOrWhiteSpace(savedKey) && ValidateApiKey(savedKey))
+            {
+                return savedKey;
+            }
+
+            // If no saved key or saved key is invalid, prompt for new key
+            string apiKey;
+            do
+            {
+                apiKey = Interaction.InputBox("Please enter your Groq API key:", "API Key Required", "");
+                if (string.IsNullOrWhiteSpace(apiKey))
+                {
+                    MessageBox.Show("A valid API key is required to use the application.", "Invalid API Key");
+                    continue;
+                }
+
+                if (ValidateApiKey(apiKey))
+                {
+                    // Save valid API key to settings
+                    Properties.Settings.Default.ApiKey = apiKey;
+                    Properties.Settings.Default.Save();
+                    return apiKey;
+                }
+                
+                MessageBox.Show("Invalid API key. Please check your key and try again.", "Invalid API Key");
+            } while (true);
+        }
+
+        private static bool ValidateApiKey(string apiKey)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
+                    
+                    var content = new StringContent(JsonConvert.SerializeObject(new
+                    {
+                        messages = new[]
+                        {
+                            new { role = "user", content = "Test" }
+                        },
+                        model = "llama3-8b-8192",
+                        max_tokens = 1
+                    }), Encoding.UTF8, "application/json");
+
+                    var response = client.PostAsync("https://api.groq.com/openai/v1/chat/completions", content).Result;
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void InitializeNotifyIcon()
@@ -66,15 +132,15 @@ namespace WindowsFormsApplication1
         }
 
         private void InitializeCharacters()
-{
-        characters = new Dictionary<string, (string, Image)>
         {
-            {"Sonia", (CharacterDescriptions.GetCharacterDescription("Sonia", userName), Properties.Resources.Sonia_PFP)},
-            {"Aimee", (CharacterDescriptions.GetCharacterDescription("Aimee", userName), Properties.Resources.Aimee_PFP)},
-            {"Esther", (CharacterDescriptions.GetCharacterDescription("Esther", userName), Properties.Resources.Esther_PFP)},
-            {"Melanie", (CharacterDescriptions.GetCharacterDescription("Melanie", userName), Properties.Resources.Melanie_PFP)}
-        };
-}
+            characters = new Dictionary<string, (string, Image)>
+            {
+                {"Sonia", (CharacterDescriptions.GetCharacterDescription("Sonia", userName), Properties.Resources.Sonia_PFP)},
+                {"Aimee", (CharacterDescriptions.GetCharacterDescription("Aimee", userName), Properties.Resources.Aimee_PFP)},
+                {"Esther", (CharacterDescriptions.GetCharacterDescription("Esther", userName), Properties.Resources.Esther_PFP)},
+                {"Melanie", (CharacterDescriptions.GetCharacterDescription("Melanie", userName), Properties.Resources.Melanie_PFP)}
+            };
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -538,10 +604,48 @@ namespace WindowsFormsApplication1
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            notifyIcon.Dispose(); // Dispose of the notifyIcon
+            notifyIcon.Dispose();
             base.OnFormClosing(e);
             Application.Exit();
         }
 
+        private void resetDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will reset ALL the data. Are you sure?", "Confirm Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                // Reset saved data
+                Properties.Settings.Default.UserName = string.Empty; // Clear saved name
+                Properties.Settings.Default.UserUsername = string.Empty; // Clear saved username
+                Properties.Settings.Default.ApiKey = string.Empty; // Clear saved API key
+                Properties.Settings.Default.Save(); // Persist changes
+
+                // Restart the application
+                Application.Restart();
+            }
+        }
+
+        private void aPIKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string apiKey;
+            do
+            {
+                apiKey = Interaction.InputBox("Please enter your new Groq API key:", "Change API Key", "");
+                if (string.IsNullOrWhiteSpace(apiKey))
+                {
+                    return; // User cancelled
+                }
+
+                if (ValidateApiKey(apiKey))
+                {
+                    Properties.Settings.Default.ApiKey = apiKey;
+                    Properties.Settings.Default.Save();
+                    API_KEY = apiKey;
+                    MessageBox.Show("API key has been updated.", "API Key Updated");
+                    return;
+                }
+                
+                MessageBox.Show("Invalid API key. Please check your key and try again.", "Invalid API Key");
+            } while (true);
+        }
     }
 }
